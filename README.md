@@ -105,3 +105,4 @@ The parameters in `config/exp_config` are described as follows:
 - `temperature`: This parameter adjusts the temprature parameter $\tau$, controlling the the attention to difficult samples. (Default: 0.3)
 - `patience`: This parameter adjusts the patience used in early break. (Default: 10)
 - `aug_percent`:  The inactivation probability. (Default: 0.2)
+# tv_diag_gating
