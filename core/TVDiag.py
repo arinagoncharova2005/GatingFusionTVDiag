@@ -172,6 +172,17 @@ class TVDiag(object):
             train_times.append(time_per_epoch)
             self.logger.info("Epoch {} done. Loss: {:.3f}, Time per epoch: {:.3f}[s]"
                          .format(epoch, mean_epoch_loss, time_per_epoch))
+            gate_info = model.get_gate_weights() if hasattr(model, "get_gate_weights") else {}
+            if gate_info:
+                modalities = gate_info["modalities"]
+                gate_mode = gate_info.get("mode", "unknown")
+                fti_gate = gate_info["fti"].cpu().tolist()
+                rcl_gate = gate_info["rcl"].cpu().tolist()
+                fti_gate_str = ", ".join([f"{m}:{w:.3f}" for m, w in zip(modalities, fti_gate)])
+                rcl_gate_str = ", ".join([f"{m}:{w:.3f}" for m, w in zip(modalities, rcl_gate)])
+                self.logger.info(f"GateMode: {gate_mode}")
+                self.logger.info(f"Gate[FTI]: {fti_gate_str}")
+                self.logger.info(f"Gate[RCL]: {rcl_gate_str}")
 
             for k, v in rcl_results.items():
                 rcl_results[k] = np.mean(v)
