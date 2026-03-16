@@ -1,40 +1,57 @@
-2026-03-12 00:45:39 [INFO]: Load dataset
-2026-03-12 00:45:39 [INFO]: Load raw events from sockshop dataset
-2026-03-12 00:45:39 [INFO]: Build dataset for training
-2026-03-12 00:45:44 [INFO]: Training...
-2026-03-12 00:45:44 [INFO]: Currently using GPU 0
-2026-03-12 00:45:44 [INFO]: dataset: sockshop
-2026-03-12 00:45:44 [INFO]: reconstruct: False
-2026-03-12 00:45:44 [INFO]: log_step: 20
-2026-03-12 00:45:44 [INFO]: gpu_device: 0
-2026-03-12 00:45:44 [INFO]: modalities: ['trace', 'log']
-2026-03-12 00:45:44 [INFO]: metric_direction: True
-2026-03-12 00:45:44 [INFO]: trace_op: True
-2026-03-12 00:45:44 [INFO]: trace_ab_type: True
-2026-03-12 00:45:44 [INFO]: aug_percent: 0.4
-2026-03-12 00:45:44 [INFO]: aug_times: 10
-2026-03-12 00:45:44 [INFO]: TO: True
-2026-03-12 00:45:44 [INFO]: CM: True
-2026-03-12 00:45:44 [INFO]: dynamic_weight: True
-2026-03-12 00:45:44 [INFO]: temperature: 0.3
-2026-03-12 00:45:44 [INFO]: contrastive_loss_scale: 0.1
-2026-03-12 00:45:44 [INFO]: batch_size: 128
-2026-03-12 00:45:44 [INFO]: epochs: 500
-2026-03-12 00:45:44 [INFO]: alert_embedding_dim: 128
-2026-03-12 00:45:44 [INFO]: graph_hidden_dim: 64
-2026-03-12 00:45:44 [INFO]: graph_out: 32
-2026-03-12 00:45:44 [INFO]: graph_layers: 2
-2026-03-12 00:45:44 [INFO]: linear_hidden: [64]
-2026-03-12 00:45:44 [INFO]: lr: 0.001
-2026-03-12 00:45:44 [INFO]: weight_decay: 0.0001
-2026-03-12 00:45:44 [INFO]: use_simple_gating: True
-2026-03-12 00:45:44 [INFO]: simple_gating_mode: concat
-2026-03-12 00:45:44 [INFO]: feat_drop: 0
-2026-03-12 00:45:44 [INFO]: patience: 10
-2026-03-12 00:45:44 [INFO]: ft_num: 7
-2026-03-12 00:45:44 [INFO]: aggregator: mean
-2026-03-12 00:45:44 [INFO]: MainModel(
+2026-03-16 11:54:21 [INFO]: Load dataset
+2026-03-16 11:54:21 [INFO]: Load raw events from sockshop dataset
+2026-03-16 11:54:22 [INFO]: Build dataset for training
+2026-03-16 11:54:27 [INFO]: Training...
+2026-03-16 11:54:27 [INFO]: Currently using GPU 0
+2026-03-16 11:54:27 [INFO]: dataset: sockshop
+2026-03-16 11:54:27 [INFO]: reconstruct: False
+2026-03-16 11:54:27 [INFO]: log_step: 20
+2026-03-16 11:54:27 [INFO]: gpu_device: 0
+2026-03-16 11:54:27 [INFO]: modalities: ['metric', 'trace', 'log']
+2026-03-16 11:54:27 [INFO]: metric_direction: True
+2026-03-16 11:54:27 [INFO]: trace_op: True
+2026-03-16 11:54:27 [INFO]: trace_ab_type: True
+2026-03-16 11:54:27 [INFO]: aug_percent: 0.4
+2026-03-16 11:54:27 [INFO]: aug_times: 10
+2026-03-16 11:54:27 [INFO]: TO: True
+2026-03-16 11:54:27 [INFO]: CM: True
+2026-03-16 11:54:27 [INFO]: dynamic_weight: True
+2026-03-16 11:54:27 [INFO]: temperature: 0.3
+2026-03-16 11:54:27 [INFO]: contrastive_loss_scale: 0.1
+2026-03-16 11:54:27 [INFO]: batch_size: 128
+2026-03-16 11:54:27 [INFO]: epochs: 500
+2026-03-16 11:54:27 [INFO]: alert_embedding_dim: 128
+2026-03-16 11:54:27 [INFO]: graph_hidden_dim: 64
+2026-03-16 11:54:27 [INFO]: graph_out: 32
+2026-03-16 11:54:27 [INFO]: graph_layers: 2
+2026-03-16 11:54:27 [INFO]: linear_hidden: [64]
+2026-03-16 11:54:27 [INFO]: lr: 0.001
+2026-03-16 11:54:27 [INFO]: weight_decay: 0.0001
+2026-03-16 11:54:27 [INFO]: use_simple_gating: True
+2026-03-16 11:54:27 [INFO]: simple_gating_mode: concat
+2026-03-16 11:54:27 [INFO]: feat_drop: 0
+2026-03-16 11:54:27 [INFO]: patience: 10
+2026-03-16 11:54:27 [INFO]: ft_num: 7
+2026-03-16 11:54:27 [INFO]: aggregator: mean
+2026-03-16 11:54:27 [INFO]: MainModel(
   (encoders): ModuleDict(
+    (metric): Encoder(
+      (graph_encoder): SAGEEncoder(
+        (sage_layers): ModuleList(
+          (0): SAGEConv(
+            (feat_drop): Dropout(p=0, inplace=False)
+            (fc_neigh): Linear(in_features=128, out_features=64, bias=False)
+            (fc_self): Linear(in_features=128, out_features=64, bias=False)
+          )
+          (1): SAGEConv(
+            (feat_drop): Dropout(p=0, inplace=False)
+            (fc_neigh): Linear(in_features=64, out_features=32, bias=False)
+            (fc_self): Linear(in_features=64, out_features=32, bias=False)
+          )
+        )
+        (pool): MaxPooling()
+      )
+    )
     (trace): Encoder(
       (graph_encoder): SAGEEncoder(
         (sage_layers): ModuleList(
@@ -73,7 +90,7 @@
   (locator): Voter(
     (net): FullyConnected(
       (net): Sequential(
-        (0): Linear(in_features=64, out_features=64, bias=True)
+        (0): Linear(in_features=96, out_features=64, bias=True)
         (1): ReLU()
         (2): Linear(in_features=64, out_features=1, bias=True)
       )
@@ -82,922 +99,1240 @@
   (typeClassifier): Classifier(
     (net): FullyConnected(
       (net): Sequential(
-        (0): Linear(in_features=64, out_features=64, bias=True)
+        (0): Linear(in_features=96, out_features=64, bias=True)
         (1): ReLU()
         (2): Linear(in_features=64, out_features=7, bias=True)
       )
     )
   )
 )
-2026-03-12 00:45:44 [INFO]: Start training for 500 epochs.
-2026-03-12 00:45:44 [DEBUG]: con_loss: 1.081, RCA_loss: 2.613, TC_loss: 1.924
-2026-03-12 00:45:45 [DEBUG]: con_loss: 1.066, RCA_loss: 2.509, TC_loss: 1.915
-2026-03-12 00:45:45 [INFO]: Epoch 0 done. Loss: 5.550, Time per epoch: 1.079[s]
-2026-03-12 00:45:45 [INFO]: GateMode: concat
-2026-03-12 00:45:45 [INFO]: Gate[FTI]: trace:0.499, log:0.500
-2026-03-12 00:45:45 [INFO]: Gate[RCL]: trace:0.500, log:0.500
-2026-03-12 00:45:45 [DEBUG]: con_loss: 1.078, RCA_loss: 2.435, TC_loss: 1.922
-2026-03-12 00:45:46 [DEBUG]: con_loss: 1.067, RCA_loss: 2.320, TC_loss: 1.849
-2026-03-12 00:45:46 [INFO]: Epoch 1 done. Loss: 5.440, Time per epoch: 0.730[s]
-2026-03-12 00:45:46 [INFO]: GateMode: concat
-2026-03-12 00:45:46 [INFO]: Gate[FTI]: trace:0.499, log:0.501
-2026-03-12 00:45:46 [INFO]: Gate[RCL]: trace:0.501, log:0.499
-2026-03-12 00:45:46 [DEBUG]: con_loss: 1.081, RCA_loss: 2.281, TC_loss: 1.879
-2026-03-12 00:45:46 [DEBUG]: con_loss: 1.066, RCA_loss: 2.253, TC_loss: 1.847
-2026-03-12 00:45:47 [INFO]: Epoch 2 done. Loss: 5.375, Time per epoch: 0.693[s]
-2026-03-12 00:45:47 [INFO]: GateMode: concat
-2026-03-12 00:45:47 [INFO]: Gate[FTI]: trace:0.498, log:0.502
-2026-03-12 00:45:47 [INFO]: Gate[RCL]: trace:0.501, log:0.499
-2026-03-12 00:45:47 [DEBUG]: con_loss: 1.080, RCA_loss: 2.106, TC_loss: 1.809
-2026-03-12 00:45:47 [DEBUG]: con_loss: 1.065, RCA_loss: 2.125, TC_loss: 1.806
-2026-03-12 00:45:47 [INFO]: Epoch 3 done. Loss: 5.270, Time per epoch: 0.693[s]
-2026-03-12 00:45:47 [INFO]: GateMode: concat
-2026-03-12 00:45:47 [INFO]: Gate[FTI]: trace:0.497, log:0.503
-2026-03-12 00:45:47 [INFO]: Gate[RCL]: trace:0.500, log:0.500
-2026-03-12 00:45:47 [DEBUG]: con_loss: 1.078, RCA_loss: 2.038, TC_loss: 1.787
-2026-03-12 00:45:48 [DEBUG]: con_loss: 1.070, RCA_loss: 2.043, TC_loss: 1.745
-2026-03-12 00:45:48 [INFO]: Epoch 4 done. Loss: 5.213, Time per epoch: 0.694[s]
-2026-03-12 00:45:48 [INFO]: GateMode: concat
-2026-03-12 00:45:48 [INFO]: Gate[FTI]: trace:0.496, log:0.504
-2026-03-12 00:45:48 [INFO]: Gate[RCL]: trace:0.500, log:0.500
-2026-03-12 00:45:48 [DEBUG]: con_loss: 1.077, RCA_loss: 1.876, TC_loss: 1.738
-2026-03-12 00:45:49 [DEBUG]: con_loss: 1.068, RCA_loss: 1.888, TC_loss: 1.748
-2026-03-12 00:45:49 [INFO]: Epoch 5 done. Loss: 5.121, Time per epoch: 0.729[s]
-2026-03-12 00:45:49 [INFO]: GateMode: concat
-2026-03-12 00:45:49 [INFO]: Gate[FTI]: trace:0.496, log:0.504
-2026-03-12 00:45:49 [INFO]: Gate[RCL]: trace:0.499, log:0.501
-2026-03-12 00:45:49 [DEBUG]: con_loss: 1.077, RCA_loss: 1.843, TC_loss: 1.668
-2026-03-12 00:45:49 [DEBUG]: con_loss: 1.066, RCA_loss: 1.891, TC_loss: 1.699
-2026-03-12 00:45:49 [INFO]: Epoch 6 done. Loss: 5.084, Time per epoch: 0.700[s]
-2026-03-12 00:45:49 [INFO]: GateMode: concat
-2026-03-12 00:45:49 [INFO]: Gate[FTI]: trace:0.495, log:0.505
-2026-03-12 00:45:49 [INFO]: Gate[RCL]: trace:0.498, log:0.502
-2026-03-12 00:45:50 [DEBUG]: con_loss: 1.079, RCA_loss: 1.787, TC_loss: 1.688
-2026-03-12 00:45:50 [DEBUG]: con_loss: 1.064, RCA_loss: 1.819, TC_loss: 1.670
-2026-03-12 00:45:50 [INFO]: Epoch 7 done. Loss: 5.049, Time per epoch: 0.705[s]
-2026-03-12 00:45:50 [INFO]: GateMode: concat
-2026-03-12 00:45:50 [INFO]: Gate[FTI]: trace:0.495, log:0.505
-2026-03-12 00:45:50 [INFO]: Gate[RCL]: trace:0.497, log:0.503
-2026-03-12 00:45:50 [DEBUG]: con_loss: 1.080, RCA_loss: 1.739, TC_loss: 1.639
-2026-03-12 00:45:51 [DEBUG]: con_loss: 1.066, RCA_loss: 1.822, TC_loss: 1.642
-2026-03-12 00:45:51 [INFO]: Epoch 8 done. Loss: 5.020, Time per epoch: 0.695[s]
-2026-03-12 00:45:51 [INFO]: GateMode: concat
-2026-03-12 00:45:51 [INFO]: Gate[FTI]: trace:0.495, log:0.505
-2026-03-12 00:45:51 [INFO]: Gate[RCL]: trace:0.496, log:0.504
-2026-03-12 00:45:51 [DEBUG]: con_loss: 1.077, RCA_loss: 1.698, TC_loss: 1.628
-2026-03-12 00:45:51 [DEBUG]: con_loss: 1.067, RCA_loss: 1.644, TC_loss: 1.597
-2026-03-12 00:45:52 [INFO]: Epoch 9 done. Loss: 4.950, Time per epoch: 0.697[s]
-2026-03-12 00:45:52 [INFO]: GateMode: concat
-2026-03-12 00:45:52 [INFO]: Gate[FTI]: trace:0.494, log:0.506
-2026-03-12 00:45:52 [INFO]: Gate[RCL]: trace:0.495, log:0.505
-2026-03-12 00:45:52 [DEBUG]: con_loss: 1.083, RCA_loss: 1.683, TC_loss: 1.627
-2026-03-12 00:45:52 [DEBUG]: con_loss: 1.062, RCA_loss: 1.595, TC_loss: 1.557
-2026-03-12 00:45:52 [INFO]: Epoch 10 done. Loss: 4.924, Time per epoch: 0.700[s]
-2026-03-12 00:45:52 [INFO]: GateMode: concat
-2026-03-12 00:45:52 [INFO]: Gate[FTI]: trace:0.494, log:0.506
-2026-03-12 00:45:52 [INFO]: Gate[RCL]: trace:0.494, log:0.506
-2026-03-12 00:45:53 [DEBUG]: con_loss: 1.078, RCA_loss: 1.684, TC_loss: 1.576
-2026-03-12 00:45:53 [DEBUG]: con_loss: 1.070, RCA_loss: 1.533, TC_loss: 1.597
-2026-03-12 00:45:53 [INFO]: Epoch 11 done. Loss: 4.907, Time per epoch: 0.951[s]
-2026-03-12 00:45:53 [INFO]: GateMode: concat
-2026-03-12 00:45:53 [INFO]: Gate[FTI]: trace:0.493, log:0.507
-2026-03-12 00:45:53 [INFO]: Gate[RCL]: trace:0.493, log:0.507
-2026-03-12 00:45:53 [DEBUG]: con_loss: 1.079, RCA_loss: 1.562, TC_loss: 1.518
-2026-03-12 00:45:54 [DEBUG]: con_loss: 1.070, RCA_loss: 1.488, TC_loss: 1.558
-2026-03-12 00:45:54 [INFO]: Epoch 12 done. Loss: 4.841, Time per epoch: 0.689[s]
-2026-03-12 00:45:54 [INFO]: GateMode: concat
-2026-03-12 00:45:54 [INFO]: Gate[FTI]: trace:0.493, log:0.507
-2026-03-12 00:45:54 [INFO]: Gate[RCL]: trace:0.492, log:0.508
-2026-03-12 00:45:54 [DEBUG]: con_loss: 1.078, RCA_loss: 1.409, TC_loss: 1.457
-2026-03-12 00:45:54 [DEBUG]: con_loss: 1.062, RCA_loss: 1.565, TC_loss: 1.506
-2026-03-12 00:45:55 [INFO]: Epoch 13 done. Loss: 4.792, Time per epoch: 0.708[s]
-2026-03-12 00:45:55 [INFO]: GateMode: concat
-2026-03-12 00:45:55 [INFO]: Gate[FTI]: trace:0.492, log:0.508
-2026-03-12 00:45:55 [INFO]: Gate[RCL]: trace:0.492, log:0.508
-2026-03-12 00:45:55 [DEBUG]: con_loss: 1.077, RCA_loss: 1.488, TC_loss: 1.463
-2026-03-12 00:45:55 [DEBUG]: con_loss: 1.064, RCA_loss: 1.307, TC_loss: 1.432
-2026-03-12 00:45:55 [INFO]: Epoch 14 done. Loss: 4.730, Time per epoch: 0.696[s]
-2026-03-12 00:45:55 [INFO]: GateMode: concat
-2026-03-12 00:45:55 [INFO]: Gate[FTI]: trace:0.492, log:0.508
-2026-03-12 00:45:55 [INFO]: Gate[RCL]: trace:0.491, log:0.509
-2026-03-12 00:45:55 [DEBUG]: con_loss: 1.078, RCA_loss: 1.391, TC_loss: 1.480
-2026-03-12 00:45:56 [DEBUG]: con_loss: 1.062, RCA_loss: 1.520, TC_loss: 1.467
-2026-03-12 00:45:56 [INFO]: Epoch 15 done. Loss: 4.772, Time per epoch: 0.681[s]
-2026-03-12 00:45:56 [INFO]: GateMode: concat
-2026-03-12 00:45:56 [INFO]: Gate[FTI]: trace:0.492, log:0.508
-2026-03-12 00:45:56 [INFO]: Gate[RCL]: trace:0.490, log:0.510
-2026-03-12 00:45:56 [DEBUG]: con_loss: 1.078, RCA_loss: 1.324, TC_loss: 1.461
-2026-03-12 00:45:56 [DEBUG]: con_loss: 1.061, RCA_loss: 1.318, TC_loss: 1.358
-2026-03-12 00:45:57 [INFO]: Epoch 16 done. Loss: 4.673, Time per epoch: 0.691[s]
-2026-03-12 00:45:57 [INFO]: GateMode: concat
-2026-03-12 00:45:57 [INFO]: Gate[FTI]: trace:0.492, log:0.508
-2026-03-12 00:45:57 [INFO]: Gate[RCL]: trace:0.489, log:0.511
-2026-03-12 00:45:57 [DEBUG]: con_loss: 1.077, RCA_loss: 1.186, TC_loss: 1.373
-2026-03-12 00:45:57 [DEBUG]: con_loss: 1.064, RCA_loss: 1.414, TC_loss: 1.430
-2026-03-12 00:45:57 [INFO]: Epoch 17 done. Loss: 4.658, Time per epoch: 0.682[s]
-2026-03-12 00:45:57 [INFO]: GateMode: concat
-2026-03-12 00:45:57 [INFO]: Gate[FTI]: trace:0.491, log:0.509
-2026-03-12 00:45:57 [INFO]: Gate[RCL]: trace:0.489, log:0.511
-2026-03-12 00:45:57 [DEBUG]: con_loss: 1.076, RCA_loss: 1.388, TC_loss: 1.456
-2026-03-12 00:45:58 [DEBUG]: con_loss: 1.061, RCA_loss: 1.237, TC_loss: 1.265
-2026-03-12 00:45:58 [INFO]: Epoch 18 done. Loss: 4.644, Time per epoch: 0.675[s]
-2026-03-12 00:45:58 [INFO]: GateMode: concat
-2026-03-12 00:45:58 [INFO]: Gate[FTI]: trace:0.491, log:0.509
-2026-03-12 00:45:58 [INFO]: Gate[RCL]: trace:0.488, log:0.512
-2026-03-12 00:45:58 [DEBUG]: con_loss: 1.075, RCA_loss: 1.362, TC_loss: 1.387
-2026-03-12 00:45:59 [DEBUG]: con_loss: 1.065, RCA_loss: 1.292, TC_loss: 1.343
-2026-03-12 00:45:59 [INFO]: Epoch 19 done. Loss: 4.654, Time per epoch: 0.748[s]
-2026-03-12 00:45:59 [INFO]: GateMode: concat
-2026-03-12 00:45:59 [INFO]: Gate[FTI]: trace:0.491, log:0.509
-2026-03-12 00:45:59 [INFO]: Gate[RCL]: trace:0.487, log:0.513
-2026-03-12 00:45:59 [DEBUG]: con_loss: 1.076, RCA_loss: 1.290, TC_loss: 1.345
-2026-03-12 00:45:59 [DEBUG]: con_loss: 1.067, RCA_loss: 1.234, TC_loss: 1.342
-2026-03-12 00:45:59 [INFO]: Epoch 20 done. Loss: 4.611, Time per epoch: 0.685[s]
-2026-03-12 00:45:59 [INFO]: GateMode: concat
-2026-03-12 00:45:59 [INFO]: Gate[FTI]: trace:0.490, log:0.510
-2026-03-12 00:45:59 [INFO]: Gate[RCL]: trace:0.486, log:0.514
-2026-03-12 00:46:00 [DEBUG]: con_loss: 1.077, RCA_loss: 1.150, TC_loss: 1.382
-2026-03-12 00:46:00 [DEBUG]: con_loss: 1.061, RCA_loss: 1.239, TC_loss: 1.294
-2026-03-12 00:46:00 [INFO]: Epoch 21 done. Loss: 4.573, Time per epoch: 0.885[s]
-2026-03-12 00:46:00 [INFO]: GateMode: concat
-2026-03-12 00:46:00 [INFO]: Gate[FTI]: trace:0.490, log:0.510
-2026-03-12 00:46:00 [INFO]: Gate[RCL]: trace:0.485, log:0.515
-2026-03-12 00:46:01 [DEBUG]: con_loss: 1.074, RCA_loss: 1.219, TC_loss: 1.304
-2026-03-12 00:46:01 [DEBUG]: con_loss: 1.062, RCA_loss: 1.089, TC_loss: 1.263
-2026-03-12 00:46:01 [INFO]: Epoch 22 done. Loss: 4.526, Time per epoch: 0.710[s]
-2026-03-12 00:46:01 [INFO]: GateMode: concat
-2026-03-12 00:46:01 [INFO]: Gate[FTI]: trace:0.490, log:0.510
-2026-03-12 00:46:01 [INFO]: Gate[RCL]: trace:0.485, log:0.515
-2026-03-12 00:46:01 [DEBUG]: con_loss: 1.078, RCA_loss: 1.135, TC_loss: 1.241
-2026-03-12 00:46:02 [DEBUG]: con_loss: 1.057, RCA_loss: 1.100, TC_loss: 1.275
-2026-03-12 00:46:02 [INFO]: Epoch 23 done. Loss: 4.494, Time per epoch: 0.684[s]
-2026-03-12 00:46:02 [INFO]: GateMode: concat
-2026-03-12 00:46:02 [INFO]: Gate[FTI]: trace:0.490, log:0.510
-2026-03-12 00:46:02 [INFO]: Gate[RCL]: trace:0.484, log:0.516
-2026-03-12 00:46:02 [DEBUG]: con_loss: 1.072, RCA_loss: 0.982, TC_loss: 1.302
-2026-03-12 00:46:02 [DEBUG]: con_loss: 1.057, RCA_loss: 1.039, TC_loss: 1.176
-2026-03-12 00:46:02 [INFO]: Epoch 24 done. Loss: 4.430, Time per epoch: 0.711[s]
-2026-03-12 00:46:02 [INFO]: GateMode: concat
-2026-03-12 00:46:02 [INFO]: Gate[FTI]: trace:0.490, log:0.510
-2026-03-12 00:46:02 [INFO]: Gate[RCL]: trace:0.483, log:0.517
-2026-03-12 00:46:03 [DEBUG]: con_loss: 1.072, RCA_loss: 1.068, TC_loss: 1.226
-2026-03-12 00:46:03 [DEBUG]: con_loss: 1.060, RCA_loss: 1.157, TC_loss: 1.253
-2026-03-12 00:46:03 [INFO]: Epoch 25 done. Loss: 4.482, Time per epoch: 0.671[s]
-2026-03-12 00:46:03 [INFO]: GateMode: concat
-2026-03-12 00:46:03 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:03 [INFO]: Gate[RCL]: trace:0.482, log:0.518
-2026-03-12 00:46:03 [DEBUG]: con_loss: 1.074, RCA_loss: 1.014, TC_loss: 1.211
-2026-03-12 00:46:04 [DEBUG]: con_loss: 1.061, RCA_loss: 1.044, TC_loss: 1.317
-2026-03-12 00:46:04 [INFO]: Epoch 26 done. Loss: 4.453, Time per epoch: 0.678[s]
-2026-03-12 00:46:04 [INFO]: GateMode: concat
-2026-03-12 00:46:04 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:04 [INFO]: Gate[RCL]: trace:0.481, log:0.519
-2026-03-12 00:46:04 [DEBUG]: con_loss: 1.078, RCA_loss: 1.007, TC_loss: 1.215
-2026-03-12 00:46:04 [DEBUG]: con_loss: 1.064, RCA_loss: 0.942, TC_loss: 1.236
-2026-03-12 00:46:04 [INFO]: Epoch 27 done. Loss: 4.408, Time per epoch: 0.666[s]
-2026-03-12 00:46:04 [INFO]: GateMode: concat
-2026-03-12 00:46:04 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:04 [INFO]: Gate[RCL]: trace:0.481, log:0.519
-2026-03-12 00:46:05 [DEBUG]: con_loss: 1.072, RCA_loss: 0.860, TC_loss: 1.168
-2026-03-12 00:46:05 [DEBUG]: con_loss: 1.061, RCA_loss: 1.056, TC_loss: 1.229
-2026-03-12 00:46:05 [INFO]: Epoch 28 done. Loss: 4.384, Time per epoch: 0.670[s]
-2026-03-12 00:46:05 [INFO]: GateMode: concat
-2026-03-12 00:46:05 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:05 [INFO]: Gate[RCL]: trace:0.480, log:0.520
-2026-03-12 00:46:05 [DEBUG]: con_loss: 1.073, RCA_loss: 0.965, TC_loss: 1.217
-2026-03-12 00:46:06 [DEBUG]: con_loss: 1.059, RCA_loss: 0.918, TC_loss: 1.135
-2026-03-12 00:46:06 [INFO]: Epoch 29 done. Loss: 4.364, Time per epoch: 0.670[s]
-2026-03-12 00:46:06 [INFO]: GateMode: concat
-2026-03-12 00:46:06 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:06 [INFO]: Gate[RCL]: trace:0.479, log:0.521
-2026-03-12 00:46:06 [DEBUG]: con_loss: 1.071, RCA_loss: 0.971, TC_loss: 1.176
-2026-03-12 00:46:06 [DEBUG]: con_loss: 1.060, RCA_loss: 0.810, TC_loss: 1.214
-2026-03-12 00:46:06 [INFO]: Epoch 30 done. Loss: 4.348, Time per epoch: 0.663[s]
-2026-03-12 00:46:06 [INFO]: GateMode: concat
-2026-03-12 00:46:06 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:06 [INFO]: Gate[RCL]: trace:0.479, log:0.521
-2026-03-12 00:46:07 [DEBUG]: con_loss: 1.070, RCA_loss: 0.867, TC_loss: 1.123
-2026-03-12 00:46:07 [DEBUG]: con_loss: 1.059, RCA_loss: 0.888, TC_loss: 1.120
-2026-03-12 00:46:07 [INFO]: Epoch 31 done. Loss: 4.305, Time per epoch: 0.851[s]
-2026-03-12 00:46:07 [INFO]: GateMode: concat
-2026-03-12 00:46:07 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:07 [INFO]: Gate[RCL]: trace:0.478, log:0.522
-2026-03-12 00:46:07 [DEBUG]: con_loss: 1.072, RCA_loss: 0.860, TC_loss: 1.171
-2026-03-12 00:46:08 [DEBUG]: con_loss: 1.058, RCA_loss: 0.933, TC_loss: 1.109
-2026-03-12 00:46:08 [INFO]: Epoch 32 done. Loss: 4.323, Time per epoch: 0.663[s]
-2026-03-12 00:46:08 [INFO]: GateMode: concat
-2026-03-12 00:46:08 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:08 [INFO]: Gate[RCL]: trace:0.478, log:0.522
-2026-03-12 00:46:08 [DEBUG]: con_loss: 1.069, RCA_loss: 0.822, TC_loss: 1.042
-2026-03-12 00:46:08 [DEBUG]: con_loss: 1.059, RCA_loss: 0.805, TC_loss: 1.068
-2026-03-12 00:46:09 [INFO]: Epoch 33 done. Loss: 4.239, Time per epoch: 0.669[s]
-2026-03-12 00:46:09 [INFO]: GateMode: concat
-2026-03-12 00:46:09 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:09 [INFO]: Gate[RCL]: trace:0.478, log:0.522
-2026-03-12 00:46:09 [DEBUG]: con_loss: 1.071, RCA_loss: 0.903, TC_loss: 1.080
-2026-03-12 00:46:09 [DEBUG]: con_loss: 1.059, RCA_loss: 0.769, TC_loss: 1.075
-2026-03-12 00:46:09 [INFO]: Epoch 34 done. Loss: 4.262, Time per epoch: 0.666[s]
-2026-03-12 00:46:09 [INFO]: GateMode: concat
-2026-03-12 00:46:09 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:09 [INFO]: Gate[RCL]: trace:0.477, log:0.523
-2026-03-12 00:46:09 [DEBUG]: con_loss: 1.068, RCA_loss: 0.898, TC_loss: 1.026
-2026-03-12 00:46:10 [DEBUG]: con_loss: 1.058, RCA_loss: 0.794, TC_loss: 1.067
-2026-03-12 00:46:10 [INFO]: Epoch 35 done. Loss: 4.250, Time per epoch: 0.680[s]
-2026-03-12 00:46:10 [INFO]: GateMode: concat
-2026-03-12 00:46:10 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:10 [INFO]: Gate[RCL]: trace:0.477, log:0.523
-2026-03-12 00:46:10 [DEBUG]: con_loss: 1.069, RCA_loss: 0.809, TC_loss: 1.099
-2026-03-12 00:46:11 [DEBUG]: con_loss: 1.055, RCA_loss: 0.816, TC_loss: 1.038
-2026-03-12 00:46:11 [INFO]: Epoch 36 done. Loss: 4.244, Time per epoch: 0.679[s]
-2026-03-12 00:46:11 [INFO]: GateMode: concat
-2026-03-12 00:46:11 [INFO]: Gate[FTI]: trace:0.489, log:0.511
-2026-03-12 00:46:11 [INFO]: Gate[RCL]: trace:0.477, log:0.523
-2026-03-12 00:46:11 [DEBUG]: con_loss: 1.072, RCA_loss: 0.763, TC_loss: 1.025
-2026-03-12 00:46:11 [DEBUG]: con_loss: 1.056, RCA_loss: 0.818, TC_loss: 1.088
-2026-03-12 00:46:11 [INFO]: Epoch 37 done. Loss: 4.228, Time per epoch: 0.668[s]
-2026-03-12 00:46:11 [INFO]: GateMode: concat
-2026-03-12 00:46:11 [INFO]: Gate[FTI]: trace:0.490, log:0.510
-2026-03-12 00:46:11 [INFO]: Gate[RCL]: trace:0.477, log:0.523
-2026-03-12 00:46:12 [DEBUG]: con_loss: 1.067, RCA_loss: 0.717, TC_loss: 0.999
-2026-03-12 00:46:12 [DEBUG]: con_loss: 1.057, RCA_loss: 0.834, TC_loss: 1.014
-2026-03-12 00:46:12 [INFO]: Epoch 38 done. Loss: 4.195, Time per epoch: 0.678[s]
-2026-03-12 00:46:12 [INFO]: GateMode: concat
-2026-03-12 00:46:12 [INFO]: Gate[FTI]: trace:0.490, log:0.510
-2026-03-12 00:46:12 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:12 [DEBUG]: con_loss: 1.070, RCA_loss: 0.823, TC_loss: 1.051
-2026-03-12 00:46:13 [DEBUG]: con_loss: 1.057, RCA_loss: 0.732, TC_loss: 1.011
-2026-03-12 00:46:13 [INFO]: Epoch 39 done. Loss: 4.209, Time per epoch: 0.677[s]
-2026-03-12 00:46:13 [INFO]: GateMode: concat
-2026-03-12 00:46:13 [INFO]: Gate[FTI]: trace:0.490, log:0.510
-2026-03-12 00:46:13 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:13 [DEBUG]: con_loss: 1.067, RCA_loss: 0.787, TC_loss: 0.958
-2026-03-12 00:46:13 [DEBUG]: con_loss: 1.058, RCA_loss: 0.734, TC_loss: 1.058
-2026-03-12 00:46:13 [INFO]: Epoch 40 done. Loss: 4.188, Time per epoch: 0.674[s]
-2026-03-12 00:46:13 [INFO]: GateMode: concat
-2026-03-12 00:46:13 [INFO]: Gate[FTI]: trace:0.490, log:0.510
-2026-03-12 00:46:13 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:14 [DEBUG]: con_loss: 1.068, RCA_loss: 0.747, TC_loss: 1.008
-2026-03-12 00:46:14 [DEBUG]: con_loss: 1.057, RCA_loss: 0.728, TC_loss: 0.922
-2026-03-12 00:46:14 [INFO]: Epoch 41 done. Loss: 4.155, Time per epoch: 0.837[s]
-2026-03-12 00:46:14 [INFO]: GateMode: concat
-2026-03-12 00:46:14 [INFO]: Gate[FTI]: trace:0.490, log:0.510
-2026-03-12 00:46:14 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:14 [DEBUG]: con_loss: 1.068, RCA_loss: 0.694, TC_loss: 0.942
-2026-03-12 00:46:15 [DEBUG]: con_loss: 1.055, RCA_loss: 0.643, TC_loss: 0.982
-2026-03-12 00:46:15 [INFO]: Epoch 42 done. Loss: 4.118, Time per epoch: 0.682[s]
-2026-03-12 00:46:15 [INFO]: GateMode: concat
-2026-03-12 00:46:15 [INFO]: Gate[FTI]: trace:0.491, log:0.509
-2026-03-12 00:46:15 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:15 [DEBUG]: con_loss: 1.074, RCA_loss: 0.795, TC_loss: 1.061
-2026-03-12 00:46:15 [DEBUG]: con_loss: 1.053, RCA_loss: 0.684, TC_loss: 0.879
-2026-03-12 00:46:16 [INFO]: Epoch 43 done. Loss: 4.159, Time per epoch: 0.686[s]
-2026-03-12 00:46:16 [INFO]: GateMode: concat
-2026-03-12 00:46:16 [INFO]: Gate[FTI]: trace:0.491, log:0.509
-2026-03-12 00:46:16 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:16 [DEBUG]: con_loss: 1.072, RCA_loss: 0.720, TC_loss: 0.968
-2026-03-12 00:46:16 [DEBUG]: con_loss: 1.054, RCA_loss: 0.637, TC_loss: 0.901
-2026-03-12 00:46:16 [INFO]: Epoch 44 done. Loss: 4.111, Time per epoch: 0.679[s]
-2026-03-12 00:46:16 [INFO]: GateMode: concat
-2026-03-12 00:46:16 [INFO]: Gate[FTI]: trace:0.491, log:0.509
-2026-03-12 00:46:16 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:16 [DEBUG]: con_loss: 1.069, RCA_loss: 0.637, TC_loss: 0.881
-2026-03-12 00:46:17 [DEBUG]: con_loss: 1.061, RCA_loss: 0.716, TC_loss: 0.877
-2026-03-12 00:46:17 [INFO]: Epoch 45 done. Loss: 4.083, Time per epoch: 0.679[s]
-2026-03-12 00:46:17 [INFO]: GateMode: concat
-2026-03-12 00:46:17 [INFO]: Gate[FTI]: trace:0.491, log:0.509
-2026-03-12 00:46:17 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:17 [DEBUG]: con_loss: 1.072, RCA_loss: 0.730, TC_loss: 0.897
-2026-03-12 00:46:17 [DEBUG]: con_loss: 1.050, RCA_loss: 0.706, TC_loss: 0.879
-2026-03-12 00:46:18 [INFO]: Epoch 46 done. Loss: 4.106, Time per epoch: 0.677[s]
-2026-03-12 00:46:18 [INFO]: GateMode: concat
-2026-03-12 00:46:18 [INFO]: Gate[FTI]: trace:0.492, log:0.508
-2026-03-12 00:46:18 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:18 [DEBUG]: con_loss: 1.068, RCA_loss: 0.663, TC_loss: 0.925
-2026-03-12 00:46:18 [DEBUG]: con_loss: 1.055, RCA_loss: 0.657, TC_loss: 0.889
-2026-03-12 00:46:18 [INFO]: Epoch 47 done. Loss: 4.087, Time per epoch: 0.674[s]
-2026-03-12 00:46:18 [INFO]: GateMode: concat
-2026-03-12 00:46:18 [INFO]: Gate[FTI]: trace:0.492, log:0.508
-2026-03-12 00:46:18 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:18 [DEBUG]: con_loss: 1.070, RCA_loss: 0.686, TC_loss: 0.951
-2026-03-12 00:46:19 [DEBUG]: con_loss: 1.053, RCA_loss: 0.646, TC_loss: 0.824
-2026-03-12 00:46:19 [INFO]: Epoch 48 done. Loss: 4.080, Time per epoch: 0.691[s]
-2026-03-12 00:46:19 [INFO]: GateMode: concat
-2026-03-12 00:46:19 [INFO]: Gate[FTI]: trace:0.492, log:0.508
-2026-03-12 00:46:19 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:19 [DEBUG]: con_loss: 1.070, RCA_loss: 0.733, TC_loss: 0.823
-2026-03-12 00:46:20 [DEBUG]: con_loss: 1.056, RCA_loss: 0.595, TC_loss: 0.925
-2026-03-12 00:46:20 [INFO]: Epoch 49 done. Loss: 4.073, Time per epoch: 0.689[s]
-2026-03-12 00:46:20 [INFO]: GateMode: concat
-2026-03-12 00:46:20 [INFO]: Gate[FTI]: trace:0.493, log:0.507
-2026-03-12 00:46:20 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:20 [DEBUG]: con_loss: 1.065, RCA_loss: 0.536, TC_loss: 0.782
-2026-03-12 00:46:20 [DEBUG]: con_loss: 1.060, RCA_loss: 0.724, TC_loss: 0.936
-2026-03-12 00:46:20 [INFO]: Epoch 50 done. Loss: 4.048, Time per epoch: 0.679[s]
-2026-03-12 00:46:20 [INFO]: GateMode: concat
-2026-03-12 00:46:20 [INFO]: Gate[FTI]: trace:0.493, log:0.507
-2026-03-12 00:46:20 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:21 [DEBUG]: con_loss: 1.068, RCA_loss: 0.553, TC_loss: 0.806
-2026-03-12 00:46:21 [DEBUG]: con_loss: 1.056, RCA_loss: 0.660, TC_loss: 0.838
-2026-03-12 00:46:21 [INFO]: Epoch 51 done. Loss: 4.018, Time per epoch: 0.873[s]
-2026-03-12 00:46:21 [INFO]: GateMode: concat
-2026-03-12 00:46:21 [INFO]: Gate[FTI]: trace:0.494, log:0.506
-2026-03-12 00:46:21 [INFO]: Gate[RCL]: trace:0.476, log:0.524
-2026-03-12 00:46:21 [DEBUG]: con_loss: 1.065, RCA_loss: 0.657, TC_loss: 0.767
-2026-03-12 00:46:22 [DEBUG]: con_loss: 1.055, RCA_loss: 0.528, TC_loss: 0.778
-2026-03-12 00:46:22 [INFO]: Epoch 52 done. Loss: 3.985, Time per epoch: 0.685[s]
-2026-03-12 00:46:22 [INFO]: GateMode: concat
-2026-03-12 00:46:22 [INFO]: Gate[FTI]: trace:0.494, log:0.506
-2026-03-12 00:46:22 [INFO]: Gate[RCL]: trace:0.477, log:0.523
-2026-03-12 00:46:22 [DEBUG]: con_loss: 1.069, RCA_loss: 0.579, TC_loss: 0.815
-2026-03-12 00:46:22 [DEBUG]: con_loss: 1.055, RCA_loss: 0.656, TC_loss: 0.819
-2026-03-12 00:46:23 [INFO]: Epoch 53 done. Loss: 4.021, Time per epoch: 0.688[s]
-2026-03-12 00:46:23 [INFO]: GateMode: concat
-2026-03-12 00:46:23 [INFO]: Gate[FTI]: trace:0.494, log:0.506
-2026-03-12 00:46:23 [INFO]: Gate[RCL]: trace:0.477, log:0.523
-2026-03-12 00:46:23 [DEBUG]: con_loss: 1.067, RCA_loss: 0.616, TC_loss: 0.774
-2026-03-12 00:46:23 [DEBUG]: con_loss: 1.055, RCA_loss: 0.596, TC_loss: 0.765
-2026-03-12 00:46:23 [INFO]: Epoch 54 done. Loss: 3.991, Time per epoch: 0.684[s]
-2026-03-12 00:46:23 [INFO]: GateMode: concat
-2026-03-12 00:46:23 [INFO]: Gate[FTI]: trace:0.495, log:0.505
-2026-03-12 00:46:23 [INFO]: Gate[RCL]: trace:0.477, log:0.523
-2026-03-12 00:46:23 [DEBUG]: con_loss: 1.070, RCA_loss: 0.650, TC_loss: 0.799
-2026-03-12 00:46:24 [DEBUG]: con_loss: 1.054, RCA_loss: 0.526, TC_loss: 0.772
-2026-03-12 00:46:24 [INFO]: Epoch 55 done. Loss: 3.990, Time per epoch: 0.677[s]
-2026-03-12 00:46:24 [INFO]: GateMode: concat
-2026-03-12 00:46:24 [INFO]: Gate[FTI]: trace:0.495, log:0.505
-2026-03-12 00:46:24 [INFO]: Gate[RCL]: trace:0.478, log:0.522
-2026-03-12 00:46:24 [DEBUG]: con_loss: 1.070, RCA_loss: 0.674, TC_loss: 0.777
-2026-03-12 00:46:25 [DEBUG]: con_loss: 1.061, RCA_loss: 0.517, TC_loss: 0.792
-2026-03-12 00:46:25 [INFO]: Epoch 56 done. Loss: 3.995, Time per epoch: 0.714[s]
-2026-03-12 00:46:25 [INFO]: GateMode: concat
-2026-03-12 00:46:25 [INFO]: Gate[FTI]: trace:0.496, log:0.504
-2026-03-12 00:46:25 [INFO]: Gate[RCL]: trace:0.478, log:0.522
-2026-03-12 00:46:25 [DEBUG]: con_loss: 1.069, RCA_loss: 0.691, TC_loss: 0.756
-2026-03-12 00:46:25 [DEBUG]: con_loss: 1.056, RCA_loss: 0.465, TC_loss: 0.736
-2026-03-12 00:46:25 [INFO]: Epoch 57 done. Loss: 3.966, Time per epoch: 0.672[s]
-2026-03-12 00:46:25 [INFO]: GateMode: concat
-2026-03-12 00:46:25 [INFO]: Gate[FTI]: trace:0.496, log:0.504
-2026-03-12 00:46:25 [INFO]: Gate[RCL]: trace:0.479, log:0.521
-2026-03-12 00:46:26 [DEBUG]: con_loss: 1.070, RCA_loss: 0.614, TC_loss: 0.769
-2026-03-12 00:46:26 [DEBUG]: con_loss: 1.055, RCA_loss: 0.510, TC_loss: 0.687
-2026-03-12 00:46:26 [INFO]: Epoch 58 done. Loss: 3.949, Time per epoch: 0.675[s]
-2026-03-12 00:46:26 [INFO]: GateMode: concat
-2026-03-12 00:46:26 [INFO]: Gate[FTI]: trace:0.496, log:0.504
-2026-03-12 00:46:26 [INFO]: Gate[RCL]: trace:0.479, log:0.521
-2026-03-12 00:46:26 [DEBUG]: con_loss: 1.067, RCA_loss: 0.548, TC_loss: 0.669
-2026-03-12 00:46:27 [DEBUG]: con_loss: 1.056, RCA_loss: 0.537, TC_loss: 0.739
-2026-03-12 00:46:27 [INFO]: Epoch 59 done. Loss: 3.927, Time per epoch: 0.668[s]
-2026-03-12 00:46:27 [INFO]: GateMode: concat
-2026-03-12 00:46:27 [INFO]: Gate[FTI]: trace:0.497, log:0.503
-2026-03-12 00:46:27 [INFO]: Gate[RCL]: trace:0.479, log:0.521
-2026-03-12 00:46:27 [DEBUG]: con_loss: 1.072, RCA_loss: 0.536, TC_loss: 0.727
-2026-03-12 00:46:27 [DEBUG]: con_loss: 1.051, RCA_loss: 0.456, TC_loss: 0.641
-2026-03-12 00:46:28 [INFO]: Epoch 60 done. Loss: 3.893, Time per epoch: 0.920[s]
-2026-03-12 00:46:28 [INFO]: GateMode: concat
-2026-03-12 00:46:28 [INFO]: Gate[FTI]: trace:0.497, log:0.503
-2026-03-12 00:46:28 [INFO]: Gate[RCL]: trace:0.480, log:0.520
-2026-03-12 00:46:28 [DEBUG]: con_loss: 1.068, RCA_loss: 0.490, TC_loss: 0.673
-2026-03-12 00:46:28 [DEBUG]: con_loss: 1.057, RCA_loss: 0.528, TC_loss: 0.742
-2026-03-12 00:46:28 [INFO]: Epoch 61 done. Loss: 3.912, Time per epoch: 0.667[s]
-2026-03-12 00:46:28 [INFO]: GateMode: concat
-2026-03-12 00:46:28 [INFO]: Gate[FTI]: trace:0.497, log:0.503
-2026-03-12 00:46:28 [INFO]: Gate[RCL]: trace:0.480, log:0.520
-2026-03-12 00:46:28 [DEBUG]: con_loss: 1.063, RCA_loss: 0.559, TC_loss: 0.690
-2026-03-12 00:46:29 [DEBUG]: con_loss: 1.058, RCA_loss: 0.475, TC_loss: 0.722
-2026-03-12 00:46:29 [INFO]: Epoch 62 done. Loss: 3.915, Time per epoch: 0.665[s]
-2026-03-12 00:46:29 [INFO]: GateMode: concat
-2026-03-12 00:46:29 [INFO]: Gate[FTI]: trace:0.497, log:0.503
-2026-03-12 00:46:29 [INFO]: Gate[RCL]: trace:0.480, log:0.520
-2026-03-12 00:46:29 [DEBUG]: con_loss: 1.069, RCA_loss: 0.495, TC_loss: 0.723
-2026-03-12 00:46:29 [DEBUG]: con_loss: 1.055, RCA_loss: 0.526, TC_loss: 0.671
-2026-03-12 00:46:30 [INFO]: Epoch 63 done. Loss: 3.907, Time per epoch: 0.594[s]
-2026-03-12 00:46:30 [INFO]: GateMode: concat
-2026-03-12 00:46:30 [INFO]: Gate[FTI]: trace:0.498, log:0.502
-2026-03-12 00:46:30 [INFO]: Gate[RCL]: trace:0.480, log:0.520
-2026-03-12 00:46:30 [DEBUG]: con_loss: 1.069, RCA_loss: 0.500, TC_loss: 0.670
-2026-03-12 00:46:30 [DEBUG]: con_loss: 1.055, RCA_loss: 0.568, TC_loss: 0.679
-2026-03-12 00:46:30 [INFO]: Epoch 64 done. Loss: 3.908, Time per epoch: 0.666[s]
-2026-03-12 00:46:30 [INFO]: GateMode: concat
-2026-03-12 00:46:30 [INFO]: Gate[FTI]: trace:0.498, log:0.502
-2026-03-12 00:46:30 [INFO]: Gate[RCL]: trace:0.480, log:0.520
-2026-03-12 00:46:30 [DEBUG]: con_loss: 1.066, RCA_loss: 0.493, TC_loss: 0.607
-2026-03-12 00:46:31 [DEBUG]: con_loss: 1.051, RCA_loss: 0.466, TC_loss: 0.583
-2026-03-12 00:46:31 [INFO]: Epoch 65 done. Loss: 3.839, Time per epoch: 0.667[s]
-2026-03-12 00:46:31 [INFO]: GateMode: concat
-2026-03-12 00:46:31 [INFO]: Gate[FTI]: trace:0.499, log:0.501
-2026-03-12 00:46:31 [INFO]: Gate[RCL]: trace:0.481, log:0.519
-2026-03-12 00:46:31 [DEBUG]: con_loss: 1.067, RCA_loss: 0.547, TC_loss: 0.616
-2026-03-12 00:46:31 [DEBUG]: con_loss: 1.058, RCA_loss: 0.505, TC_loss: 0.635
-2026-03-12 00:46:32 [INFO]: Epoch 66 done. Loss: 3.879, Time per epoch: 0.662[s]
-2026-03-12 00:46:32 [INFO]: GateMode: concat
-2026-03-12 00:46:32 [INFO]: Gate[FTI]: trace:0.499, log:0.501
-2026-03-12 00:46:32 [INFO]: Gate[RCL]: trace:0.481, log:0.519
-2026-03-12 00:46:32 [DEBUG]: con_loss: 1.067, RCA_loss: 0.541, TC_loss: 0.651
-2026-03-12 00:46:32 [DEBUG]: con_loss: 1.058, RCA_loss: 0.442, TC_loss: 0.629
-2026-03-12 00:46:32 [INFO]: Epoch 67 done. Loss: 3.869, Time per epoch: 0.665[s]
-2026-03-12 00:46:32 [INFO]: GateMode: concat
-2026-03-12 00:46:32 [INFO]: Gate[FTI]: trace:0.500, log:0.500
-2026-03-12 00:46:32 [INFO]: Gate[RCL]: trace:0.482, log:0.518
-2026-03-12 00:46:32 [DEBUG]: con_loss: 1.068, RCA_loss: 0.508, TC_loss: 0.525
-2026-03-12 00:46:33 [DEBUG]: con_loss: 1.055, RCA_loss: 0.447, TC_loss: 0.628
-2026-03-12 00:46:33 [INFO]: Epoch 68 done. Loss: 3.830, Time per epoch: 0.668[s]
-2026-03-12 00:46:33 [INFO]: GateMode: concat
-2026-03-12 00:46:33 [INFO]: Gate[FTI]: trace:0.500, log:0.500
-2026-03-12 00:46:33 [INFO]: Gate[RCL]: trace:0.482, log:0.518
-2026-03-12 00:46:33 [DEBUG]: con_loss: 1.065, RCA_loss: 0.559, TC_loss: 0.616
-2026-03-12 00:46:33 [DEBUG]: con_loss: 1.054, RCA_loss: 0.452, TC_loss: 0.586
-2026-03-12 00:46:34 [INFO]: Epoch 69 done. Loss: 3.856, Time per epoch: 0.665[s]
-2026-03-12 00:46:34 [INFO]: GateMode: concat
-2026-03-12 00:46:34 [INFO]: Gate[FTI]: trace:0.500, log:0.500
-2026-03-12 00:46:34 [INFO]: Gate[RCL]: trace:0.482, log:0.518
-2026-03-12 00:46:34 [DEBUG]: con_loss: 1.070, RCA_loss: 0.462, TC_loss: 0.554
-2026-03-12 00:46:34 [DEBUG]: con_loss: 1.053, RCA_loss: 0.445, TC_loss: 0.562
-2026-03-12 00:46:34 [INFO]: Epoch 70 done. Loss: 3.809, Time per epoch: 0.884[s]
-2026-03-12 00:46:34 [INFO]: GateMode: concat
-2026-03-12 00:46:34 [INFO]: Gate[FTI]: trace:0.501, log:0.499
-2026-03-12 00:46:34 [INFO]: Gate[RCL]: trace:0.483, log:0.517
-2026-03-12 00:46:35 [DEBUG]: con_loss: 1.064, RCA_loss: 0.469, TC_loss: 0.543
-2026-03-12 00:46:35 [DEBUG]: con_loss: 1.052, RCA_loss: 0.477, TC_loss: 0.590
-2026-03-12 00:46:35 [INFO]: Epoch 71 done. Loss: 3.821, Time per epoch: 0.669[s]
-2026-03-12 00:46:35 [INFO]: GateMode: concat
-2026-03-12 00:46:35 [INFO]: Gate[FTI]: trace:0.501, log:0.499
-2026-03-12 00:46:35 [INFO]: Gate[RCL]: trace:0.483, log:0.517
-2026-03-12 00:46:35 [DEBUG]: con_loss: 1.066, RCA_loss: 0.376, TC_loss: 0.575
-2026-03-12 00:46:36 [DEBUG]: con_loss: 1.058, RCA_loss: 0.564, TC_loss: 0.564
-2026-03-12 00:46:36 [INFO]: Epoch 72 done. Loss: 3.823, Time per epoch: 0.664[s]
-2026-03-12 00:46:36 [INFO]: GateMode: concat
-2026-03-12 00:46:36 [INFO]: Gate[FTI]: trace:0.502, log:0.498
-2026-03-12 00:46:36 [INFO]: Gate[RCL]: trace:0.484, log:0.516
-2026-03-12 00:46:36 [DEBUG]: con_loss: 1.068, RCA_loss: 0.439, TC_loss: 0.597
-2026-03-12 00:46:36 [DEBUG]: con_loss: 1.055, RCA_loss: 0.387, TC_loss: 0.587
-2026-03-12 00:46:36 [INFO]: Epoch 73 done. Loss: 3.806, Time per epoch: 0.671[s]
-2026-03-12 00:46:36 [INFO]: GateMode: concat
-2026-03-12 00:46:36 [INFO]: Gate[FTI]: trace:0.502, log:0.498
-2026-03-12 00:46:36 [INFO]: Gate[RCL]: trace:0.484, log:0.516
-2026-03-12 00:46:37 [DEBUG]: con_loss: 1.069, RCA_loss: 0.491, TC_loss: 0.543
-2026-03-12 00:46:37 [DEBUG]: con_loss: 1.054, RCA_loss: 0.455, TC_loss: 0.580
-2026-03-12 00:46:37 [INFO]: Epoch 74 done. Loss: 3.820, Time per epoch: 0.675[s]
-2026-03-12 00:46:37 [INFO]: GateMode: concat
-2026-03-12 00:46:37 [INFO]: Gate[FTI]: trace:0.502, log:0.498
-2026-03-12 00:46:37 [INFO]: Gate[RCL]: trace:0.485, log:0.515
-2026-03-12 00:46:37 [DEBUG]: con_loss: 1.068, RCA_loss: 0.486, TC_loss: 0.549
-2026-03-12 00:46:38 [DEBUG]: con_loss: 1.056, RCA_loss: 0.416, TC_loss: 0.504
-2026-03-12 00:46:38 [INFO]: Epoch 75 done. Loss: 3.792, Time per epoch: 0.659[s]
-2026-03-12 00:46:38 [INFO]: GateMode: concat
-2026-03-12 00:46:38 [INFO]: Gate[FTI]: trace:0.502, log:0.498
-2026-03-12 00:46:38 [INFO]: Gate[RCL]: trace:0.485, log:0.515
-2026-03-12 00:46:38 [DEBUG]: con_loss: 1.066, RCA_loss: 0.393, TC_loss: 0.548
-2026-03-12 00:46:38 [DEBUG]: con_loss: 1.058, RCA_loss: 0.403, TC_loss: 0.473
-2026-03-12 00:46:38 [INFO]: Epoch 76 done. Loss: 3.757, Time per epoch: 0.660[s]
-2026-03-12 00:46:38 [INFO]: GateMode: concat
-2026-03-12 00:46:38 [INFO]: Gate[FTI]: trace:0.503, log:0.497
-2026-03-12 00:46:38 [INFO]: Gate[RCL]: trace:0.485, log:0.515
-2026-03-12 00:46:39 [DEBUG]: con_loss: 1.069, RCA_loss: 0.451, TC_loss: 0.493
-2026-03-12 00:46:39 [DEBUG]: con_loss: 1.056, RCA_loss: 0.322, TC_loss: 0.485
-2026-03-12 00:46:39 [INFO]: Epoch 77 done. Loss: 3.742, Time per epoch: 0.659[s]
-2026-03-12 00:46:39 [INFO]: GateMode: concat
-2026-03-12 00:46:39 [INFO]: Gate[FTI]: trace:0.504, log:0.496
-2026-03-12 00:46:39 [INFO]: Gate[RCL]: trace:0.486, log:0.514
-2026-03-12 00:46:39 [DEBUG]: con_loss: 1.067, RCA_loss: 0.351, TC_loss: 0.484
-2026-03-12 00:46:40 [DEBUG]: con_loss: 1.052, RCA_loss: 0.445, TC_loss: 0.480
-2026-03-12 00:46:40 [INFO]: Epoch 78 done. Loss: 3.742, Time per epoch: 0.652[s]
-2026-03-12 00:46:40 [INFO]: GateMode: concat
-2026-03-12 00:46:40 [INFO]: Gate[FTI]: trace:0.504, log:0.496
-2026-03-12 00:46:40 [INFO]: Gate[RCL]: trace:0.486, log:0.514
-2026-03-12 00:46:40 [DEBUG]: con_loss: 1.066, RCA_loss: 0.403, TC_loss: 0.439
-2026-03-12 00:46:40 [DEBUG]: con_loss: 1.058, RCA_loss: 0.478, TC_loss: 0.473
-2026-03-12 00:46:40 [INFO]: Epoch 79 done. Loss: 3.752, Time per epoch: 0.659[s]
-2026-03-12 00:46:40 [INFO]: GateMode: concat
-2026-03-12 00:46:40 [INFO]: Gate[FTI]: trace:0.505, log:0.495
-2026-03-12 00:46:40 [INFO]: Gate[RCL]: trace:0.487, log:0.513
-2026-03-12 00:46:41 [DEBUG]: con_loss: 1.070, RCA_loss: 0.373, TC_loss: 0.506
-2026-03-12 00:46:41 [DEBUG]: con_loss: 1.054, RCA_loss: 0.369, TC_loss: 0.525
-2026-03-12 00:46:41 [INFO]: Epoch 80 done. Loss: 3.747, Time per epoch: 0.872[s]
-2026-03-12 00:46:41 [INFO]: GateMode: concat
-2026-03-12 00:46:41 [INFO]: Gate[FTI]: trace:0.505, log:0.495
-2026-03-12 00:46:41 [INFO]: Gate[RCL]: trace:0.487, log:0.513
-2026-03-12 00:46:41 [DEBUG]: con_loss: 1.066, RCA_loss: 0.393, TC_loss: 0.479
-2026-03-12 00:46:42 [DEBUG]: con_loss: 1.059, RCA_loss: 0.441, TC_loss: 0.516
-2026-03-12 00:46:42 [INFO]: Epoch 81 done. Loss: 3.761, Time per epoch: 0.654[s]
-2026-03-12 00:46:42 [INFO]: GateMode: concat
-2026-03-12 00:46:42 [INFO]: Gate[FTI]: trace:0.505, log:0.495
-2026-03-12 00:46:42 [INFO]: Gate[RCL]: trace:0.487, log:0.513
-2026-03-12 00:46:42 [DEBUG]: con_loss: 1.066, RCA_loss: 0.354, TC_loss: 0.510
-2026-03-12 00:46:42 [DEBUG]: con_loss: 1.052, RCA_loss: 0.431, TC_loss: 0.423
-2026-03-12 00:46:43 [INFO]: Epoch 82 done. Loss: 3.732, Time per epoch: 0.657[s]
-2026-03-12 00:46:43 [INFO]: GateMode: concat
-2026-03-12 00:46:43 [INFO]: Gate[FTI]: trace:0.506, log:0.494
-2026-03-12 00:46:43 [INFO]: Gate[RCL]: trace:0.488, log:0.512
-2026-03-12 00:46:43 [DEBUG]: con_loss: 1.070, RCA_loss: 0.410, TC_loss: 0.495
-2026-03-12 00:46:43 [DEBUG]: con_loss: 1.052, RCA_loss: 0.325, TC_loss: 0.416
-2026-03-12 00:46:43 [INFO]: Epoch 83 done. Loss: 3.715, Time per epoch: 0.664[s]
-2026-03-12 00:46:43 [INFO]: GateMode: concat
-2026-03-12 00:46:43 [INFO]: Gate[FTI]: trace:0.506, log:0.494
-2026-03-12 00:46:43 [INFO]: Gate[RCL]: trace:0.488, log:0.512
-2026-03-12 00:46:43 [DEBUG]: con_loss: 1.065, RCA_loss: 0.359, TC_loss: 0.372
-2026-03-12 00:46:44 [DEBUG]: con_loss: 1.053, RCA_loss: 0.420, TC_loss: 0.440
-2026-03-12 00:46:44 [INFO]: Epoch 84 done. Loss: 3.700, Time per epoch: 0.692[s]
-2026-03-12 00:46:44 [INFO]: GateMode: concat
-2026-03-12 00:46:44 [INFO]: Gate[FTI]: trace:0.507, log:0.493
-2026-03-12 00:46:44 [INFO]: Gate[RCL]: trace:0.489, log:0.511
-2026-03-12 00:46:44 [DEBUG]: con_loss: 1.067, RCA_loss: 0.394, TC_loss: 0.432
-2026-03-12 00:46:45 [DEBUG]: con_loss: 1.051, RCA_loss: 0.333, TC_loss: 0.427
-2026-03-12 00:46:45 [INFO]: Epoch 85 done. Loss: 3.699, Time per epoch: 0.686[s]
-2026-03-12 00:46:45 [INFO]: GateMode: concat
-2026-03-12 00:46:45 [INFO]: Gate[FTI]: trace:0.507, log:0.493
-2026-03-12 00:46:45 [INFO]: Gate[RCL]: trace:0.489, log:0.511
-2026-03-12 00:46:45 [DEBUG]: con_loss: 1.063, RCA_loss: 0.373, TC_loss: 0.400
-2026-03-12 00:46:45 [DEBUG]: con_loss: 1.049, RCA_loss: 0.326, TC_loss: 0.396
-2026-03-12 00:46:45 [INFO]: Epoch 86 done. Loss: 3.674, Time per epoch: 0.683[s]
-2026-03-12 00:46:45 [INFO]: GateMode: concat
-2026-03-12 00:46:45 [INFO]: Gate[FTI]: trace:0.507, log:0.493
-2026-03-12 00:46:45 [INFO]: Gate[RCL]: trace:0.490, log:0.510
-2026-03-12 00:46:46 [DEBUG]: con_loss: 1.070, RCA_loss: 0.375, TC_loss: 0.423
-2026-03-12 00:46:46 [DEBUG]: con_loss: 1.049, RCA_loss: 0.317, TC_loss: 0.398
-2026-03-12 00:46:46 [INFO]: Epoch 87 done. Loss: 3.681, Time per epoch: 0.661[s]
-2026-03-12 00:46:46 [INFO]: GateMode: concat
-2026-03-12 00:46:46 [INFO]: Gate[FTI]: trace:0.508, log:0.492
-2026-03-12 00:46:46 [INFO]: Gate[RCL]: trace:0.490, log:0.510
-2026-03-12 00:46:46 [DEBUG]: con_loss: 1.067, RCA_loss: 0.401, TC_loss: 0.395
-2026-03-12 00:46:47 [DEBUG]: con_loss: 1.056, RCA_loss: 0.355, TC_loss: 0.424
-2026-03-12 00:46:47 [INFO]: Epoch 88 done. Loss: 3.697, Time per epoch: 0.655[s]
-2026-03-12 00:46:47 [INFO]: GateMode: concat
-2026-03-12 00:46:47 [INFO]: Gate[FTI]: trace:0.508, log:0.492
-2026-03-12 00:46:47 [INFO]: Gate[RCL]: trace:0.491, log:0.509
-2026-03-12 00:46:47 [DEBUG]: con_loss: 1.065, RCA_loss: 0.390, TC_loss: 0.397
-2026-03-12 00:46:47 [DEBUG]: con_loss: 1.055, RCA_loss: 0.343, TC_loss: 0.492
-2026-03-12 00:46:47 [INFO]: Epoch 89 done. Loss: 3.708, Time per epoch: 0.653[s]
-2026-03-12 00:46:47 [INFO]: GateMode: concat
-2026-03-12 00:46:47 [INFO]: Gate[FTI]: trace:0.509, log:0.491
-2026-03-12 00:46:47 [INFO]: Gate[RCL]: trace:0.491, log:0.509
-2026-03-12 00:46:47 [DEBUG]: con_loss: 1.061, RCA_loss: 0.369, TC_loss: 0.376
-2026-03-12 00:46:48 [DEBUG]: con_loss: 1.058, RCA_loss: 0.401, TC_loss: 0.438
-2026-03-12 00:46:48 [INFO]: Epoch 90 done. Loss: 3.698, Time per epoch: 0.836[s]
-2026-03-12 00:46:48 [INFO]: GateMode: concat
-2026-03-12 00:46:48 [INFO]: Gate[FTI]: trace:0.509, log:0.491
-2026-03-12 00:46:48 [INFO]: Gate[RCL]: trace:0.492, log:0.508
-2026-03-12 00:46:48 [DEBUG]: con_loss: 1.071, RCA_loss: 0.317, TC_loss: 0.380
-2026-03-12 00:46:49 [DEBUG]: con_loss: 1.057, RCA_loss: 0.418, TC_loss: 0.419
-2026-03-12 00:46:49 [INFO]: Epoch 91 done. Loss: 3.688, Time per epoch: 0.681[s]
-2026-03-12 00:46:49 [INFO]: GateMode: concat
-2026-03-12 00:46:49 [INFO]: Gate[FTI]: trace:0.509, log:0.491
-2026-03-12 00:46:49 [INFO]: Gate[RCL]: trace:0.492, log:0.508
-2026-03-12 00:46:49 [DEBUG]: con_loss: 1.068, RCA_loss: 0.320, TC_loss: 0.419
-2026-03-12 00:46:49 [DEBUG]: con_loss: 1.050, RCA_loss: 0.318, TC_loss: 0.380
-2026-03-12 00:46:50 [INFO]: Epoch 92 done. Loss: 3.661, Time per epoch: 0.652[s]
-2026-03-12 00:46:50 [INFO]: GateMode: concat
-2026-03-12 00:46:50 [INFO]: Gate[FTI]: trace:0.510, log:0.490
-2026-03-12 00:46:50 [INFO]: Gate[RCL]: trace:0.492, log:0.508
-2026-03-12 00:46:50 [DEBUG]: con_loss: 1.067, RCA_loss: 0.338, TC_loss: 0.364
-2026-03-12 00:46:50 [DEBUG]: con_loss: 1.053, RCA_loss: 0.241, TC_loss: 0.398
-2026-03-12 00:46:50 [INFO]: Epoch 93 done. Loss: 3.638, Time per epoch: 0.653[s]
-2026-03-12 00:46:50 [INFO]: GateMode: concat
-2026-03-12 00:46:50 [INFO]: Gate[FTI]: trace:0.510, log:0.490
-2026-03-12 00:46:50 [INFO]: Gate[RCL]: trace:0.493, log:0.507
-2026-03-12 00:46:50 [DEBUG]: con_loss: 1.066, RCA_loss: 0.376, TC_loss: 0.390
-2026-03-12 00:46:51 [DEBUG]: con_loss: 1.052, RCA_loss: 0.239, TC_loss: 0.326
-2026-03-12 00:46:51 [INFO]: Epoch 94 done. Loss: 3.635, Time per epoch: 0.655[s]
-2026-03-12 00:46:51 [INFO]: GateMode: concat
-2026-03-12 00:46:51 [INFO]: Gate[FTI]: trace:0.511, log:0.489
-2026-03-12 00:46:51 [INFO]: Gate[RCL]: trace:0.493, log:0.507
-2026-03-12 00:46:51 [DEBUG]: con_loss: 1.064, RCA_loss: 0.293, TC_loss: 0.366
-2026-03-12 00:46:51 [DEBUG]: con_loss: 1.054, RCA_loss: 0.333, TC_loss: 0.330
-2026-03-12 00:46:51 [INFO]: Epoch 95 done. Loss: 3.633, Time per epoch: 0.652[s]
-2026-03-12 00:46:51 [INFO]: GateMode: concat
-2026-03-12 00:46:51 [INFO]: Gate[FTI]: trace:0.511, log:0.489
-2026-03-12 00:46:51 [INFO]: Gate[RCL]: trace:0.494, log:0.506
-2026-03-12 00:46:52 [DEBUG]: con_loss: 1.067, RCA_loss: 0.371, TC_loss: 0.394
-2026-03-12 00:46:52 [DEBUG]: con_loss: 1.054, RCA_loss: 0.259, TC_loss: 0.351
-2026-03-12 00:46:52 [INFO]: Epoch 96 done. Loss: 3.647, Time per epoch: 0.655[s]
-2026-03-12 00:46:52 [INFO]: GateMode: concat
-2026-03-12 00:46:52 [INFO]: Gate[FTI]: trace:0.512, log:0.488
-2026-03-12 00:46:52 [INFO]: Gate[RCL]: trace:0.495, log:0.505
-2026-03-12 00:46:52 [DEBUG]: con_loss: 1.064, RCA_loss: 0.297, TC_loss: 0.330
-2026-03-12 00:46:53 [DEBUG]: con_loss: 1.051, RCA_loss: 0.333, TC_loss: 0.350
-2026-03-12 00:46:53 [INFO]: Epoch 97 done. Loss: 3.629, Time per epoch: 0.654[s]
-2026-03-12 00:46:53 [INFO]: GateMode: concat
-2026-03-12 00:46:53 [INFO]: Gate[FTI]: trace:0.512, log:0.488
-2026-03-12 00:46:53 [INFO]: Gate[RCL]: trace:0.495, log:0.505
-2026-03-12 00:46:53 [DEBUG]: con_loss: 1.069, RCA_loss: 0.339, TC_loss: 0.359
-2026-03-12 00:46:53 [DEBUG]: con_loss: 1.051, RCA_loss: 0.301, TC_loss: 0.327
-2026-03-12 00:46:53 [INFO]: Epoch 98 done. Loss: 3.634, Time per epoch: 0.654[s]
-2026-03-12 00:46:53 [INFO]: GateMode: concat
-2026-03-12 00:46:53 [INFO]: Gate[FTI]: trace:0.512, log:0.488
-2026-03-12 00:46:53 [INFO]: Gate[RCL]: trace:0.495, log:0.505
-2026-03-12 00:46:54 [DEBUG]: con_loss: 1.064, RCA_loss: 0.309, TC_loss: 0.365
-2026-03-12 00:46:54 [DEBUG]: con_loss: 1.053, RCA_loss: 0.301, TC_loss: 0.348
-2026-03-12 00:46:54 [INFO]: Epoch 99 done. Loss: 3.633, Time per epoch: 0.651[s]
-2026-03-12 00:46:54 [INFO]: GateMode: concat
-2026-03-12 00:46:54 [INFO]: Gate[FTI]: trace:0.512, log:0.488
-2026-03-12 00:46:54 [INFO]: Gate[RCL]: trace:0.496, log:0.504
-2026-03-12 00:46:54 [DEBUG]: con_loss: 1.069, RCA_loss: 0.356, TC_loss: 0.411
-2026-03-12 00:46:55 [DEBUG]: con_loss: 1.053, RCA_loss: 0.227, TC_loss: 0.278
-2026-03-12 00:46:55 [INFO]: Epoch 100 done. Loss: 3.621, Time per epoch: 0.856[s]
-2026-03-12 00:46:55 [INFO]: GateMode: concat
-2026-03-12 00:46:55 [INFO]: Gate[FTI]: trace:0.513, log:0.487
-2026-03-12 00:46:55 [INFO]: Gate[RCL]: trace:0.496, log:0.504
-2026-03-12 00:46:55 [DEBUG]: con_loss: 1.066, RCA_loss: 0.285, TC_loss: 0.325
-2026-03-12 00:46:55 [DEBUG]: con_loss: 1.048, RCA_loss: 0.304, TC_loss: 0.286
-2026-03-12 00:46:56 [INFO]: Epoch 101 done. Loss: 3.601, Time per epoch: 0.704[s]
-2026-03-12 00:46:56 [INFO]: GateMode: concat
-2026-03-12 00:46:56 [INFO]: Gate[FTI]: trace:0.513, log:0.487
-2026-03-12 00:46:56 [INFO]: Gate[RCL]: trace:0.496, log:0.504
-2026-03-12 00:46:56 [DEBUG]: con_loss: 1.064, RCA_loss: 0.333, TC_loss: 0.380
-2026-03-12 00:46:56 [DEBUG]: con_loss: 1.057, RCA_loss: 0.317, TC_loss: 0.335
-2026-03-12 00:46:56 [INFO]: Epoch 102 done. Loss: 3.644, Time per epoch: 0.781[s]
-2026-03-12 00:46:56 [INFO]: GateMode: concat
-2026-03-12 00:46:56 [INFO]: Gate[FTI]: trace:0.514, log:0.486
-2026-03-12 00:46:56 [INFO]: Gate[RCL]: trace:0.496, log:0.504
-2026-03-12 00:46:57 [DEBUG]: con_loss: 1.065, RCA_loss: 0.308, TC_loss: 0.300
-2026-03-12 00:46:57 [DEBUG]: con_loss: 1.052, RCA_loss: 0.249, TC_loss: 0.329
-2026-03-12 00:46:57 [INFO]: Epoch 103 done. Loss: 3.598, Time per epoch: 0.789[s]
-2026-03-12 00:46:57 [INFO]: GateMode: concat
-2026-03-12 00:46:57 [INFO]: Gate[FTI]: trace:0.514, log:0.486
-2026-03-12 00:46:57 [INFO]: Gate[RCL]: trace:0.497, log:0.503
-2026-03-12 00:46:57 [DEBUG]: con_loss: 1.063, RCA_loss: 0.350, TC_loss: 0.291
-2026-03-12 00:46:58 [DEBUG]: con_loss: 1.047, RCA_loss: 0.287, TC_loss: 0.297
-2026-03-12 00:46:58 [INFO]: Epoch 104 done. Loss: 3.606, Time per epoch: 0.675[s]
-2026-03-12 00:46:58 [INFO]: GateMode: concat
-2026-03-12 00:46:58 [INFO]: Gate[FTI]: trace:0.514, log:0.486
-2026-03-12 00:46:58 [INFO]: Gate[RCL]: trace:0.497, log:0.503
-2026-03-12 00:46:58 [DEBUG]: con_loss: 1.068, RCA_loss: 0.284, TC_loss: 0.355
-2026-03-12 00:46:58 [DEBUG]: con_loss: 1.050, RCA_loss: 0.343, TC_loss: 0.285
-2026-03-12 00:46:59 [INFO]: Epoch 105 done. Loss: 3.619, Time per epoch: 0.672[s]
-2026-03-12 00:46:59 [INFO]: GateMode: concat
-2026-03-12 00:46:59 [INFO]: Gate[FTI]: trace:0.514, log:0.486
-2026-03-12 00:46:59 [INFO]: Gate[RCL]: trace:0.498, log:0.502
-2026-03-12 00:46:59 [DEBUG]: con_loss: 1.066, RCA_loss: 0.324, TC_loss: 0.294
-2026-03-12 00:46:59 [DEBUG]: con_loss: 1.055, RCA_loss: 0.289, TC_loss: 0.345
-2026-03-12 00:46:59 [INFO]: Epoch 106 done. Loss: 3.616, Time per epoch: 0.674[s]
-2026-03-12 00:46:59 [INFO]: GateMode: concat
-2026-03-12 00:46:59 [INFO]: Gate[FTI]: trace:0.515, log:0.485
-2026-03-12 00:46:59 [INFO]: Gate[RCL]: trace:0.498, log:0.502
-2026-03-12 00:46:59 [DEBUG]: con_loss: 1.066, RCA_loss: 0.235, TC_loss: 0.325
-2026-03-12 00:47:00 [DEBUG]: con_loss: 1.052, RCA_loss: 0.250, TC_loss: 0.311
-2026-03-12 00:47:00 [INFO]: Epoch 107 done. Loss: 3.583, Time per epoch: 0.691[s]
-2026-03-12 00:47:00 [INFO]: GateMode: concat
-2026-03-12 00:47:00 [INFO]: Gate[FTI]: trace:0.515, log:0.485
-2026-03-12 00:47:00 [INFO]: Gate[RCL]: trace:0.498, log:0.502
-2026-03-12 00:47:00 [DEBUG]: con_loss: 1.064, RCA_loss: 0.197, TC_loss: 0.247
-2026-03-12 00:47:00 [DEBUG]: con_loss: 1.051, RCA_loss: 0.291, TC_loss: 0.333
-2026-03-12 00:47:01 [INFO]: Epoch 108 done. Loss: 3.569, Time per epoch: 0.666[s]
-2026-03-12 00:47:01 [INFO]: GateMode: concat
-2026-03-12 00:47:01 [INFO]: Gate[FTI]: trace:0.516, log:0.484
-2026-03-12 00:47:01 [INFO]: Gate[RCL]: trace:0.498, log:0.502
-2026-03-12 00:47:01 [DEBUG]: con_loss: 1.068, RCA_loss: 0.235, TC_loss: 0.332
-2026-03-12 00:47:01 [DEBUG]: con_loss: 1.057, RCA_loss: 0.308, TC_loss: 0.303
-2026-03-12 00:47:01 [INFO]: Epoch 109 done. Loss: 3.598, Time per epoch: 0.663[s]
-2026-03-12 00:47:01 [INFO]: GateMode: concat
-2026-03-12 00:47:01 [INFO]: Gate[FTI]: trace:0.516, log:0.484
-2026-03-12 00:47:01 [INFO]: Gate[RCL]: trace:0.499, log:0.501
-2026-03-12 00:47:02 [DEBUG]: con_loss: 1.064, RCA_loss: 0.267, TC_loss: 0.259
-2026-03-12 00:47:02 [DEBUG]: con_loss: 1.051, RCA_loss: 0.261, TC_loss: 0.273
-2026-03-12 00:47:02 [INFO]: Epoch 110 done. Loss: 3.566, Time per epoch: 1.026[s]
-2026-03-12 00:47:02 [INFO]: GateMode: concat
-2026-03-12 00:47:02 [INFO]: Gate[FTI]: trace:0.516, log:0.484
-2026-03-12 00:47:02 [INFO]: Gate[RCL]: trace:0.499, log:0.501
-2026-03-12 00:47:02 [DEBUG]: con_loss: 1.067, RCA_loss: 0.221, TC_loss: 0.271
-2026-03-12 00:47:03 [DEBUG]: con_loss: 1.053, RCA_loss: 0.242, TC_loss: 0.296
-2026-03-12 00:47:03 [INFO]: Epoch 111 done. Loss: 3.560, Time per epoch: 0.642[s]
-2026-03-12 00:47:03 [INFO]: GateMode: concat
-2026-03-12 00:47:03 [INFO]: Gate[FTI]: trace:0.516, log:0.484
-2026-03-12 00:47:03 [INFO]: Gate[RCL]: trace:0.499, log:0.501
-2026-03-12 00:47:03 [DEBUG]: con_loss: 1.064, RCA_loss: 0.258, TC_loss: 0.249
-2026-03-12 00:47:03 [DEBUG]: con_loss: 1.054, RCA_loss: 0.268, TC_loss: 0.273
-2026-03-12 00:47:04 [INFO]: Epoch 112 done. Loss: 3.564, Time per epoch: 0.587[s]
-2026-03-12 00:47:04 [INFO]: GateMode: concat
-2026-03-12 00:47:04 [INFO]: Gate[FTI]: trace:0.517, log:0.483
-2026-03-12 00:47:04 [INFO]: Gate[RCL]: trace:0.499, log:0.501
-2026-03-12 00:47:04 [DEBUG]: con_loss: 1.059, RCA_loss: 0.226, TC_loss: 0.292
-2026-03-12 00:47:04 [DEBUG]: con_loss: 1.060, RCA_loss: 0.223, TC_loss: 0.279
-2026-03-12 00:47:04 [INFO]: Epoch 113 done. Loss: 3.557, Time per epoch: 0.579[s]
-2026-03-12 00:47:04 [INFO]: GateMode: concat
-2026-03-12 00:47:04 [INFO]: Gate[FTI]: trace:0.517, log:0.483
-2026-03-12 00:47:04 [INFO]: Gate[RCL]: trace:0.500, log:0.500
-2026-03-12 00:47:04 [DEBUG]: con_loss: 1.067, RCA_loss: 0.322, TC_loss: 0.307
-2026-03-12 00:47:05 [DEBUG]: con_loss: 1.053, RCA_loss: 0.199, TC_loss: 0.236
-2026-03-12 00:47:05 [INFO]: Epoch 114 done. Loss: 3.569, Time per epoch: 0.573[s]
-2026-03-12 00:47:05 [INFO]: GateMode: concat
-2026-03-12 00:47:05 [INFO]: Gate[FTI]: trace:0.517, log:0.483
-2026-03-12 00:47:05 [INFO]: Gate[RCL]: trace:0.500, log:0.500
-2026-03-12 00:47:05 [DEBUG]: con_loss: 1.062, RCA_loss: 0.242, TC_loss: 0.289
-2026-03-12 00:47:05 [DEBUG]: con_loss: 1.049, RCA_loss: 0.206, TC_loss: 0.267
-2026-03-12 00:47:05 [INFO]: Epoch 115 done. Loss: 3.552, Time per epoch: 0.609[s]
-2026-03-12 00:47:05 [INFO]: GateMode: concat
-2026-03-12 00:47:05 [INFO]: Gate[FTI]: trace:0.517, log:0.483
-2026-03-12 00:47:05 [INFO]: Gate[RCL]: trace:0.501, log:0.499
-2026-03-12 00:47:05 [DEBUG]: con_loss: 1.067, RCA_loss: 0.212, TC_loss: 0.245
-2026-03-12 00:47:06 [DEBUG]: con_loss: 1.049, RCA_loss: 0.193, TC_loss: 0.226
-2026-03-12 00:47:06 [INFO]: Epoch 116 done. Loss: 3.521, Time per epoch: 0.679[s]
-2026-03-12 00:47:06 [INFO]: GateMode: concat
-2026-03-12 00:47:06 [INFO]: Gate[FTI]: trace:0.518, log:0.482
-2026-03-12 00:47:06 [INFO]: Gate[RCL]: trace:0.501, log:0.499
-2026-03-12 00:47:06 [DEBUG]: con_loss: 1.065, RCA_loss: 0.282, TC_loss: 0.281
-2026-03-12 00:47:07 [DEBUG]: con_loss: 1.053, RCA_loss: 0.225, TC_loss: 0.297
-2026-03-12 00:47:07 [INFO]: Epoch 117 done. Loss: 3.573, Time per epoch: 0.792[s]
-2026-03-12 00:47:07 [INFO]: GateMode: concat
-2026-03-12 00:47:07 [INFO]: Gate[FTI]: trace:0.518, log:0.482
-2026-03-12 00:47:07 [INFO]: Gate[RCL]: trace:0.501, log:0.499
-2026-03-12 00:47:07 [DEBUG]: con_loss: 1.065, RCA_loss: 0.229, TC_loss: 0.214
-2026-03-12 00:47:07 [DEBUG]: con_loss: 1.053, RCA_loss: 0.201, TC_loss: 0.279
-2026-03-12 00:47:07 [INFO]: Epoch 118 done. Loss: 3.533, Time per epoch: 0.651[s]
-2026-03-12 00:47:07 [INFO]: GateMode: concat
-2026-03-12 00:47:07 [INFO]: Gate[FTI]: trace:0.518, log:0.482
-2026-03-12 00:47:07 [INFO]: Gate[RCL]: trace:0.501, log:0.499
-2026-03-12 00:47:08 [DEBUG]: con_loss: 1.062, RCA_loss: 0.246, TC_loss: 0.224
-2026-03-12 00:47:08 [DEBUG]: con_loss: 1.051, RCA_loss: 0.204, TC_loss: 0.218
-2026-03-12 00:47:08 [INFO]: Epoch 119 done. Loss: 3.524, Time per epoch: 0.645[s]
-2026-03-12 00:47:08 [INFO]: GateMode: concat
-2026-03-12 00:47:08 [INFO]: Gate[FTI]: trace:0.519, log:0.481
-2026-03-12 00:47:08 [INFO]: Gate[RCL]: trace:0.502, log:0.498
-2026-03-12 00:47:09 [DEBUG]: con_loss: 1.064, RCA_loss: 0.192, TC_loss: 0.233
-2026-03-12 00:47:09 [DEBUG]: con_loss: 1.054, RCA_loss: 0.272, TC_loss: 0.256
-2026-03-12 00:47:09 [INFO]: Epoch 120 done. Loss: 3.540, Time per epoch: 0.927[s]
-2026-03-12 00:47:09 [INFO]: GateMode: concat
-2026-03-12 00:47:09 [INFO]: Gate[FTI]: trace:0.519, log:0.481
-2026-03-12 00:47:09 [INFO]: Gate[RCL]: trace:0.502, log:0.498
-2026-03-12 00:47:09 [DEBUG]: con_loss: 1.070, RCA_loss: 0.200, TC_loss: 0.227
-2026-03-12 00:47:09 [DEBUG]: con_loss: 1.051, RCA_loss: 0.205, TC_loss: 0.198
-2026-03-12 00:47:10 [INFO]: Epoch 121 done. Loss: 3.511, Time per epoch: 0.645[s]
-2026-03-12 00:47:10 [INFO]: GateMode: concat
-2026-03-12 00:47:10 [INFO]: Gate[FTI]: trace:0.519, log:0.481
-2026-03-12 00:47:10 [INFO]: Gate[RCL]: trace:0.503, log:0.497
-2026-03-12 00:47:10 [DEBUG]: con_loss: 1.062, RCA_loss: 0.230, TC_loss: 0.255
-2026-03-12 00:47:10 [DEBUG]: con_loss: 1.053, RCA_loss: 0.265, TC_loss: 0.214
-2026-03-12 00:47:10 [INFO]: Epoch 122 done. Loss: 3.542, Time per epoch: 0.662[s]
-2026-03-12 00:47:10 [INFO]: GateMode: concat
-2026-03-12 00:47:10 [INFO]: Gate[FTI]: trace:0.519, log:0.481
-2026-03-12 00:47:10 [INFO]: Gate[RCL]: trace:0.503, log:0.497
-2026-03-12 00:47:10 [DEBUG]: con_loss: 1.066, RCA_loss: 0.229, TC_loss: 0.196
-2026-03-12 00:47:11 [DEBUG]: con_loss: 1.049, RCA_loss: 0.189, TC_loss: 0.271
-2026-03-12 00:47:11 [INFO]: Epoch 123 done. Loss: 3.523, Time per epoch: 0.641[s]
-2026-03-12 00:47:11 [INFO]: GateMode: concat
-2026-03-12 00:47:11 [INFO]: Gate[FTI]: trace:0.520, log:0.480
-2026-03-12 00:47:11 [INFO]: Gate[RCL]: trace:0.503, log:0.497
-2026-03-12 00:47:11 [DEBUG]: con_loss: 1.066, RCA_loss: 0.206, TC_loss: 0.223
-2026-03-12 00:47:11 [DEBUG]: con_loss: 1.049, RCA_loss: 0.194, TC_loss: 0.217
-2026-03-12 00:47:12 [INFO]: Epoch 124 done. Loss: 3.511, Time per epoch: 0.645[s]
-2026-03-12 00:47:12 [INFO]: GateMode: concat
-2026-03-12 00:47:12 [INFO]: Gate[FTI]: trace:0.520, log:0.480
-2026-03-12 00:47:12 [INFO]: Gate[RCL]: trace:0.503, log:0.497
-2026-03-12 00:47:12 [DEBUG]: con_loss: 1.066, RCA_loss: 0.236, TC_loss: 0.229
-2026-03-12 00:47:12 [DEBUG]: con_loss: 1.053, RCA_loss: 0.178, TC_loss: 0.270
-2026-03-12 00:47:12 [INFO]: Epoch 125 done. Loss: 3.531, Time per epoch: 0.639[s]
-2026-03-12 00:47:12 [INFO]: GateMode: concat
-2026-03-12 00:47:12 [INFO]: Gate[FTI]: trace:0.520, log:0.480
-2026-03-12 00:47:12 [INFO]: Gate[RCL]: trace:0.504, log:0.496
-2026-03-12 00:47:12 [DEBUG]: con_loss: 1.069, RCA_loss: 0.211, TC_loss: 0.193
-2026-03-12 00:47:13 [DEBUG]: con_loss: 1.056, RCA_loss: 0.169, TC_loss: 0.241
-2026-03-12 00:47:13 [INFO]: Epoch 126 done. Loss: 3.508, Time per epoch: 0.639[s]
-2026-03-12 00:47:13 [INFO]: GateMode: concat
-2026-03-12 00:47:13 [INFO]: Gate[FTI]: trace:0.521, log:0.479
-2026-03-12 00:47:13 [INFO]: Gate[RCL]: trace:0.504, log:0.496
-2026-03-12 00:47:13 [DEBUG]: con_loss: 1.068, RCA_loss: 0.212, TC_loss: 0.255
-2026-03-12 00:47:13 [DEBUG]: con_loss: 1.052, RCA_loss: 0.207, TC_loss: 0.227
-2026-03-12 00:47:14 [INFO]: Epoch 127 done. Loss: 3.528, Time per epoch: 0.638[s]
-2026-03-12 00:47:14 [INFO]: GateMode: concat
-2026-03-12 00:47:14 [INFO]: Gate[FTI]: trace:0.521, log:0.479
-2026-03-12 00:47:14 [INFO]: Gate[RCL]: trace:0.505, log:0.495
-2026-03-12 00:47:14 [DEBUG]: con_loss: 1.062, RCA_loss: 0.185, TC_loss: 0.199
-2026-03-12 00:47:14 [DEBUG]: con_loss: 1.052, RCA_loss: 0.229, TC_loss: 0.189
-2026-03-12 00:47:14 [INFO]: Epoch 128 done. Loss: 3.501, Time per epoch: 0.635[s]
-2026-03-12 00:47:14 [INFO]: GateMode: concat
-2026-03-12 00:47:14 [INFO]: Gate[FTI]: trace:0.521, log:0.479
-2026-03-12 00:47:14 [INFO]: Gate[RCL]: trace:0.505, log:0.495
-2026-03-12 00:47:14 [DEBUG]: con_loss: 1.061, RCA_loss: 0.159, TC_loss: 0.213
-2026-03-12 00:47:15 [DEBUG]: con_loss: 1.052, RCA_loss: 0.253, TC_loss: 0.210
-2026-03-12 00:47:15 [INFO]: Epoch 129 done. Loss: 3.510, Time per epoch: 0.635[s]
-2026-03-12 00:47:15 [INFO]: GateMode: concat
-2026-03-12 00:47:15 [INFO]: Gate[FTI]: trace:0.521, log:0.479
-2026-03-12 00:47:15 [INFO]: Gate[RCL]: trace:0.505, log:0.495
-2026-03-12 00:47:15 [DEBUG]: con_loss: 1.065, RCA_loss: 0.169, TC_loss: 0.217
-2026-03-12 00:47:15 [DEBUG]: con_loss: 1.052, RCA_loss: 0.211, TC_loss: 0.205
-2026-03-12 00:47:16 [INFO]: Epoch 130 done. Loss: 3.502, Time per epoch: 0.771[s]
-2026-03-12 00:47:16 [INFO]: GateMode: concat
-2026-03-12 00:47:16 [INFO]: Gate[FTI]: trace:0.522, log:0.478
-2026-03-12 00:47:16 [INFO]: Gate[RCL]: trace:0.506, log:0.494
-2026-03-12 00:47:16 [DEBUG]: con_loss: 1.069, RCA_loss: 0.201, TC_loss: 0.209
-2026-03-12 00:47:16 [DEBUG]: con_loss: 1.050, RCA_loss: 0.163, TC_loss: 0.197
-2026-03-12 00:47:16 [INFO]: Epoch 131 done. Loss: 3.495, Time per epoch: 0.640[s]
-2026-03-12 00:47:16 [INFO]: GateMode: concat
-2026-03-12 00:47:16 [INFO]: Gate[FTI]: trace:0.522, log:0.478
-2026-03-12 00:47:16 [INFO]: Gate[RCL]: trace:0.506, log:0.494
-2026-03-12 00:47:16 [DEBUG]: con_loss: 1.064, RCA_loss: 0.167, TC_loss: 0.192
-2026-03-12 00:47:17 [DEBUG]: con_loss: 1.054, RCA_loss: 0.143, TC_loss: 0.199
-2026-03-12 00:47:17 [INFO]: Epoch 132 done. Loss: 3.478, Time per epoch: 0.650[s]
-2026-03-12 00:47:17 [INFO]: GateMode: concat
-2026-03-12 00:47:17 [INFO]: Gate[FTI]: trace:0.522, log:0.478
-2026-03-12 00:47:17 [INFO]: Gate[RCL]: trace:0.506, log:0.494
-2026-03-12 00:47:17 [DEBUG]: con_loss: 1.063, RCA_loss: 0.198, TC_loss: 0.220
-2026-03-12 00:47:17 [DEBUG]: con_loss: 1.052, RCA_loss: 0.205, TC_loss: 0.196
-2026-03-12 00:47:18 [INFO]: Epoch 133 done. Loss: 3.506, Time per epoch: 0.664[s]
-2026-03-12 00:47:18 [INFO]: GateMode: concat
-2026-03-12 00:47:18 [INFO]: Gate[FTI]: trace:0.522, log:0.478
-2026-03-12 00:47:18 [INFO]: Gate[RCL]: trace:0.507, log:0.493
-2026-03-12 00:47:18 [DEBUG]: con_loss: 1.064, RCA_loss: 0.177, TC_loss: 0.174
-2026-03-12 00:47:18 [DEBUG]: con_loss: 1.050, RCA_loss: 0.160, TC_loss: 0.211
-2026-03-12 00:47:18 [INFO]: Epoch 134 done. Loss: 3.482, Time per epoch: 0.701[s]
-2026-03-12 00:47:18 [INFO]: GateMode: concat
-2026-03-12 00:47:18 [INFO]: Gate[FTI]: trace:0.523, log:0.477
-2026-03-12 00:47:18 [INFO]: Gate[RCL]: trace:0.507, log:0.493
-2026-03-12 00:47:18 [DEBUG]: con_loss: 1.065, RCA_loss: 0.205, TC_loss: 0.209
-2026-03-12 00:47:19 [DEBUG]: con_loss: 1.055, RCA_loss: 0.217, TC_loss: 0.218
-2026-03-12 00:47:19 [INFO]: Epoch 135 done. Loss: 3.515, Time per epoch: 0.708[s]
-2026-03-12 00:47:19 [INFO]: GateMode: concat
-2026-03-12 00:47:19 [INFO]: Gate[FTI]: trace:0.523, log:0.477
-2026-03-12 00:47:19 [INFO]: Gate[RCL]: trace:0.508, log:0.492
-2026-03-12 00:47:19 [DEBUG]: con_loss: 1.063, RCA_loss: 0.172, TC_loss: 0.195
-2026-03-12 00:47:19 [DEBUG]: con_loss: 1.056, RCA_loss: 0.141, TC_loss: 0.269
-2026-03-12 00:47:20 [INFO]: Epoch 136 done. Loss: 3.497, Time per epoch: 0.613[s]
-2026-03-12 00:47:20 [INFO]: GateMode: concat
-2026-03-12 00:47:20 [INFO]: Gate[FTI]: trace:0.523, log:0.477
-2026-03-12 00:47:20 [INFO]: Gate[RCL]: trace:0.508, log:0.492
-2026-03-12 00:47:20 [DEBUG]: con_loss: 1.066, RCA_loss: 0.147, TC_loss: 0.218
-2026-03-12 00:47:20 [DEBUG]: con_loss: 1.055, RCA_loss: 0.199, TC_loss: 0.156
-2026-03-12 00:47:20 [INFO]: Epoch 137 done. Loss: 3.483, Time per epoch: 0.626[s]
-2026-03-12 00:47:20 [INFO]: GateMode: concat
-2026-03-12 00:47:20 [INFO]: Gate[FTI]: trace:0.523, log:0.477
-2026-03-12 00:47:20 [INFO]: Gate[RCL]: trace:0.508, log:0.492
-2026-03-12 00:47:20 [DEBUG]: con_loss: 1.066, RCA_loss: 0.150, TC_loss: 0.194
-2026-03-12 00:47:21 [DEBUG]: con_loss: 1.047, RCA_loss: 0.123, TC_loss: 0.168
-2026-03-12 00:47:21 [INFO]: Epoch 138 done. Loss: 3.459, Time per epoch: 0.634[s]
-2026-03-12 00:47:21 [INFO]: GateMode: concat
-2026-03-12 00:47:21 [INFO]: Gate[FTI]: trace:0.523, log:0.477
-2026-03-12 00:47:21 [INFO]: Gate[RCL]: trace:0.509, log:0.491
-2026-03-12 00:47:21 [DEBUG]: con_loss: 1.062, RCA_loss: 0.116, TC_loss: 0.171
-2026-03-12 00:47:21 [DEBUG]: con_loss: 1.050, RCA_loss: 0.170, TC_loss: 0.167
-2026-03-12 00:47:22 [INFO]: Epoch 139 done. Loss: 3.456, Time per epoch: 0.623[s]
-2026-03-12 00:47:22 [INFO]: GateMode: concat
-2026-03-12 00:47:22 [INFO]: Gate[FTI]: trace:0.524, log:0.476
-2026-03-12 00:47:22 [INFO]: Gate[RCL]: trace:0.509, log:0.491
-2026-03-12 00:47:22 [DEBUG]: con_loss: 1.063, RCA_loss: 0.184, TC_loss: 0.174
-2026-03-12 00:47:22 [DEBUG]: con_loss: 1.045, RCA_loss: 0.171, TC_loss: 0.176
-2026-03-12 00:47:22 [INFO]: Epoch 140 done. Loss: 3.476, Time per epoch: 0.810[s]
-2026-03-12 00:47:22 [INFO]: GateMode: concat
-2026-03-12 00:47:22 [INFO]: Gate[FTI]: trace:0.524, log:0.476
-2026-03-12 00:47:22 [INFO]: Gate[RCL]: trace:0.509, log:0.491
-2026-03-12 00:47:22 [DEBUG]: con_loss: 1.065, RCA_loss: 0.191, TC_loss: 0.171
-2026-03-12 00:47:23 [DEBUG]: con_loss: 1.055, RCA_loss: 0.154, TC_loss: 0.189
-2026-03-12 00:47:23 [INFO]: Epoch 141 done. Loss: 3.479, Time per epoch: 0.602[s]
-2026-03-12 00:47:23 [INFO]: GateMode: concat
-2026-03-12 00:47:23 [INFO]: Gate[FTI]: trace:0.524, log:0.476
-2026-03-12 00:47:23 [INFO]: Gate[RCL]: trace:0.509, log:0.491
-2026-03-12 00:47:23 [DEBUG]: con_loss: 1.062, RCA_loss: 0.200, TC_loss: 0.177
-2026-03-12 00:47:23 [DEBUG]: con_loss: 1.051, RCA_loss: 0.185, TC_loss: 0.174
-2026-03-12 00:47:24 [INFO]: Epoch 142 done. Loss: 3.485, Time per epoch: 0.639[s]
-2026-03-12 00:47:24 [INFO]: GateMode: concat
-2026-03-12 00:47:24 [INFO]: Gate[FTI]: trace:0.524, log:0.476
-2026-03-12 00:47:24 [INFO]: Gate[RCL]: trace:0.510, log:0.490
-2026-03-12 00:47:24 [DEBUG]: con_loss: 1.069, RCA_loss: 0.166, TC_loss: 0.180
-2026-03-12 00:47:24 [DEBUG]: con_loss: 1.051, RCA_loss: 0.172, TC_loss: 0.191
-2026-03-12 00:47:24 [INFO]: Epoch 143 done. Loss: 3.480, Time per epoch: 0.637[s]
-2026-03-12 00:47:24 [INFO]: GateMode: concat
-2026-03-12 00:47:24 [INFO]: Gate[FTI]: trace:0.525, log:0.475
-2026-03-12 00:47:24 [INFO]: Gate[RCL]: trace:0.510, log:0.490
-2026-03-12 00:47:24 [DEBUG]: con_loss: 1.063, RCA_loss: 0.146, TC_loss: 0.156
-2026-03-12 00:47:25 [DEBUG]: con_loss: 1.054, RCA_loss: 0.195, TC_loss: 0.200
-2026-03-12 00:47:25 [INFO]: Epoch 144 done. Loss: 3.476, Time per epoch: 0.642[s]
-2026-03-12 00:47:25 [INFO]: GateMode: concat
-2026-03-12 00:47:25 [INFO]: Gate[FTI]: trace:0.525, log:0.475
-2026-03-12 00:47:25 [INFO]: Gate[RCL]: trace:0.510, log:0.490
-2026-03-12 00:47:25 [DEBUG]: con_loss: 1.062, RCA_loss: 0.169, TC_loss: 0.179
-2026-03-12 00:47:25 [DEBUG]: con_loss: 1.055, RCA_loss: 0.130, TC_loss: 0.200
-2026-03-12 00:47:26 [INFO]: Epoch 145 done. Loss: 3.471, Time per epoch: 0.664[s]
-2026-03-12 00:47:26 [INFO]: GateMode: concat
-2026-03-12 00:47:26 [INFO]: Gate[FTI]: trace:0.525, log:0.475
-2026-03-12 00:47:26 [INFO]: Gate[RCL]: trace:0.510, log:0.490
-2026-03-12 00:47:26 [DEBUG]: con_loss: 1.064, RCA_loss: 0.134, TC_loss: 0.189
-2026-03-12 00:47:26 [DEBUG]: con_loss: 1.052, RCA_loss: 0.176, TC_loss: 0.191
-2026-03-12 00:47:26 [INFO]: Epoch 146 done. Loss: 3.474, Time per epoch: 0.650[s]
-2026-03-12 00:47:26 [INFO]: GateMode: concat
-2026-03-12 00:47:26 [INFO]: Gate[FTI]: trace:0.525, log:0.475
-2026-03-12 00:47:26 [INFO]: Gate[RCL]: trace:0.511, log:0.489
-2026-03-12 00:47:26 [DEBUG]: con_loss: 1.064, RCA_loss: 0.121, TC_loss: 0.144
-2026-03-12 00:47:27 [DEBUG]: con_loss: 1.054, RCA_loss: 0.169, TC_loss: 0.214
-2026-03-12 00:47:27 [INFO]: Epoch 147 done. Loss: 3.464, Time per epoch: 0.637[s]
-2026-03-12 00:47:27 [INFO]: GateMode: concat
-2026-03-12 00:47:27 [INFO]: Gate[FTI]: trace:0.525, log:0.475
-2026-03-12 00:47:27 [INFO]: Gate[RCL]: trace:0.511, log:0.489
-2026-03-12 00:47:27 [DEBUG]: con_loss: 1.064, RCA_loss: 0.189, TC_loss: 0.185
-2026-03-12 00:47:27 [DEBUG]: con_loss: 1.055, RCA_loss: 0.170, TC_loss: 0.181
-2026-03-12 00:47:27 [INFO]: Epoch 148 done. Loss: 3.484, Time per epoch: 0.635[s]
-2026-03-12 00:47:27 [INFO]: GateMode: concat
-2026-03-12 00:47:27 [INFO]: Gate[FTI]: trace:0.526, log:0.474
-2026-03-12 00:47:27 [INFO]: Gate[RCL]: trace:0.511, log:0.489
-2026-03-12 00:47:28 [DEBUG]: con_loss: 1.065, RCA_loss: 0.212, TC_loss: 0.194
-2026-03-12 00:47:28 [DEBUG]: con_loss: 1.048, RCA_loss: 0.166, TC_loss: 0.137
-2026-03-12 00:47:28 [INFO]: Epoch 149 done. Loss: 3.478, Time per epoch: 0.638[s]
-2026-03-12 00:47:28 [INFO]: GateMode: concat
-2026-03-12 00:47:28 [INFO]: Gate[FTI]: trace:0.526, log:0.474
-2026-03-12 00:47:28 [INFO]: Gate[RCL]: trace:0.512, log:0.488
-2026-03-12 00:47:28 [INFO]: Early stop at epoch 149 due to lack of improvement.
-2026-03-12 00:47:28 [INFO]: Training has finished.
-2026-03-12 00:47:28 [DEBUG]: The training time is 103.69446063041687[s]
-2026-03-12 00:47:28 [DEBUG]: The training time per epoch is 0.6912964042027792[s]
-2026-03-12 00:47:28 [DEBUG]: The affinity of RCL -> FTI is -0.0002658653862310789
-2026-03-12 00:47:28 [DEBUG]: The affinity of FTI -> RCL is 0.04095409818900575
-2026-03-12 00:47:28 [INFO]: Model checkpoint and metadata has been saved at ./logs/sockshop.
-2026-03-12 00:47:29 [INFO]: [Root localization] HR@1: 65.560%, HR@2: 72.614%, HR@3: 76.349%, HR@4: 79.668%, HR@5: 81.743%, avg@3: 0.715, MRR@3: 0.703
-2026-03-12 00:47:29 [INFO]: [Failure type classification] precision: 39.007%, recall: 36.515%, f1-score: 37.720%
-2026-03-12 00:47:29 [INFO]: The average test time is 0.0033918416351698248[s]
-2026-03-12 00:47:29 [INFO]: The total test time is 0.8174338340759277[s]
+2026-03-16 11:54:27 [INFO]: Start training for 500 epochs.
+2026-03-16 11:54:27 [DEBUG]: con_loss: 2.732, RCA_loss: 2.916, TC_loss: 2.048
+2026-03-16 11:54:27 [DEBUG]: con_loss: 2.699, RCA_loss: 2.808, TC_loss: 1.941
+2026-03-16 11:54:28 [INFO]: Epoch 0 done. Loss: 6.559, Time per epoch: 1.066[s]
+2026-03-16 11:54:28 [INFO]: GateMode: concat
+2026-03-16 11:54:28 [INFO]: Gate[FTI]: metric:0.334, trace:0.333, log:0.334
+2026-03-16 11:54:28 [INFO]: Gate[RCL]: metric:0.333, trace:0.334, log:0.333
+2026-03-16 11:54:28 [DEBUG]: con_loss: 2.731, RCA_loss: 2.728, TC_loss: 1.940
+2026-03-16 11:54:28 [DEBUG]: con_loss: 2.697, RCA_loss: 2.631, TC_loss: 1.918
+2026-03-16 11:54:28 [INFO]: Epoch 1 done. Loss: 6.434, Time per epoch: 0.628[s]
+2026-03-16 11:54:28 [INFO]: GateMode: concat
+2026-03-16 11:54:28 [INFO]: Gate[FTI]: metric:0.334, trace:0.332, log:0.334
+2026-03-16 11:54:28 [INFO]: Gate[RCL]: metric:0.333, trace:0.335, log:0.333
+2026-03-16 11:54:28 [DEBUG]: con_loss: 2.732, RCA_loss: 2.556, TC_loss: 1.924
+2026-03-16 11:54:29 [DEBUG]: con_loss: 2.693, RCA_loss: 2.504, TC_loss: 1.878
+2026-03-16 11:54:29 [INFO]: Epoch 2 done. Loss: 6.344, Time per epoch: 0.648[s]
+2026-03-16 11:54:29 [INFO]: GateMode: concat
+2026-03-16 11:54:29 [INFO]: Gate[FTI]: metric:0.335, trace:0.332, log:0.334
+2026-03-16 11:54:29 [INFO]: Gate[RCL]: metric:0.332, trace:0.335, log:0.332
+2026-03-16 11:54:29 [DEBUG]: con_loss: 2.724, RCA_loss: 2.385, TC_loss: 1.875
+2026-03-16 11:54:29 [DEBUG]: con_loss: 2.695, RCA_loss: 2.374, TC_loss: 1.881
+2026-03-16 11:54:30 [INFO]: Epoch 3 done. Loss: 6.256, Time per epoch: 0.655[s]
+2026-03-16 11:54:30 [INFO]: GateMode: concat
+2026-03-16 11:54:30 [INFO]: Gate[FTI]: metric:0.335, trace:0.331, log:0.334
+2026-03-16 11:54:30 [INFO]: Gate[RCL]: metric:0.332, trace:0.336, log:0.332
+2026-03-16 11:54:30 [DEBUG]: con_loss: 2.724, RCA_loss: 2.262, TC_loss: 1.854
+2026-03-16 11:54:30 [DEBUG]: con_loss: 2.698, RCA_loss: 2.228, TC_loss: 1.866
+2026-03-16 11:54:30 [INFO]: Epoch 4 done. Loss: 6.181, Time per epoch: 0.647[s]
+2026-03-16 11:54:30 [INFO]: GateMode: concat
+2026-03-16 11:54:30 [INFO]: Gate[FTI]: metric:0.335, trace:0.331, log:0.334
+2026-03-16 11:54:30 [INFO]: Gate[RCL]: metric:0.331, trace:0.337, log:0.332
+2026-03-16 11:54:30 [DEBUG]: con_loss: 2.723, RCA_loss: 2.086, TC_loss: 1.839
+2026-03-16 11:54:31 [DEBUG]: con_loss: 2.693, RCA_loss: 2.067, TC_loss: 1.817
+2026-03-16 11:54:31 [INFO]: Epoch 5 done. Loss: 6.079, Time per epoch: 0.644[s]
+2026-03-16 11:54:31 [INFO]: GateMode: concat
+2026-03-16 11:54:31 [INFO]: Gate[FTI]: metric:0.335, trace:0.331, log:0.334
+2026-03-16 11:54:31 [INFO]: Gate[RCL]: metric:0.330, trace:0.337, log:0.333
+2026-03-16 11:54:31 [DEBUG]: con_loss: 2.719, RCA_loss: 1.947, TC_loss: 1.803
+2026-03-16 11:54:31 [DEBUG]: con_loss: 2.690, RCA_loss: 1.999, TC_loss: 1.806
+2026-03-16 11:54:31 [INFO]: Epoch 6 done. Loss: 6.013, Time per epoch: 0.644[s]
+2026-03-16 11:54:31 [INFO]: GateMode: concat
+2026-03-16 11:54:31 [INFO]: Gate[FTI]: metric:0.335, trace:0.331, log:0.334
+2026-03-16 11:54:31 [INFO]: Gate[RCL]: metric:0.330, trace:0.338, log:0.333
+2026-03-16 11:54:32 [DEBUG]: con_loss: 2.723, RCA_loss: 1.834, TC_loss: 1.762
+2026-03-16 11:54:32 [DEBUG]: con_loss: 2.687, RCA_loss: 1.851, TC_loss: 1.760
+2026-03-16 11:54:32 [INFO]: Epoch 7 done. Loss: 5.927, Time per epoch: 0.644[s]
+2026-03-16 11:54:32 [INFO]: GateMode: concat
+2026-03-16 11:54:32 [INFO]: Gate[FTI]: metric:0.335, trace:0.332, log:0.333
+2026-03-16 11:54:32 [INFO]: Gate[RCL]: metric:0.329, trace:0.337, log:0.333
+2026-03-16 11:54:32 [DEBUG]: con_loss: 2.721, RCA_loss: 1.700, TC_loss: 1.753
+2026-03-16 11:54:33 [DEBUG]: con_loss: 2.688, RCA_loss: 1.780, TC_loss: 1.716
+2026-03-16 11:54:33 [INFO]: Epoch 8 done. Loss: 5.862, Time per epoch: 0.783[s]
+2026-03-16 11:54:33 [INFO]: GateMode: concat
+2026-03-16 11:54:33 [INFO]: Gate[FTI]: metric:0.335, trace:0.332, log:0.333
+2026-03-16 11:54:33 [INFO]: Gate[RCL]: metric:0.330, trace:0.337, log:0.333
+2026-03-16 11:54:33 [DEBUG]: con_loss: 2.718, RCA_loss: 1.651, TC_loss: 1.729
+2026-03-16 11:54:33 [DEBUG]: con_loss: 2.680, RCA_loss: 1.528, TC_loss: 1.690
+2026-03-16 11:54:34 [INFO]: Epoch 9 done. Loss: 5.772, Time per epoch: 0.640[s]
+2026-03-16 11:54:34 [INFO]: GateMode: concat
+2026-03-16 11:54:34 [INFO]: Gate[FTI]: metric:0.335, trace:0.333, log:0.333
+2026-03-16 11:54:34 [INFO]: Gate[RCL]: metric:0.330, trace:0.337, log:0.333
+2026-03-16 11:54:34 [DEBUG]: con_loss: 2.720, RCA_loss: 1.554, TC_loss: 1.712
+2026-03-16 11:54:34 [DEBUG]: con_loss: 2.682, RCA_loss: 1.443, TC_loss: 1.674
+2026-03-16 11:54:34 [INFO]: Epoch 10 done. Loss: 5.719, Time per epoch: 0.639[s]
+2026-03-16 11:54:34 [INFO]: GateMode: concat
+2026-03-16 11:54:34 [INFO]: Gate[FTI]: metric:0.334, trace:0.333, log:0.333
+2026-03-16 11:54:34 [INFO]: Gate[RCL]: metric:0.331, trace:0.336, log:0.333
+2026-03-16 11:54:34 [DEBUG]: con_loss: 2.713, RCA_loss: 1.426, TC_loss: 1.654
+2026-03-16 11:54:35 [DEBUG]: con_loss: 2.690, RCA_loss: 1.319, TC_loss: 1.657
+2026-03-16 11:54:35 [INFO]: Epoch 11 done. Loss: 5.637, Time per epoch: 0.654[s]
+2026-03-16 11:54:35 [INFO]: GateMode: concat
+2026-03-16 11:54:35 [INFO]: Gate[FTI]: metric:0.334, trace:0.333, log:0.333
+2026-03-16 11:54:35 [INFO]: Gate[RCL]: metric:0.331, trace:0.335, log:0.333
+2026-03-16 11:54:35 [DEBUG]: con_loss: 2.723, RCA_loss: 1.255, TC_loss: 1.629
+2026-03-16 11:54:35 [DEBUG]: con_loss: 2.683, RCA_loss: 1.182, TC_loss: 1.612
+2026-03-16 11:54:35 [INFO]: Epoch 12 done. Loss: 5.544, Time per epoch: 0.645[s]
+2026-03-16 11:54:35 [INFO]: GateMode: concat
+2026-03-16 11:54:35 [INFO]: Gate[FTI]: metric:0.334, trace:0.333, log:0.333
+2026-03-16 11:54:35 [INFO]: Gate[RCL]: metric:0.332, trace:0.335, log:0.333
+2026-03-16 11:54:36 [DEBUG]: con_loss: 2.713, RCA_loss: 1.215, TC_loss: 1.583
+2026-03-16 11:54:36 [DEBUG]: con_loss: 2.681, RCA_loss: 0.977, TC_loss: 1.550
+2026-03-16 11:54:36 [INFO]: Epoch 13 done. Loss: 5.452, Time per epoch: 0.645[s]
+2026-03-16 11:54:36 [INFO]: GateMode: concat
+2026-03-16 11:54:36 [INFO]: Gate[FTI]: metric:0.334, trace:0.333, log:0.333
+2026-03-16 11:54:36 [INFO]: Gate[RCL]: metric:0.333, trace:0.334, log:0.333
+2026-03-16 11:54:36 [DEBUG]: con_loss: 2.714, RCA_loss: 1.002, TC_loss: 1.523
+2026-03-16 11:54:37 [DEBUG]: con_loss: 2.685, RCA_loss: 0.919, TC_loss: 1.516
+2026-03-16 11:54:37 [INFO]: Epoch 14 done. Loss: 5.362, Time per epoch: 0.640[s]
+2026-03-16 11:54:37 [INFO]: GateMode: concat
+2026-03-16 11:54:37 [INFO]: Gate[FTI]: metric:0.334, trace:0.333, log:0.333
+2026-03-16 11:54:37 [INFO]: Gate[RCL]: metric:0.334, trace:0.334, log:0.332
+2026-03-16 11:54:37 [DEBUG]: con_loss: 2.716, RCA_loss: 0.876, TC_loss: 1.501
+2026-03-16 11:54:37 [DEBUG]: con_loss: 2.679, RCA_loss: 0.914, TC_loss: 1.542
+2026-03-16 11:54:37 [INFO]: Epoch 15 done. Loss: 5.329, Time per epoch: 0.642[s]
+2026-03-16 11:54:37 [INFO]: GateMode: concat
+2026-03-16 11:54:37 [INFO]: Gate[FTI]: metric:0.333, trace:0.334, log:0.333
+2026-03-16 11:54:37 [INFO]: Gate[RCL]: metric:0.335, trace:0.333, log:0.332
+2026-03-16 11:54:38 [DEBUG]: con_loss: 2.713, RCA_loss: 0.796, TC_loss: 1.499
+2026-03-16 11:54:38 [DEBUG]: con_loss: 2.684, RCA_loss: 0.734, TC_loss: 1.421
+2026-03-16 11:54:38 [INFO]: Epoch 16 done. Loss: 5.234, Time per epoch: 0.640[s]
+2026-03-16 11:54:38 [INFO]: GateMode: concat
+2026-03-16 11:54:38 [INFO]: Gate[FTI]: metric:0.333, trace:0.334, log:0.333
+2026-03-16 11:54:38 [INFO]: Gate[RCL]: metric:0.336, trace:0.333, log:0.331
+2026-03-16 11:54:38 [DEBUG]: con_loss: 2.716, RCA_loss: 0.635, TC_loss: 1.436
+2026-03-16 11:54:39 [DEBUG]: con_loss: 2.688, RCA_loss: 0.744, TC_loss: 1.463
+2026-03-16 11:54:39 [INFO]: Epoch 17 done. Loss: 5.193, Time per epoch: 0.637[s]
+2026-03-16 11:54:39 [INFO]: GateMode: concat
+2026-03-16 11:54:39 [INFO]: Gate[FTI]: metric:0.332, trace:0.334, log:0.333
+2026-03-16 11:54:39 [INFO]: Gate[RCL]: metric:0.337, trace:0.332, log:0.331
+2026-03-16 11:54:39 [DEBUG]: con_loss: 2.713, RCA_loss: 0.694, TC_loss: 1.415
+2026-03-16 11:54:39 [DEBUG]: con_loss: 2.680, RCA_loss: 0.561, TC_loss: 1.374
+2026-03-16 11:54:39 [INFO]: Epoch 18 done. Loss: 5.132, Time per epoch: 0.782[s]
+2026-03-16 11:54:39 [INFO]: GateMode: concat
+2026-03-16 11:54:39 [INFO]: Gate[FTI]: metric:0.332, trace:0.335, log:0.333
+2026-03-16 11:54:39 [INFO]: Gate[RCL]: metric:0.338, trace:0.332, log:0.330
+2026-03-16 11:54:40 [DEBUG]: con_loss: 2.713, RCA_loss: 0.617, TC_loss: 1.402
+2026-03-16 11:54:40 [DEBUG]: con_loss: 2.683, RCA_loss: 0.563, TC_loss: 1.374
+2026-03-16 11:54:40 [INFO]: Epoch 19 done. Loss: 5.111, Time per epoch: 0.638[s]
+2026-03-16 11:54:40 [INFO]: GateMode: concat
+2026-03-16 11:54:40 [INFO]: Gate[FTI]: metric:0.332, trace:0.335, log:0.333
+2026-03-16 11:54:40 [INFO]: Gate[RCL]: metric:0.339, trace:0.331, log:0.329
+2026-03-16 11:54:40 [DEBUG]: con_loss: 2.718, RCA_loss: 0.532, TC_loss: 1.378
+2026-03-16 11:54:41 [DEBUG]: con_loss: 2.684, RCA_loss: 0.577, TC_loss: 1.304
+2026-03-16 11:54:41 [INFO]: Epoch 20 done. Loss: 5.071, Time per epoch: 0.638[s]
+2026-03-16 11:54:41 [INFO]: GateMode: concat
+2026-03-16 11:54:41 [INFO]: Gate[FTI]: metric:0.332, trace:0.335, log:0.333
+2026-03-16 11:54:41 [INFO]: Gate[RCL]: metric:0.340, trace:0.331, log:0.329
+2026-03-16 11:54:41 [DEBUG]: con_loss: 2.712, RCA_loss: 0.476, TC_loss: 1.357
+2026-03-16 11:54:41 [DEBUG]: con_loss: 2.684, RCA_loss: 0.412, TC_loss: 1.256
+2026-03-16 11:54:41 [INFO]: Epoch 21 done. Loss: 4.997, Time per epoch: 0.636[s]
+2026-03-16 11:54:41 [INFO]: GateMode: concat
+2026-03-16 11:54:41 [INFO]: Gate[FTI]: metric:0.332, trace:0.335, log:0.333
+2026-03-16 11:54:41 [INFO]: Gate[RCL]: metric:0.341, trace:0.330, log:0.328
+2026-03-16 11:54:42 [DEBUG]: con_loss: 2.712, RCA_loss: 0.482, TC_loss: 1.282
+2026-03-16 11:54:42 [DEBUG]: con_loss: 2.675, RCA_loss: 0.344, TC_loss: 1.254
+2026-03-16 11:54:42 [INFO]: Epoch 22 done. Loss: 4.960, Time per epoch: 0.635[s]
+2026-03-16 11:54:42 [INFO]: GateMode: concat
+2026-03-16 11:54:42 [INFO]: Gate[FTI]: metric:0.331, trace:0.335, log:0.333
+2026-03-16 11:54:42 [INFO]: Gate[RCL]: metric:0.342, trace:0.330, log:0.328
+2026-03-16 11:54:42 [DEBUG]: con_loss: 2.711, RCA_loss: 0.448, TC_loss: 1.200
+2026-03-16 11:54:42 [DEBUG]: con_loss: 2.677, RCA_loss: 0.421, TC_loss: 1.237
+2026-03-16 11:54:43 [INFO]: Epoch 23 done. Loss: 4.946, Time per epoch: 0.634[s]
+2026-03-16 11:54:43 [INFO]: GateMode: concat
+2026-03-16 11:54:43 [INFO]: Gate[FTI]: metric:0.331, trace:0.336, log:0.333
+2026-03-16 11:54:43 [INFO]: Gate[RCL]: metric:0.343, trace:0.329, log:0.328
+2026-03-16 11:54:43 [DEBUG]: con_loss: 2.705, RCA_loss: 0.413, TC_loss: 1.157
+2026-03-16 11:54:43 [DEBUG]: con_loss: 2.677, RCA_loss: 0.311, TC_loss: 1.188
+2026-03-16 11:54:43 [INFO]: Epoch 24 done. Loss: 4.885, Time per epoch: 0.632[s]
+2026-03-16 11:54:43 [INFO]: GateMode: concat
+2026-03-16 11:54:43 [INFO]: Gate[FTI]: metric:0.331, trace:0.336, log:0.333
+2026-03-16 11:54:43 [INFO]: Gate[RCL]: metric:0.344, trace:0.329, log:0.327
+2026-03-16 11:54:43 [DEBUG]: con_loss: 2.708, RCA_loss: 0.402, TC_loss: 1.166
+2026-03-16 11:54:44 [DEBUG]: con_loss: 2.680, RCA_loss: 0.397, TC_loss: 1.168
+2026-03-16 11:54:44 [INFO]: Epoch 25 done. Loss: 4.903, Time per epoch: 0.633[s]
+2026-03-16 11:54:44 [INFO]: GateMode: concat
+2026-03-16 11:54:44 [INFO]: Gate[FTI]: metric:0.331, trace:0.336, log:0.333
+2026-03-16 11:54:44 [INFO]: Gate[RCL]: metric:0.344, trace:0.329, log:0.327
+2026-03-16 11:54:44 [DEBUG]: con_loss: 2.710, RCA_loss: 0.338, TC_loss: 1.178
+2026-03-16 11:54:44 [DEBUG]: con_loss: 2.682, RCA_loss: 0.335, TC_loss: 1.173
+2026-03-16 11:54:45 [INFO]: Epoch 26 done. Loss: 4.877, Time per epoch: 0.636[s]
+2026-03-16 11:54:45 [INFO]: GateMode: concat
+2026-03-16 11:54:45 [INFO]: Gate[FTI]: metric:0.332, trace:0.335, log:0.333
+2026-03-16 11:54:45 [INFO]: Gate[RCL]: metric:0.345, trace:0.328, log:0.327
+2026-03-16 11:54:45 [DEBUG]: con_loss: 2.714, RCA_loss: 0.312, TC_loss: 1.104
+2026-03-16 11:54:45 [DEBUG]: con_loss: 2.686, RCA_loss: 0.323, TC_loss: 1.136
+2026-03-16 11:54:45 [INFO]: Epoch 27 done. Loss: 4.841, Time per epoch: 0.635[s]
+2026-03-16 11:54:45 [INFO]: GateMode: concat
+2026-03-16 11:54:45 [INFO]: Gate[FTI]: metric:0.332, trace:0.335, log:0.333
+2026-03-16 11:54:45 [INFO]: Gate[RCL]: metric:0.345, trace:0.328, log:0.327
+2026-03-16 11:54:45 [DEBUG]: con_loss: 2.704, RCA_loss: 0.330, TC_loss: 1.074
+2026-03-16 11:54:46 [DEBUG]: con_loss: 2.681, RCA_loss: 0.299, TC_loss: 1.124
+2026-03-16 11:54:46 [INFO]: Epoch 28 done. Loss: 4.826, Time per epoch: 0.770[s]
+2026-03-16 11:54:46 [INFO]: GateMode: concat
+2026-03-16 11:54:46 [INFO]: Gate[FTI]: metric:0.332, trace:0.335, log:0.333
+2026-03-16 11:54:46 [INFO]: Gate[RCL]: metric:0.345, trace:0.328, log:0.327
+2026-03-16 11:54:46 [DEBUG]: con_loss: 2.702, RCA_loss: 0.334, TC_loss: 1.110
+2026-03-16 11:54:46 [DEBUG]: con_loss: 2.679, RCA_loss: 0.317, TC_loss: 1.005
+2026-03-16 11:54:47 [INFO]: Epoch 29 done. Loss: 4.809, Time per epoch: 0.636[s]
+2026-03-16 11:54:47 [INFO]: GateMode: concat
+2026-03-16 11:54:47 [INFO]: Gate[FTI]: metric:0.332, trace:0.335, log:0.332
+2026-03-16 11:54:47 [INFO]: Gate[RCL]: metric:0.345, trace:0.328, log:0.327
+2026-03-16 11:54:47 [DEBUG]: con_loss: 2.707, RCA_loss: 0.304, TC_loss: 1.085
+2026-03-16 11:54:47 [DEBUG]: con_loss: 2.674, RCA_loss: 0.237, TC_loss: 1.048
+2026-03-16 11:54:47 [INFO]: Epoch 30 done. Loss: 4.786, Time per epoch: 0.637[s]
+2026-03-16 11:54:47 [INFO]: GateMode: concat
+2026-03-16 11:54:47 [INFO]: Gate[FTI]: metric:0.332, trace:0.336, log:0.332
+2026-03-16 11:54:47 [INFO]: Gate[RCL]: metric:0.346, trace:0.328, log:0.327
+2026-03-16 11:54:47 [DEBUG]: con_loss: 2.710, RCA_loss: 0.231, TC_loss: 0.993
+2026-03-16 11:54:48 [DEBUG]: con_loss: 2.670, RCA_loss: 0.238, TC_loss: 0.981
+2026-03-16 11:54:48 [INFO]: Epoch 31 done. Loss: 4.728, Time per epoch: 0.642[s]
+2026-03-16 11:54:48 [INFO]: GateMode: concat
+2026-03-16 11:54:48 [INFO]: Gate[FTI]: metric:0.333, trace:0.336, log:0.332
+2026-03-16 11:54:48 [INFO]: Gate[RCL]: metric:0.346, trace:0.328, log:0.327
+2026-03-16 11:54:48 [DEBUG]: con_loss: 2.706, RCA_loss: 0.272, TC_loss: 0.987
+2026-03-16 11:54:48 [DEBUG]: con_loss: 2.677, RCA_loss: 0.205, TC_loss: 0.994
+2026-03-16 11:54:49 [INFO]: Epoch 32 done. Loss: 4.733, Time per epoch: 0.639[s]
+2026-03-16 11:54:49 [INFO]: GateMode: concat
+2026-03-16 11:54:49 [INFO]: Gate[FTI]: metric:0.333, trace:0.335, log:0.331
+2026-03-16 11:54:49 [INFO]: Gate[RCL]: metric:0.346, trace:0.327, log:0.327
+2026-03-16 11:54:49 [DEBUG]: con_loss: 2.702, RCA_loss: 0.198, TC_loss: 0.918
+2026-03-16 11:54:49 [DEBUG]: con_loss: 2.675, RCA_loss: 0.251, TC_loss: 0.922
+2026-03-16 11:54:49 [INFO]: Epoch 33 done. Loss: 4.689, Time per epoch: 0.638[s]
+2026-03-16 11:54:49 [INFO]: GateMode: concat
+2026-03-16 11:54:49 [INFO]: Gate[FTI]: metric:0.334, trace:0.335, log:0.331
+2026-03-16 11:54:49 [INFO]: Gate[RCL]: metric:0.346, trace:0.327, log:0.327
+2026-03-16 11:54:49 [DEBUG]: con_loss: 2.708, RCA_loss: 0.254, TC_loss: 0.955
+2026-03-16 11:54:50 [DEBUG]: con_loss: 2.671, RCA_loss: 0.172, TC_loss: 0.879
+2026-03-16 11:54:50 [INFO]: Epoch 34 done. Loss: 4.682, Time per epoch: 0.639[s]
+2026-03-16 11:54:50 [INFO]: GateMode: concat
+2026-03-16 11:54:50 [INFO]: Gate[FTI]: metric:0.334, trace:0.335, log:0.331
+2026-03-16 11:54:50 [INFO]: Gate[RCL]: metric:0.346, trace:0.327, log:0.327
+2026-03-16 11:54:50 [DEBUG]: con_loss: 2.704, RCA_loss: 0.214, TC_loss: 0.826
+2026-03-16 11:54:50 [DEBUG]: con_loss: 2.673, RCA_loss: 0.229, TC_loss: 0.905
+2026-03-16 11:54:50 [INFO]: Epoch 35 done. Loss: 4.660, Time per epoch: 0.639[s]
+2026-03-16 11:54:50 [INFO]: GateMode: concat
+2026-03-16 11:54:50 [INFO]: Gate[FTI]: metric:0.335, trace:0.335, log:0.330
+2026-03-16 11:54:50 [INFO]: Gate[RCL]: metric:0.346, trace:0.327, log:0.327
+2026-03-16 11:54:51 [DEBUG]: con_loss: 2.704, RCA_loss: 0.210, TC_loss: 0.955
+2026-03-16 11:54:51 [DEBUG]: con_loss: 2.670, RCA_loss: 0.248, TC_loss: 0.798
+2026-03-16 11:54:51 [INFO]: Epoch 36 done. Loss: 4.669, Time per epoch: 0.639[s]
+2026-03-16 11:54:51 [INFO]: GateMode: concat
+2026-03-16 11:54:51 [INFO]: Gate[FTI]: metric:0.335, trace:0.335, log:0.330
+2026-03-16 11:54:51 [INFO]: Gate[RCL]: metric:0.346, trace:0.327, log:0.327
+2026-03-16 11:54:51 [DEBUG]: con_loss: 2.704, RCA_loss: 0.255, TC_loss: 0.817
+2026-03-16 11:54:52 [DEBUG]: con_loss: 2.666, RCA_loss: 0.195, TC_loss: 0.888
+2026-03-16 11:54:52 [INFO]: Epoch 37 done. Loss: 4.654, Time per epoch: 0.641[s]
+2026-03-16 11:54:52 [INFO]: GateMode: concat
+2026-03-16 11:54:52 [INFO]: Gate[FTI]: metric:0.336, trace:0.335, log:0.329
+2026-03-16 11:54:52 [INFO]: Gate[RCL]: metric:0.346, trace:0.327, log:0.327
+2026-03-16 11:54:52 [DEBUG]: con_loss: 2.696, RCA_loss: 0.156, TC_loss: 0.797
+2026-03-16 11:54:52 [DEBUG]: con_loss: 2.678, RCA_loss: 0.176, TC_loss: 0.887
+2026-03-16 11:54:52 [INFO]: Epoch 38 done. Loss: 4.620, Time per epoch: 0.757[s]
+2026-03-16 11:54:52 [INFO]: GateMode: concat
+2026-03-16 11:54:52 [INFO]: Gate[FTI]: metric:0.336, trace:0.335, log:0.329
+2026-03-16 11:54:52 [INFO]: Gate[RCL]: metric:0.346, trace:0.327, log:0.327
+2026-03-16 11:54:53 [DEBUG]: con_loss: 2.704, RCA_loss: 0.179, TC_loss: 0.893
+2026-03-16 11:54:53 [DEBUG]: con_loss: 2.671, RCA_loss: 0.170, TC_loss: 0.756
+2026-03-16 11:54:53 [INFO]: Epoch 39 done. Loss: 4.616, Time per epoch: 0.640[s]
+2026-03-16 11:54:53 [INFO]: GateMode: concat
+2026-03-16 11:54:53 [INFO]: Gate[FTI]: metric:0.337, trace:0.335, log:0.328
+2026-03-16 11:54:53 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.327
+2026-03-16 11:54:53 [DEBUG]: con_loss: 2.705, RCA_loss: 0.159, TC_loss: 0.765
+2026-03-16 11:54:54 [DEBUG]: con_loss: 2.671, RCA_loss: 0.174, TC_loss: 0.841
+2026-03-16 11:54:54 [INFO]: Epoch 40 done. Loss: 4.601, Time per epoch: 0.632[s]
+2026-03-16 11:54:54 [INFO]: GateMode: concat
+2026-03-16 11:54:54 [INFO]: Gate[FTI]: metric:0.338, trace:0.334, log:0.328
+2026-03-16 11:54:54 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.327
+2026-03-16 11:54:54 [DEBUG]: con_loss: 2.703, RCA_loss: 0.186, TC_loss: 0.795
+2026-03-16 11:54:54 [DEBUG]: con_loss: 2.664, RCA_loss: 0.178, TC_loss: 0.701
+2026-03-16 11:54:54 [INFO]: Epoch 41 done. Loss: 4.579, Time per epoch: 0.641[s]
+2026-03-16 11:54:54 [INFO]: GateMode: concat
+2026-03-16 11:54:54 [INFO]: Gate[FTI]: metric:0.338, trace:0.334, log:0.328
+2026-03-16 11:54:54 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.327
+2026-03-16 11:54:55 [DEBUG]: con_loss: 2.704, RCA_loss: 0.163, TC_loss: 0.763
+2026-03-16 11:54:55 [DEBUG]: con_loss: 2.661, RCA_loss: 0.098, TC_loss: 0.754
+2026-03-16 11:54:55 [INFO]: Epoch 42 done. Loss: 4.558, Time per epoch: 0.638[s]
+2026-03-16 11:54:55 [INFO]: GateMode: concat
+2026-03-16 11:54:55 [INFO]: Gate[FTI]: metric:0.339, trace:0.334, log:0.327
+2026-03-16 11:54:55 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.328
+2026-03-16 11:54:55 [DEBUG]: con_loss: 2.704, RCA_loss: 0.264, TC_loss: 0.814
+2026-03-16 11:54:56 [DEBUG]: con_loss: 2.669, RCA_loss: 0.143, TC_loss: 0.650
+2026-03-16 11:54:56 [INFO]: Epoch 43 done. Loss: 4.584, Time per epoch: 0.633[s]
+2026-03-16 11:54:56 [INFO]: GateMode: concat
+2026-03-16 11:54:56 [INFO]: Gate[FTI]: metric:0.339, trace:0.334, log:0.327
+2026-03-16 11:54:56 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.328
+2026-03-16 11:54:56 [DEBUG]: con_loss: 2.705, RCA_loss: 0.167, TC_loss: 0.745
+2026-03-16 11:54:56 [DEBUG]: con_loss: 2.664, RCA_loss: 0.126, TC_loss: 0.640
+2026-03-16 11:54:56 [INFO]: Epoch 44 done. Loss: 4.534, Time per epoch: 0.639[s]
+2026-03-16 11:54:56 [INFO]: GateMode: concat
+2026-03-16 11:54:56 [INFO]: Gate[FTI]: metric:0.340, trace:0.334, log:0.326
+2026-03-16 11:54:56 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.328
+2026-03-16 11:54:56 [DEBUG]: con_loss: 2.698, RCA_loss: 0.169, TC_loss: 0.621
+2026-03-16 11:54:57 [DEBUG]: con_loss: 2.671, RCA_loss: 0.118, TC_loss: 0.660
+2026-03-16 11:54:57 [INFO]: Epoch 45 done. Loss: 4.507, Time per epoch: 0.636[s]
+2026-03-16 11:54:57 [INFO]: GateMode: concat
+2026-03-16 11:54:57 [INFO]: Gate[FTI]: metric:0.341, trace:0.334, log:0.326
+2026-03-16 11:54:57 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.328
+2026-03-16 11:54:57 [DEBUG]: con_loss: 2.695, RCA_loss: 0.116, TC_loss: 0.626
+2026-03-16 11:54:57 [DEBUG]: con_loss: 2.670, RCA_loss: 0.141, TC_loss: 0.631
+2026-03-16 11:54:58 [INFO]: Epoch 46 done. Loss: 4.492, Time per epoch: 0.632[s]
+2026-03-16 11:54:58 [INFO]: GateMode: concat
+2026-03-16 11:54:58 [INFO]: Gate[FTI]: metric:0.341, trace:0.333, log:0.325
+2026-03-16 11:54:58 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.328
+2026-03-16 11:54:58 [DEBUG]: con_loss: 2.694, RCA_loss: 0.161, TC_loss: 0.641
+2026-03-16 11:54:58 [DEBUG]: con_loss: 2.662, RCA_loss: 0.141, TC_loss: 0.564
+2026-03-16 11:54:58 [INFO]: Epoch 47 done. Loss: 4.488, Time per epoch: 0.631[s]
+2026-03-16 11:54:58 [INFO]: GateMode: concat
+2026-03-16 11:54:58 [INFO]: Gate[FTI]: metric:0.342, trace:0.333, log:0.325
+2026-03-16 11:54:58 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.328
+2026-03-16 11:54:59 [DEBUG]: con_loss: 2.694, RCA_loss: 0.108, TC_loss: 0.730
+2026-03-16 11:54:59 [DEBUG]: con_loss: 2.661, RCA_loss: 0.098, TC_loss: 0.543
+2026-03-16 11:54:59 [INFO]: Epoch 48 done. Loss: 4.481, Time per epoch: 0.793[s]
+2026-03-16 11:54:59 [INFO]: GateMode: concat
+2026-03-16 11:54:59 [INFO]: Gate[FTI]: metric:0.342, trace:0.333, log:0.325
+2026-03-16 11:54:59 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.328
+2026-03-16 11:54:59 [DEBUG]: con_loss: 2.700, RCA_loss: 0.141, TC_loss: 0.576
+2026-03-16 11:55:00 [DEBUG]: con_loss: 2.667, RCA_loss: 0.126, TC_loss: 0.599
+2026-03-16 11:55:00 [INFO]: Epoch 49 done. Loss: 4.475, Time per epoch: 0.650[s]
+2026-03-16 11:55:00 [INFO]: GateMode: concat
+2026-03-16 11:55:00 [INFO]: Gate[FTI]: metric:0.343, trace:0.333, log:0.324
+2026-03-16 11:55:00 [INFO]: Gate[RCL]: metric:0.346, trace:0.326, log:0.328
+2026-03-16 11:55:00 [DEBUG]: con_loss: 2.691, RCA_loss: 0.099, TC_loss: 0.545
+2026-03-16 11:55:00 [DEBUG]: con_loss: 2.669, RCA_loss: 0.151, TC_loss: 0.620
+2026-03-16 11:55:00 [INFO]: Epoch 50 done. Loss: 4.467, Time per epoch: 0.634[s]
+2026-03-16 11:55:00 [INFO]: GateMode: concat
+2026-03-16 11:55:00 [INFO]: Gate[FTI]: metric:0.344, trace:0.333, log:0.323
+2026-03-16 11:55:00 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:00 [DEBUG]: con_loss: 2.704, RCA_loss: 0.097, TC_loss: 0.567
+2026-03-16 11:55:01 [DEBUG]: con_loss: 2.662, RCA_loss: 0.118, TC_loss: 0.521
+2026-03-16 11:55:01 [INFO]: Epoch 51 done. Loss: 4.440, Time per epoch: 0.635[s]
+2026-03-16 11:55:01 [INFO]: GateMode: concat
+2026-03-16 11:55:01 [INFO]: Gate[FTI]: metric:0.344, trace:0.333, log:0.323
+2026-03-16 11:55:01 [INFO]: Gate[RCL]: metric:0.347, trace:0.325, log:0.328
+2026-03-16 11:55:01 [DEBUG]: con_loss: 2.693, RCA_loss: 0.106, TC_loss: 0.491
+2026-03-16 11:55:01 [DEBUG]: con_loss: 2.663, RCA_loss: 0.144, TC_loss: 0.531
+2026-03-16 11:55:02 [INFO]: Epoch 52 done. Loss: 4.430, Time per epoch: 0.632[s]
+2026-03-16 11:55:02 [INFO]: GateMode: concat
+2026-03-16 11:55:02 [INFO]: Gate[FTI]: metric:0.345, trace:0.332, log:0.323
+2026-03-16 11:55:02 [INFO]: Gate[RCL]: metric:0.347, trace:0.325, log:0.328
+2026-03-16 11:55:02 [DEBUG]: con_loss: 2.697, RCA_loss: 0.117, TC_loss: 0.494
+2026-03-16 11:55:02 [DEBUG]: con_loss: 2.664, RCA_loss: 0.155, TC_loss: 0.525
+2026-03-16 11:55:02 [INFO]: Epoch 53 done. Loss: 4.436, Time per epoch: 0.633[s]
+2026-03-16 11:55:02 [INFO]: GateMode: concat
+2026-03-16 11:55:02 [INFO]: Gate[FTI]: metric:0.346, trace:0.332, log:0.322
+2026-03-16 11:55:02 [INFO]: Gate[RCL]: metric:0.347, trace:0.325, log:0.328
+2026-03-16 11:55:02 [DEBUG]: con_loss: 2.695, RCA_loss: 0.120, TC_loss: 0.550
+2026-03-16 11:55:03 [DEBUG]: con_loss: 2.663, RCA_loss: 0.128, TC_loss: 0.463
+2026-03-16 11:55:03 [INFO]: Epoch 54 done. Loss: 4.427, Time per epoch: 0.629[s]
+2026-03-16 11:55:03 [INFO]: GateMode: concat
+2026-03-16 11:55:03 [INFO]: Gate[FTI]: metric:0.346, trace:0.332, log:0.322
+2026-03-16 11:55:03 [INFO]: Gate[RCL]: metric:0.347, trace:0.325, log:0.328
+2026-03-16 11:55:03 [DEBUG]: con_loss: 2.700, RCA_loss: 0.100, TC_loss: 0.546
+2026-03-16 11:55:03 [DEBUG]: con_loss: 2.662, RCA_loss: 0.096, TC_loss: 0.467
+2026-03-16 11:55:03 [INFO]: Epoch 55 done. Loss: 4.415, Time per epoch: 0.632[s]
+2026-03-16 11:55:03 [INFO]: GateMode: concat
+2026-03-16 11:55:03 [INFO]: Gate[FTI]: metric:0.347, trace:0.332, log:0.321
+2026-03-16 11:55:03 [INFO]: Gate[RCL]: metric:0.347, trace:0.325, log:0.328
+2026-03-16 11:55:04 [DEBUG]: con_loss: 2.701, RCA_loss: 0.096, TC_loss: 0.466
+2026-03-16 11:55:04 [DEBUG]: con_loss: 2.667, RCA_loss: 0.113, TC_loss: 0.486
+2026-03-16 11:55:04 [INFO]: Epoch 56 done. Loss: 4.405, Time per epoch: 0.633[s]
+2026-03-16 11:55:04 [INFO]: GateMode: concat
+2026-03-16 11:55:04 [INFO]: Gate[FTI]: metric:0.347, trace:0.332, log:0.321
+2026-03-16 11:55:04 [INFO]: Gate[RCL]: metric:0.347, trace:0.325, log:0.328
+2026-03-16 11:55:04 [DEBUG]: con_loss: 2.699, RCA_loss: 0.121, TC_loss: 0.475
+2026-03-16 11:55:05 [DEBUG]: con_loss: 2.660, RCA_loss: 0.097, TC_loss: 0.462
+2026-03-16 11:55:05 [INFO]: Epoch 57 done. Loss: 4.401, Time per epoch: 0.642[s]
+2026-03-16 11:55:05 [INFO]: GateMode: concat
+2026-03-16 11:55:05 [INFO]: Gate[FTI]: metric:0.348, trace:0.331, log:0.320
+2026-03-16 11:55:05 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:05 [DEBUG]: con_loss: 2.696, RCA_loss: 0.096, TC_loss: 0.455
+2026-03-16 11:55:05 [DEBUG]: con_loss: 2.663, RCA_loss: 0.094, TC_loss: 0.396
+2026-03-16 11:55:06 [INFO]: Epoch 58 done. Loss: 4.373, Time per epoch: 0.771[s]
+2026-03-16 11:55:06 [INFO]: GateMode: concat
+2026-03-16 11:55:06 [INFO]: Gate[FTI]: metric:0.349, trace:0.331, log:0.320
+2026-03-16 11:55:06 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:06 [DEBUG]: con_loss: 2.694, RCA_loss: 0.101, TC_loss: 0.389
+2026-03-16 11:55:06 [DEBUG]: con_loss: 2.662, RCA_loss: 0.060, TC_loss: 0.387
+2026-03-16 11:55:06 [INFO]: Epoch 59 done. Loss: 4.346, Time per epoch: 0.635[s]
+2026-03-16 11:55:06 [INFO]: GateMode: concat
+2026-03-16 11:55:06 [INFO]: Gate[FTI]: metric:0.350, trace:0.331, log:0.320
+2026-03-16 11:55:06 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:06 [DEBUG]: con_loss: 2.699, RCA_loss: 0.089, TC_loss: 0.402
+2026-03-16 11:55:07 [DEBUG]: con_loss: 2.660, RCA_loss: 0.086, TC_loss: 0.414
+2026-03-16 11:55:07 [INFO]: Epoch 60 done. Loss: 4.360, Time per epoch: 0.629[s]
+2026-03-16 11:55:07 [INFO]: GateMode: concat
+2026-03-16 11:55:07 [INFO]: Gate[FTI]: metric:0.350, trace:0.331, log:0.319
+2026-03-16 11:55:07 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:07 [DEBUG]: con_loss: 2.693, RCA_loss: 0.075, TC_loss: 0.359
+2026-03-16 11:55:07 [DEBUG]: con_loss: 2.660, RCA_loss: 0.076, TC_loss: 0.420
+2026-03-16 11:55:07 [INFO]: Epoch 61 done. Loss: 4.343, Time per epoch: 0.631[s]
+2026-03-16 11:55:07 [INFO]: GateMode: concat
+2026-03-16 11:55:07 [INFO]: Gate[FTI]: metric:0.351, trace:0.330, log:0.319
+2026-03-16 11:55:07 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:08 [DEBUG]: con_loss: 2.692, RCA_loss: 0.066, TC_loss: 0.351
+2026-03-16 11:55:08 [DEBUG]: con_loss: 2.661, RCA_loss: 0.067, TC_loss: 0.373
+2026-03-16 11:55:08 [INFO]: Epoch 62 done. Loss: 4.325, Time per epoch: 0.631[s]
+2026-03-16 11:55:08 [INFO]: GateMode: concat
+2026-03-16 11:55:08 [INFO]: Gate[FTI]: metric:0.351, trace:0.330, log:0.318
+2026-03-16 11:55:08 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:08 [DEBUG]: con_loss: 2.691, RCA_loss: 0.064, TC_loss: 0.357
+2026-03-16 11:55:09 [DEBUG]: con_loss: 2.660, RCA_loss: 0.085, TC_loss: 0.371
+2026-03-16 11:55:09 [INFO]: Epoch 63 done. Loss: 4.330, Time per epoch: 0.644[s]
+2026-03-16 11:55:09 [INFO]: GateMode: concat
+2026-03-16 11:55:09 [INFO]: Gate[FTI]: metric:0.352, trace:0.330, log:0.318
+2026-03-16 11:55:09 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:09 [DEBUG]: con_loss: 2.693, RCA_loss: 0.036, TC_loss: 0.382
+2026-03-16 11:55:09 [DEBUG]: con_loss: 2.660, RCA_loss: 0.098, TC_loss: 0.340
+2026-03-16 11:55:09 [INFO]: Epoch 64 done. Loss: 4.325, Time per epoch: 0.634[s]
+2026-03-16 11:55:09 [INFO]: GateMode: concat
+2026-03-16 11:55:09 [INFO]: Gate[FTI]: metric:0.353, trace:0.330, log:0.317
+2026-03-16 11:55:09 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:10 [DEBUG]: con_loss: 2.688, RCA_loss: 0.047, TC_loss: 0.313
+2026-03-16 11:55:10 [DEBUG]: con_loss: 2.655, RCA_loss: 0.071, TC_loss: 0.252
+2026-03-16 11:55:10 [INFO]: Epoch 65 done. Loss: 4.279, Time per epoch: 0.632[s]
+2026-03-16 11:55:10 [INFO]: GateMode: concat
+2026-03-16 11:55:10 [INFO]: Gate[FTI]: metric:0.353, trace:0.330, log:0.317
+2026-03-16 11:55:10 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:10 [DEBUG]: con_loss: 2.688, RCA_loss: 0.100, TC_loss: 0.322
+2026-03-16 11:55:10 [DEBUG]: con_loss: 2.659, RCA_loss: 0.064, TC_loss: 0.331
+2026-03-16 11:55:11 [INFO]: Epoch 66 done. Loss: 4.313, Time per epoch: 0.628[s]
+2026-03-16 11:55:11 [INFO]: GateMode: concat
+2026-03-16 11:55:11 [INFO]: Gate[FTI]: metric:0.354, trace:0.330, log:0.316
+2026-03-16 11:55:11 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:11 [DEBUG]: con_loss: 2.693, RCA_loss: 0.075, TC_loss: 0.320
+2026-03-16 11:55:11 [DEBUG]: con_loss: 2.659, RCA_loss: 0.060, TC_loss: 0.315
+2026-03-16 11:55:11 [INFO]: Epoch 67 done. Loss: 4.303, Time per epoch: 0.629[s]
+2026-03-16 11:55:11 [INFO]: GateMode: concat
+2026-03-16 11:55:11 [INFO]: Gate[FTI]: metric:0.355, trace:0.329, log:0.316
+2026-03-16 11:55:11 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:12 [DEBUG]: con_loss: 2.696, RCA_loss: 0.053, TC_loss: 0.300
+2026-03-16 11:55:12 [DEBUG]: con_loss: 2.660, RCA_loss: 0.054, TC_loss: 0.302
+2026-03-16 11:55:12 [INFO]: Epoch 68 done. Loss: 4.289, Time per epoch: 0.754[s]
+2026-03-16 11:55:12 [INFO]: GateMode: concat
+2026-03-16 11:55:12 [INFO]: Gate[FTI]: metric:0.355, trace:0.329, log:0.316
+2026-03-16 11:55:12 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.328
+2026-03-16 11:55:12 [DEBUG]: con_loss: 2.690, RCA_loss: 0.046, TC_loss: 0.283
+2026-03-16 11:55:12 [DEBUG]: con_loss: 2.655, RCA_loss: 0.071, TC_loss: 0.273
+2026-03-16 11:55:13 [INFO]: Epoch 69 done. Loss: 4.277, Time per epoch: 0.629[s]
+2026-03-16 11:55:13 [INFO]: GateMode: concat
+2026-03-16 11:55:13 [INFO]: Gate[FTI]: metric:0.355, trace:0.329, log:0.315
+2026-03-16 11:55:13 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.327
+2026-03-16 11:55:13 [DEBUG]: con_loss: 2.701, RCA_loss: 0.079, TC_loss: 0.260
+2026-03-16 11:55:13 [DEBUG]: con_loss: 2.652, RCA_loss: 0.063, TC_loss: 0.243
+2026-03-16 11:55:13 [INFO]: Epoch 70 done. Loss: 4.272, Time per epoch: 0.637[s]
+2026-03-16 11:55:13 [INFO]: GateMode: concat
+2026-03-16 11:55:13 [INFO]: Gate[FTI]: metric:0.356, trace:0.329, log:0.315
+2026-03-16 11:55:13 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.327
+2026-03-16 11:55:13 [DEBUG]: con_loss: 2.681, RCA_loss: 0.040, TC_loss: 0.241
+2026-03-16 11:55:14 [DEBUG]: con_loss: 2.661, RCA_loss: 0.093, TC_loss: 0.268
+2026-03-16 11:55:14 [INFO]: Epoch 71 done. Loss: 4.269, Time per epoch: 0.631[s]
+2026-03-16 11:55:14 [INFO]: GateMode: concat
+2026-03-16 11:55:14 [INFO]: Gate[FTI]: metric:0.357, trace:0.329, log:0.314
+2026-03-16 11:55:14 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.327
+2026-03-16 11:55:14 [DEBUG]: con_loss: 2.696, RCA_loss: 0.073, TC_loss: 0.268
+2026-03-16 11:55:14 [DEBUG]: con_loss: 2.655, RCA_loss: 0.058, TC_loss: 0.214
+2026-03-16 11:55:15 [INFO]: Epoch 72 done. Loss: 4.263, Time per epoch: 0.631[s]
+2026-03-16 11:55:15 [INFO]: GateMode: concat
+2026-03-16 11:55:15 [INFO]: Gate[FTI]: metric:0.357, trace:0.328, log:0.314
+2026-03-16 11:55:15 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.327
+2026-03-16 11:55:15 [DEBUG]: con_loss: 2.692, RCA_loss: 0.085, TC_loss: 0.223
+2026-03-16 11:55:15 [DEBUG]: con_loss: 2.653, RCA_loss: 0.045, TC_loss: 0.211
+2026-03-16 11:55:15 [INFO]: Epoch 73 done. Loss: 4.250, Time per epoch: 0.628[s]
+2026-03-16 11:55:15 [INFO]: GateMode: concat
+2026-03-16 11:55:15 [INFO]: Gate[FTI]: metric:0.358, trace:0.328, log:0.314
+2026-03-16 11:55:15 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.327
+2026-03-16 11:55:15 [DEBUG]: con_loss: 2.691, RCA_loss: 0.040, TC_loss: 0.225
+2026-03-16 11:55:16 [DEBUG]: con_loss: 2.651, RCA_loss: 0.079, TC_loss: 0.243
+2026-03-16 11:55:16 [INFO]: Epoch 74 done. Loss: 4.255, Time per epoch: 0.630[s]
+2026-03-16 11:55:16 [INFO]: GateMode: concat
+2026-03-16 11:55:16 [INFO]: Gate[FTI]: metric:0.358, trace:0.328, log:0.313
+2026-03-16 11:55:16 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.327
+2026-03-16 11:55:16 [DEBUG]: con_loss: 2.691, RCA_loss: 0.042, TC_loss: 0.211
+2026-03-16 11:55:16 [DEBUG]: con_loss: 2.655, RCA_loss: 0.069, TC_loss: 0.186
+2026-03-16 11:55:16 [INFO]: Epoch 75 done. Loss: 4.236, Time per epoch: 0.630[s]
+2026-03-16 11:55:16 [INFO]: GateMode: concat
+2026-03-16 11:55:16 [INFO]: Gate[FTI]: metric:0.359, trace:0.328, log:0.313
+2026-03-16 11:55:16 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.327
+2026-03-16 11:55:17 [DEBUG]: con_loss: 2.687, RCA_loss: 0.064, TC_loss: 0.216
+2026-03-16 11:55:17 [DEBUG]: con_loss: 2.653, RCA_loss: 0.062, TC_loss: 0.184
+2026-03-16 11:55:17 [INFO]: Epoch 76 done. Loss: 4.239, Time per epoch: 0.633[s]
+2026-03-16 11:55:17 [INFO]: GateMode: concat
+2026-03-16 11:55:17 [INFO]: Gate[FTI]: metric:0.360, trace:0.328, log:0.313
+2026-03-16 11:55:17 [INFO]: Gate[RCL]: metric:0.347, trace:0.326, log:0.327
+2026-03-16 11:55:17 [DEBUG]: con_loss: 2.694, RCA_loss: 0.042, TC_loss: 0.200
+2026-03-16 11:55:18 [DEBUG]: con_loss: 2.660, RCA_loss: 0.044, TC_loss: 0.167
+2026-03-16 11:55:18 [INFO]: Epoch 77 done. Loss: 4.225, Time per epoch: 0.628[s]
+2026-03-16 11:55:18 [INFO]: GateMode: concat
+2026-03-16 11:55:18 [INFO]: Gate[FTI]: metric:0.360, trace:0.327, log:0.313
+2026-03-16 11:55:18 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.327
+2026-03-16 11:55:18 [DEBUG]: con_loss: 2.691, RCA_loss: 0.025, TC_loss: 0.170
+2026-03-16 11:55:18 [DEBUG]: con_loss: 2.649, RCA_loss: 0.069, TC_loss: 0.184
+2026-03-16 11:55:18 [INFO]: Epoch 78 done. Loss: 4.219, Time per epoch: 0.758[s]
+2026-03-16 11:55:18 [INFO]: GateMode: concat
+2026-03-16 11:55:18 [INFO]: Gate[FTI]: metric:0.360, trace:0.327, log:0.312
+2026-03-16 11:55:18 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.327
+2026-03-16 11:55:19 [DEBUG]: con_loss: 2.690, RCA_loss: 0.047, TC_loss: 0.160
+2026-03-16 11:55:19 [DEBUG]: con_loss: 2.652, RCA_loss: 0.077, TC_loss: 0.181
+2026-03-16 11:55:19 [INFO]: Epoch 79 done. Loss: 4.224, Time per epoch: 0.631[s]
+2026-03-16 11:55:19 [INFO]: GateMode: concat
+2026-03-16 11:55:19 [INFO]: Gate[FTI]: metric:0.361, trace:0.327, log:0.312
+2026-03-16 11:55:19 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:19 [DEBUG]: con_loss: 2.689, RCA_loss: 0.031, TC_loss: 0.204
+2026-03-16 11:55:20 [DEBUG]: con_loss: 2.650, RCA_loss: 0.040, TC_loss: 0.211
+2026-03-16 11:55:20 [INFO]: Epoch 80 done. Loss: 4.229, Time per epoch: 0.630[s]
+2026-03-16 11:55:20 [INFO]: GateMode: concat
+2026-03-16 11:55:20 [INFO]: Gate[FTI]: metric:0.361, trace:0.327, log:0.312
+2026-03-16 11:55:20 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:20 [DEBUG]: con_loss: 2.684, RCA_loss: 0.046, TC_loss: 0.168
+2026-03-16 11:55:20 [DEBUG]: con_loss: 2.659, RCA_loss: 0.036, TC_loss: 0.178
+2026-03-16 11:55:20 [INFO]: Epoch 81 done. Loss: 4.215, Time per epoch: 0.628[s]
+2026-03-16 11:55:20 [INFO]: GateMode: concat
+2026-03-16 11:55:20 [INFO]: Gate[FTI]: metric:0.362, trace:0.327, log:0.311
+2026-03-16 11:55:20 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:20 [DEBUG]: con_loss: 2.684, RCA_loss: 0.039, TC_loss: 0.183
+2026-03-16 11:55:21 [DEBUG]: con_loss: 2.657, RCA_loss: 0.045, TC_loss: 0.174
+2026-03-16 11:55:21 [INFO]: Epoch 82 done. Loss: 4.218, Time per epoch: 0.636[s]
+2026-03-16 11:55:21 [INFO]: GateMode: concat
+2026-03-16 11:55:21 [INFO]: Gate[FTI]: metric:0.362, trace:0.327, log:0.311
+2026-03-16 11:55:21 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:21 [DEBUG]: con_loss: 2.679, RCA_loss: 0.020, TC_loss: 0.207
+2026-03-16 11:55:21 [DEBUG]: con_loss: 2.652, RCA_loss: 0.043, TC_loss: 0.139
+2026-03-16 11:55:22 [INFO]: Epoch 83 done. Loss: 4.208, Time per epoch: 0.633[s]
+2026-03-16 11:55:22 [INFO]: GateMode: concat
+2026-03-16 11:55:22 [INFO]: Gate[FTI]: metric:0.362, trace:0.327, log:0.311
+2026-03-16 11:55:22 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:22 [DEBUG]: con_loss: 2.685, RCA_loss: 0.039, TC_loss: 0.149
+2026-03-16 11:55:22 [DEBUG]: con_loss: 2.645, RCA_loss: 0.044, TC_loss: 0.141
+2026-03-16 11:55:22 [INFO]: Epoch 84 done. Loss: 4.198, Time per epoch: 0.630[s]
+2026-03-16 11:55:22 [INFO]: GateMode: concat
+2026-03-16 11:55:22 [INFO]: Gate[FTI]: metric:0.363, trace:0.327, log:0.310
+2026-03-16 11:55:22 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:22 [DEBUG]: con_loss: 2.678, RCA_loss: 0.049, TC_loss: 0.156
+2026-03-16 11:55:23 [DEBUG]: con_loss: 2.651, RCA_loss: 0.038, TC_loss: 0.135
+2026-03-16 11:55:23 [INFO]: Epoch 85 done. Loss: 4.199, Time per epoch: 0.632[s]
+2026-03-16 11:55:23 [INFO]: GateMode: concat
+2026-03-16 11:55:23 [INFO]: Gate[FTI]: metric:0.363, trace:0.327, log:0.310
+2026-03-16 11:55:23 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:23 [DEBUG]: con_loss: 2.678, RCA_loss: 0.032, TC_loss: 0.166
+2026-03-16 11:55:23 [DEBUG]: con_loss: 2.643, RCA_loss: 0.041, TC_loss: 0.138
+2026-03-16 11:55:24 [INFO]: Epoch 86 done. Loss: 4.198, Time per epoch: 0.631[s]
+2026-03-16 11:55:24 [INFO]: GateMode: concat
+2026-03-16 11:55:24 [INFO]: Gate[FTI]: metric:0.363, trace:0.327, log:0.310
+2026-03-16 11:55:24 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:24 [DEBUG]: con_loss: 2.679, RCA_loss: 0.032, TC_loss: 0.144
+2026-03-16 11:55:24 [DEBUG]: con_loss: 2.646, RCA_loss: 0.018, TC_loss: 0.138
+2026-03-16 11:55:24 [INFO]: Epoch 87 done. Loss: 4.187, Time per epoch: 0.632[s]
+2026-03-16 11:55:24 [INFO]: GateMode: concat
+2026-03-16 11:55:24 [INFO]: Gate[FTI]: metric:0.364, trace:0.326, log:0.310
+2026-03-16 11:55:24 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:24 [DEBUG]: con_loss: 2.687, RCA_loss: 0.045, TC_loss: 0.142
+2026-03-16 11:55:25 [DEBUG]: con_loss: 2.649, RCA_loss: 0.036, TC_loss: 0.128
+2026-03-16 11:55:25 [INFO]: Epoch 88 done. Loss: 4.194, Time per epoch: 0.786[s]
+2026-03-16 11:55:25 [INFO]: GateMode: concat
+2026-03-16 11:55:25 [INFO]: Gate[FTI]: metric:0.364, trace:0.326, log:0.309
+2026-03-16 11:55:25 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:25 [DEBUG]: con_loss: 2.682, RCA_loss: 0.032, TC_loss: 0.147
+2026-03-16 11:55:25 [DEBUG]: con_loss: 2.648, RCA_loss: 0.031, TC_loss: 0.143
+2026-03-16 11:55:26 [INFO]: Epoch 89 done. Loss: 4.193, Time per epoch: 0.632[s]
+2026-03-16 11:55:26 [INFO]: GateMode: concat
+2026-03-16 11:55:26 [INFO]: Gate[FTI]: metric:0.365, trace:0.326, log:0.309
+2026-03-16 11:55:26 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:26 [DEBUG]: con_loss: 2.677, RCA_loss: 0.036, TC_loss: 0.111
+2026-03-16 11:55:26 [DEBUG]: con_loss: 2.651, RCA_loss: 0.029, TC_loss: 0.138
+2026-03-16 11:55:26 [INFO]: Epoch 90 done. Loss: 4.183, Time per epoch: 0.633[s]
+2026-03-16 11:55:26 [INFO]: GateMode: concat
+2026-03-16 11:55:26 [INFO]: Gate[FTI]: metric:0.365, trace:0.326, log:0.309
+2026-03-16 11:55:26 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:26 [DEBUG]: con_loss: 2.689, RCA_loss: 0.029, TC_loss: 0.118
+2026-03-16 11:55:27 [DEBUG]: con_loss: 2.641, RCA_loss: 0.018, TC_loss: 0.121
+2026-03-16 11:55:27 [INFO]: Epoch 91 done. Loss: 4.177, Time per epoch: 0.634[s]
+2026-03-16 11:55:27 [INFO]: GateMode: concat
+2026-03-16 11:55:27 [INFO]: Gate[FTI]: metric:0.365, trace:0.326, log:0.309
+2026-03-16 11:55:27 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:27 [DEBUG]: con_loss: 2.679, RCA_loss: 0.020, TC_loss: 0.128
+2026-03-16 11:55:27 [DEBUG]: con_loss: 2.649, RCA_loss: 0.037, TC_loss: 0.113
+2026-03-16 11:55:27 [INFO]: Epoch 92 done. Loss: 4.179, Time per epoch: 0.632[s]
+2026-03-16 11:55:27 [INFO]: GateMode: concat
+2026-03-16 11:55:27 [INFO]: Gate[FTI]: metric:0.365, trace:0.326, log:0.308
+2026-03-16 11:55:27 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:28 [DEBUG]: con_loss: 2.685, RCA_loss: 0.017, TC_loss: 0.130
+2026-03-16 11:55:28 [DEBUG]: con_loss: 2.641, RCA_loss: 0.022, TC_loss: 0.120
+2026-03-16 11:55:28 [INFO]: Epoch 93 done. Loss: 4.176, Time per epoch: 0.634[s]
+2026-03-16 11:55:28 [INFO]: GateMode: concat
+2026-03-16 11:55:28 [INFO]: Gate[FTI]: metric:0.366, trace:0.326, log:0.308
+2026-03-16 11:55:28 [INFO]: Gate[RCL]: metric:0.347, trace:0.327, log:0.326
+2026-03-16 11:55:28 [DEBUG]: con_loss: 2.678, RCA_loss: 0.043, TC_loss: 0.131
+2026-03-16 11:55:29 [DEBUG]: con_loss: 2.637, RCA_loss: 0.022, TC_loss: 0.103
+2026-03-16 11:55:29 [INFO]: Epoch 94 done. Loss: 4.176, Time per epoch: 0.635[s]
+2026-03-16 11:55:29 [INFO]: GateMode: concat
+2026-03-16 11:55:29 [INFO]: Gate[FTI]: metric:0.366, trace:0.326, log:0.308
+2026-03-16 11:55:29 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.326
+2026-03-16 11:55:29 [DEBUG]: con_loss: 2.678, RCA_loss: 0.027, TC_loss: 0.131
+2026-03-16 11:55:29 [DEBUG]: con_loss: 2.645, RCA_loss: 0.032, TC_loss: 0.114
+2026-03-16 11:55:29 [INFO]: Epoch 95 done. Loss: 4.179, Time per epoch: 0.651[s]
+2026-03-16 11:55:29 [INFO]: GateMode: concat
+2026-03-16 11:55:29 [INFO]: Gate[FTI]: metric:0.366, trace:0.326, log:0.308
+2026-03-16 11:55:29 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.326
+2026-03-16 11:55:30 [DEBUG]: con_loss: 2.682, RCA_loss: 0.020, TC_loss: 0.096
+2026-03-16 11:55:30 [DEBUG]: con_loss: 2.650, RCA_loss: 0.044, TC_loss: 0.120
+2026-03-16 11:55:30 [INFO]: Epoch 96 done. Loss: 4.176, Time per epoch: 0.633[s]
+2026-03-16 11:55:30 [INFO]: GateMode: concat
+2026-03-16 11:55:30 [INFO]: Gate[FTI]: metric:0.367, trace:0.326, log:0.308
+2026-03-16 11:55:30 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:30 [DEBUG]: con_loss: 2.671, RCA_loss: 0.011, TC_loss: 0.107
+2026-03-16 11:55:30 [DEBUG]: con_loss: 2.642, RCA_loss: 0.020, TC_loss: 0.107
+2026-03-16 11:55:31 [INFO]: Epoch 97 done. Loss: 4.162, Time per epoch: 0.632[s]
+2026-03-16 11:55:31 [INFO]: GateMode: concat
+2026-03-16 11:55:31 [INFO]: Gate[FTI]: metric:0.367, trace:0.326, log:0.307
+2026-03-16 11:55:31 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:31 [DEBUG]: con_loss: 2.675, RCA_loss: 0.016, TC_loss: 0.092
+2026-03-16 11:55:31 [DEBUG]: con_loss: 2.645, RCA_loss: 0.026, TC_loss: 0.083
+2026-03-16 11:55:31 [INFO]: Epoch 98 done. Loss: 4.157, Time per epoch: 0.771[s]
+2026-03-16 11:55:31 [INFO]: GateMode: concat
+2026-03-16 11:55:31 [INFO]: Gate[FTI]: metric:0.367, trace:0.326, log:0.307
+2026-03-16 11:55:31 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:32 [DEBUG]: con_loss: 2.674, RCA_loss: 0.015, TC_loss: 0.126
+2026-03-16 11:55:32 [DEBUG]: con_loss: 2.638, RCA_loss: 0.021, TC_loss: 0.101
+2026-03-16 11:55:32 [INFO]: Epoch 99 done. Loss: 4.166, Time per epoch: 0.630[s]
+2026-03-16 11:55:32 [INFO]: GateMode: concat
+2026-03-16 11:55:32 [INFO]: Gate[FTI]: metric:0.367, trace:0.326, log:0.307
+2026-03-16 11:55:32 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:32 [DEBUG]: con_loss: 2.684, RCA_loss: 0.025, TC_loss: 0.141
+2026-03-16 11:55:33 [DEBUG]: con_loss: 2.637, RCA_loss: 0.018, TC_loss: 0.078
+2026-03-16 11:55:33 [INFO]: Epoch 100 done. Loss: 4.168, Time per epoch: 0.631[s]
+2026-03-16 11:55:33 [INFO]: GateMode: concat
+2026-03-16 11:55:33 [INFO]: Gate[FTI]: metric:0.368, trace:0.326, log:0.307
+2026-03-16 11:55:33 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:33 [DEBUG]: con_loss: 2.672, RCA_loss: 0.008, TC_loss: 0.085
+2026-03-16 11:55:33 [DEBUG]: con_loss: 2.632, RCA_loss: 0.034, TC_loss: 0.098
+2026-03-16 11:55:33 [INFO]: Epoch 101 done. Loss: 4.155, Time per epoch: 0.632[s]
+2026-03-16 11:55:33 [INFO]: GateMode: concat
+2026-03-16 11:55:33 [INFO]: Gate[FTI]: metric:0.368, trace:0.326, log:0.307
+2026-03-16 11:55:33 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:33 [DEBUG]: con_loss: 2.677, RCA_loss: 0.019, TC_loss: 0.102
+2026-03-16 11:55:34 [DEBUG]: con_loss: 2.636, RCA_loss: 0.016, TC_loss: 0.072
+2026-03-16 11:55:34 [INFO]: Epoch 102 done. Loss: 4.153, Time per epoch: 0.630[s]
+2026-03-16 11:55:34 [INFO]: GateMode: concat
+2026-03-16 11:55:34 [INFO]: Gate[FTI]: metric:0.368, trace:0.325, log:0.306
+2026-03-16 11:55:34 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:34 [DEBUG]: con_loss: 2.668, RCA_loss: 0.017, TC_loss: 0.081
+2026-03-16 11:55:34 [DEBUG]: con_loss: 2.638, RCA_loss: 0.020, TC_loss: 0.086
+2026-03-16 11:55:35 [INFO]: Epoch 103 done. Loss: 4.150, Time per epoch: 0.633[s]
+2026-03-16 11:55:35 [INFO]: GateMode: concat
+2026-03-16 11:55:35 [INFO]: Gate[FTI]: metric:0.368, trace:0.325, log:0.306
+2026-03-16 11:55:35 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:35 [DEBUG]: con_loss: 2.665, RCA_loss: 0.021, TC_loss: 0.074
+2026-03-16 11:55:35 [DEBUG]: con_loss: 2.642, RCA_loss: 0.023, TC_loss: 0.094
+2026-03-16 11:55:35 [INFO]: Epoch 104 done. Loss: 4.153, Time per epoch: 0.631[s]
+2026-03-16 11:55:35 [INFO]: GateMode: concat
+2026-03-16 11:55:35 [INFO]: Gate[FTI]: metric:0.369, trace:0.325, log:0.306
+2026-03-16 11:55:35 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:35 [DEBUG]: con_loss: 2.673, RCA_loss: 0.022, TC_loss: 0.102
+2026-03-16 11:55:36 [DEBUG]: con_loss: 2.643, RCA_loss: 0.017, TC_loss: 0.090
+2026-03-16 11:55:36 [INFO]: Epoch 105 done. Loss: 4.160, Time per epoch: 0.634[s]
+2026-03-16 11:55:36 [INFO]: GateMode: concat
+2026-03-16 11:55:36 [INFO]: Gate[FTI]: metric:0.369, trace:0.325, log:0.306
+2026-03-16 11:55:36 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:36 [DEBUG]: con_loss: 2.672, RCA_loss: 0.013, TC_loss: 0.085
+2026-03-16 11:55:36 [DEBUG]: con_loss: 2.643, RCA_loss: 0.029, TC_loss: 0.084
+2026-03-16 11:55:37 [INFO]: Epoch 106 done. Loss: 4.154, Time per epoch: 0.633[s]
+2026-03-16 11:55:37 [INFO]: GateMode: concat
+2026-03-16 11:55:37 [INFO]: Gate[FTI]: metric:0.369, trace:0.325, log:0.306
+2026-03-16 11:55:37 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:37 [DEBUG]: con_loss: 2.671, RCA_loss: 0.012, TC_loss: 0.104
+2026-03-16 11:55:37 [DEBUG]: con_loss: 2.633, RCA_loss: 0.022, TC_loss: 0.104
+2026-03-16 11:55:37 [INFO]: Epoch 107 done. Loss: 4.159, Time per epoch: 0.631[s]
+2026-03-16 11:55:37 [INFO]: GateMode: concat
+2026-03-16 11:55:37 [INFO]: Gate[FTI]: metric:0.369, trace:0.325, log:0.305
+2026-03-16 11:55:37 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:37 [DEBUG]: con_loss: 2.675, RCA_loss: 0.018, TC_loss: 0.076
+2026-03-16 11:55:38 [DEBUG]: con_loss: 2.631, RCA_loss: 0.012, TC_loss: 0.092
+2026-03-16 11:55:38 [INFO]: Epoch 108 done. Loss: 4.149, Time per epoch: 0.757[s]
+2026-03-16 11:55:38 [INFO]: GateMode: concat
+2026-03-16 11:55:38 [INFO]: Gate[FTI]: metric:0.370, trace:0.325, log:0.305
+2026-03-16 11:55:38 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:38 [DEBUG]: con_loss: 2.667, RCA_loss: 0.011, TC_loss: 0.089
+2026-03-16 11:55:38 [DEBUG]: con_loss: 2.642, RCA_loss: 0.029, TC_loss: 0.140
+2026-03-16 11:55:39 [INFO]: Epoch 109 done. Loss: 4.167, Time per epoch: 0.631[s]
+2026-03-16 11:55:39 [INFO]: GateMode: concat
+2026-03-16 11:55:39 [INFO]: Gate[FTI]: metric:0.370, trace:0.325, log:0.305
+2026-03-16 11:55:39 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:39 [DEBUG]: con_loss: 2.662, RCA_loss: 0.037, TC_loss: 0.075
+2026-03-16 11:55:39 [DEBUG]: con_loss: 2.630, RCA_loss: 0.018, TC_loss: 0.051
+2026-03-16 11:55:39 [INFO]: Epoch 110 done. Loss: 4.141, Time per epoch: 0.632[s]
+2026-03-16 11:55:39 [INFO]: GateMode: concat
+2026-03-16 11:55:39 [INFO]: Gate[FTI]: metric:0.370, trace:0.325, log:0.305
+2026-03-16 11:55:39 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:39 [DEBUG]: con_loss: 2.679, RCA_loss: 0.030, TC_loss: 0.074
+2026-03-16 11:55:40 [DEBUG]: con_loss: 2.631, RCA_loss: 0.010, TC_loss: 0.095
+2026-03-16 11:55:40 [INFO]: Epoch 111 done. Loss: 4.152, Time per epoch: 0.627[s]
+2026-03-16 11:55:40 [INFO]: GateMode: concat
+2026-03-16 11:55:40 [INFO]: Gate[FTI]: metric:0.370, trace:0.325, log:0.305
+2026-03-16 11:55:40 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:40 [DEBUG]: con_loss: 2.669, RCA_loss: 0.018, TC_loss: 0.072
+2026-03-16 11:55:40 [DEBUG]: con_loss: 2.637, RCA_loss: 0.014, TC_loss: 0.070
+2026-03-16 11:55:40 [INFO]: Epoch 112 done. Loss: 4.143, Time per epoch: 0.632[s]
+2026-03-16 11:55:40 [INFO]: GateMode: concat
+2026-03-16 11:55:40 [INFO]: Gate[FTI]: metric:0.371, trace:0.325, log:0.305
+2026-03-16 11:55:40 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:41 [DEBUG]: con_loss: 2.661, RCA_loss: 0.009, TC_loss: 0.079
+2026-03-16 11:55:41 [DEBUG]: con_loss: 2.629, RCA_loss: 0.027, TC_loss: 0.069
+2026-03-16 11:55:41 [INFO]: Epoch 113 done. Loss: 4.141, Time per epoch: 0.632[s]
+2026-03-16 11:55:41 [INFO]: GateMode: concat
+2026-03-16 11:55:41 [INFO]: Gate[FTI]: metric:0.371, trace:0.325, log:0.305
+2026-03-16 11:55:41 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:41 [DEBUG]: con_loss: 2.673, RCA_loss: 0.012, TC_loss: 0.096
+2026-03-16 11:55:42 [DEBUG]: con_loss: 2.628, RCA_loss: 0.020, TC_loss: 0.060
+2026-03-16 11:55:42 [INFO]: Epoch 114 done. Loss: 4.145, Time per epoch: 0.629[s]
+2026-03-16 11:55:42 [INFO]: GateMode: concat
+2026-03-16 11:55:42 [INFO]: Gate[FTI]: metric:0.371, trace:0.325, log:0.304
+2026-03-16 11:55:42 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.324
+2026-03-16 11:55:42 [DEBUG]: con_loss: 2.664, RCA_loss: 0.018, TC_loss: 0.100
+2026-03-16 11:55:42 [DEBUG]: con_loss: 2.629, RCA_loss: 0.015, TC_loss: 0.066
+2026-03-16 11:55:42 [INFO]: Epoch 115 done. Loss: 4.145, Time per epoch: 0.632[s]
+2026-03-16 11:55:42 [INFO]: GateMode: concat
+2026-03-16 11:55:42 [INFO]: Gate[FTI]: metric:0.371, trace:0.325, log:0.304
+2026-03-16 11:55:42 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:42 [DEBUG]: con_loss: 2.659, RCA_loss: 0.007, TC_loss: 0.066
+2026-03-16 11:55:43 [DEBUG]: con_loss: 2.631, RCA_loss: 0.017, TC_loss: 0.077
+2026-03-16 11:55:43 [INFO]: Epoch 116 done. Loss: 4.137, Time per epoch: 0.636[s]
+2026-03-16 11:55:43 [INFO]: GateMode: concat
+2026-03-16 11:55:43 [INFO]: Gate[FTI]: metric:0.371, trace:0.325, log:0.304
+2026-03-16 11:55:43 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:43 [DEBUG]: con_loss: 2.654, RCA_loss: 0.018, TC_loss: 0.068
+2026-03-16 11:55:44 [DEBUG]: con_loss: 2.632, RCA_loss: 0.012, TC_loss: 0.057
+2026-03-16 11:55:44 [INFO]: Epoch 117 done. Loss: 4.133, Time per epoch: 0.763[s]
+2026-03-16 11:55:44 [INFO]: GateMode: concat
+2026-03-16 11:55:44 [INFO]: Gate[FTI]: metric:0.371, trace:0.325, log:0.304
+2026-03-16 11:55:44 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:44 [DEBUG]: con_loss: 2.648, RCA_loss: 0.014, TC_loss: 0.059
+2026-03-16 11:55:44 [DEBUG]: con_loss: 2.635, RCA_loss: 0.014, TC_loss: 0.075
+2026-03-16 11:55:44 [INFO]: Epoch 118 done. Loss: 4.134, Time per epoch: 0.633[s]
+2026-03-16 11:55:44 [INFO]: GateMode: concat
+2026-03-16 11:55:44 [INFO]: Gate[FTI]: metric:0.372, trace:0.325, log:0.304
+2026-03-16 11:55:44 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:44 [DEBUG]: con_loss: 2.656, RCA_loss: 0.023, TC_loss: 0.056
+2026-03-16 11:55:45 [DEBUG]: con_loss: 2.624, RCA_loss: 0.010, TC_loss: 0.056
+2026-03-16 11:55:45 [INFO]: Epoch 119 done. Loss: 4.129, Time per epoch: 0.632[s]
+2026-03-16 11:55:45 [INFO]: GateMode: concat
+2026-03-16 11:55:45 [INFO]: Gate[FTI]: metric:0.372, trace:0.325, log:0.304
+2026-03-16 11:55:45 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:45 [DEBUG]: con_loss: 2.655, RCA_loss: 0.010, TC_loss: 0.073
+2026-03-16 11:55:45 [DEBUG]: con_loss: 2.628, RCA_loss: 0.012, TC_loss: 0.056
+2026-03-16 11:55:46 [INFO]: Epoch 120 done. Loss: 4.131, Time per epoch: 0.637[s]
+2026-03-16 11:55:46 [INFO]: GateMode: concat
+2026-03-16 11:55:46 [INFO]: Gate[FTI]: metric:0.372, trace:0.324, log:0.304
+2026-03-16 11:55:46 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:46 [DEBUG]: con_loss: 2.661, RCA_loss: 0.011, TC_loss: 0.052
+2026-03-16 11:55:46 [DEBUG]: con_loss: 2.628, RCA_loss: 0.010, TC_loss: 0.052
+2026-03-16 11:55:46 [INFO]: Epoch 121 done. Loss: 4.126, Time per epoch: 0.641[s]
+2026-03-16 11:55:46 [INFO]: GateMode: concat
+2026-03-16 11:55:46 [INFO]: Gate[FTI]: metric:0.372, trace:0.324, log:0.303
+2026-03-16 11:55:46 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:46 [DEBUG]: con_loss: 2.663, RCA_loss: 0.009, TC_loss: 0.073
+2026-03-16 11:55:47 [DEBUG]: con_loss: 2.622, RCA_loss: 0.012, TC_loss: 0.043
+2026-03-16 11:55:47 [INFO]: Epoch 122 done. Loss: 4.128, Time per epoch: 0.636[s]
+2026-03-16 11:55:47 [INFO]: GateMode: concat
+2026-03-16 11:55:47 [INFO]: Gate[FTI]: metric:0.373, trace:0.324, log:0.303
+2026-03-16 11:55:47 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:47 [DEBUG]: con_loss: 2.664, RCA_loss: 0.007, TC_loss: 0.061
+2026-03-16 11:55:47 [DEBUG]: con_loss: 2.615, RCA_loss: 0.024, TC_loss: 0.062
+2026-03-16 11:55:48 [INFO]: Epoch 123 done. Loss: 4.131, Time per epoch: 0.636[s]
+2026-03-16 11:55:48 [INFO]: GateMode: concat
+2026-03-16 11:55:48 [INFO]: Gate[FTI]: metric:0.373, trace:0.324, log:0.303
+2026-03-16 11:55:48 [INFO]: Gate[RCL]: metric:0.347, trace:0.328, log:0.325
+2026-03-16 11:55:48 [DEBUG]: con_loss: 2.654, RCA_loss: 0.014, TC_loss: 0.055
+2026-03-16 11:55:48 [DEBUG]: con_loss: 2.613, RCA_loss: 0.005, TC_loss: 0.049
+2026-03-16 11:55:48 [INFO]: Epoch 124 done. Loss: 4.120, Time per epoch: 0.636[s]
+2026-03-16 11:55:48 [INFO]: GateMode: concat
+2026-03-16 11:55:48 [INFO]: Gate[FTI]: metric:0.373, trace:0.324, log:0.303
+2026-03-16 11:55:48 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.325
+2026-03-16 11:55:48 [DEBUG]: con_loss: 2.659, RCA_loss: 0.017, TC_loss: 0.067
+2026-03-16 11:55:49 [DEBUG]: con_loss: 2.620, RCA_loss: 0.025, TC_loss: 0.052
+2026-03-16 11:55:49 [INFO]: Epoch 125 done. Loss: 4.133, Time per epoch: 0.635[s]
+2026-03-16 11:55:49 [INFO]: GateMode: concat
+2026-03-16 11:55:49 [INFO]: Gate[FTI]: metric:0.373, trace:0.324, log:0.303
+2026-03-16 11:55:49 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.325
+2026-03-16 11:55:49 [DEBUG]: con_loss: 2.661, RCA_loss: 0.012, TC_loss: 0.056
+2026-03-16 11:55:49 [DEBUG]: con_loss: 2.629, RCA_loss: 0.009, TC_loss: 0.053
+2026-03-16 11:55:49 [INFO]: Epoch 126 done. Loss: 4.128, Time per epoch: 0.631[s]
+2026-03-16 11:55:49 [INFO]: GateMode: concat
+2026-03-16 11:55:49 [INFO]: Gate[FTI]: metric:0.373, trace:0.324, log:0.303
+2026-03-16 11:55:49 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:50 [DEBUG]: con_loss: 2.657, RCA_loss: 0.015, TC_loss: 0.056
+2026-03-16 11:55:50 [DEBUG]: con_loss: 2.624, RCA_loss: 0.009, TC_loss: 0.056
+2026-03-16 11:55:50 [INFO]: Epoch 127 done. Loss: 4.127, Time per epoch: 0.760[s]
+2026-03-16 11:55:50 [INFO]: GateMode: concat
+2026-03-16 11:55:50 [INFO]: Gate[FTI]: metric:0.373, trace:0.324, log:0.302
+2026-03-16 11:55:50 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:50 [DEBUG]: con_loss: 2.644, RCA_loss: 0.005, TC_loss: 0.048
+2026-03-16 11:55:51 [DEBUG]: con_loss: 2.616, RCA_loss: 0.025, TC_loss: 0.046
+2026-03-16 11:55:51 [INFO]: Epoch 128 done. Loss: 4.119, Time per epoch: 0.633[s]
+2026-03-16 11:55:51 [INFO]: GateMode: concat
+2026-03-16 11:55:51 [INFO]: Gate[FTI]: metric:0.374, trace:0.324, log:0.302
+2026-03-16 11:55:51 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:51 [DEBUG]: con_loss: 2.648, RCA_loss: 0.011, TC_loss: 0.056
+2026-03-16 11:55:51 [DEBUG]: con_loss: 2.620, RCA_loss: 0.005, TC_loss: 0.041
+2026-03-16 11:55:51 [INFO]: Epoch 129 done. Loss: 4.118, Time per epoch: 0.633[s]
+2026-03-16 11:55:51 [INFO]: GateMode: concat
+2026-03-16 11:55:51 [INFO]: Gate[FTI]: metric:0.374, trace:0.324, log:0.302
+2026-03-16 11:55:51 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:52 [DEBUG]: con_loss: 2.650, RCA_loss: 0.019, TC_loss: 0.037
+2026-03-16 11:55:52 [DEBUG]: con_loss: 2.615, RCA_loss: 0.005, TC_loss: 0.047
+2026-03-16 11:55:52 [INFO]: Epoch 130 done. Loss: 4.116, Time per epoch: 0.633[s]
+2026-03-16 11:55:52 [INFO]: GateMode: concat
+2026-03-16 11:55:52 [INFO]: Gate[FTI]: metric:0.374, trace:0.324, log:0.302
+2026-03-16 11:55:52 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:52 [DEBUG]: con_loss: 2.655, RCA_loss: 0.010, TC_loss: 0.046
+2026-03-16 11:55:53 [DEBUG]: con_loss: 2.614, RCA_loss: 0.006, TC_loss: 0.047
+2026-03-16 11:55:53 [INFO]: Epoch 131 done. Loss: 4.117, Time per epoch: 0.633[s]
+2026-03-16 11:55:53 [INFO]: GateMode: concat
+2026-03-16 11:55:53 [INFO]: Gate[FTI]: metric:0.374, trace:0.324, log:0.302
+2026-03-16 11:55:53 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:53 [DEBUG]: con_loss: 2.647, RCA_loss: 0.005, TC_loss: 0.041
+2026-03-16 11:55:53 [DEBUG]: con_loss: 2.621, RCA_loss: 0.012, TC_loss: 0.047
+2026-03-16 11:55:53 [INFO]: Epoch 132 done. Loss: 4.116, Time per epoch: 0.635[s]
+2026-03-16 11:55:53 [INFO]: GateMode: concat
+2026-03-16 11:55:53 [INFO]: Gate[FTI]: metric:0.375, trace:0.324, log:0.302
+2026-03-16 11:55:53 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:54 [DEBUG]: con_loss: 2.647, RCA_loss: 0.011, TC_loss: 0.070
+2026-03-16 11:55:54 [DEBUG]: con_loss: 2.609, RCA_loss: 0.007, TC_loss: 0.038
+2026-03-16 11:55:54 [INFO]: Epoch 133 done. Loss: 4.118, Time per epoch: 0.631[s]
+2026-03-16 11:55:54 [INFO]: GateMode: concat
+2026-03-16 11:55:54 [INFO]: Gate[FTI]: metric:0.375, trace:0.324, log:0.302
+2026-03-16 11:55:54 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:54 [DEBUG]: con_loss: 2.642, RCA_loss: 0.006, TC_loss: 0.045
+2026-03-16 11:55:54 [DEBUG]: con_loss: 2.608, RCA_loss: 0.006, TC_loss: 0.054
+2026-03-16 11:55:55 [INFO]: Epoch 134 done. Loss: 4.113, Time per epoch: 0.633[s]
+2026-03-16 11:55:55 [INFO]: GateMode: concat
+2026-03-16 11:55:55 [INFO]: Gate[FTI]: metric:0.375, trace:0.324, log:0.302
+2026-03-16 11:55:55 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:55 [DEBUG]: con_loss: 2.652, RCA_loss: 0.017, TC_loss: 0.052
+2026-03-16 11:55:55 [DEBUG]: con_loss: 2.626, RCA_loss: 0.004, TC_loss: 0.039
+2026-03-16 11:55:55 [INFO]: Epoch 135 done. Loss: 4.120, Time per epoch: 0.633[s]
+2026-03-16 11:55:55 [INFO]: GateMode: concat
+2026-03-16 11:55:55 [INFO]: Gate[FTI]: metric:0.375, trace:0.323, log:0.302
+2026-03-16 11:55:55 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:55 [DEBUG]: con_loss: 2.644, RCA_loss: 0.007, TC_loss: 0.043
+2026-03-16 11:55:56 [DEBUG]: con_loss: 2.620, RCA_loss: 0.007, TC_loss: 0.049
+2026-03-16 11:55:56 [INFO]: Epoch 136 done. Loss: 4.115, Time per epoch: 0.636[s]
+2026-03-16 11:55:56 [INFO]: GateMode: concat
+2026-03-16 11:55:56 [INFO]: Gate[FTI]: metric:0.375, trace:0.323, log:0.302
+2026-03-16 11:55:56 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:56 [DEBUG]: con_loss: 2.652, RCA_loss: 0.011, TC_loss: 0.055
+2026-03-16 11:55:57 [DEBUG]: con_loss: 2.613, RCA_loss: 0.007, TC_loss: 0.033
+2026-03-16 11:55:57 [INFO]: Epoch 137 done. Loss: 4.115, Time per epoch: 0.758[s]
+2026-03-16 11:55:57 [INFO]: GateMode: concat
+2026-03-16 11:55:57 [INFO]: Gate[FTI]: metric:0.375, trace:0.323, log:0.301
+2026-03-16 11:55:57 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:57 [DEBUG]: con_loss: 2.642, RCA_loss: 0.005, TC_loss: 0.060
+2026-03-16 11:55:57 [DEBUG]: con_loss: 2.609, RCA_loss: 0.019, TC_loss: 0.048
+2026-03-16 11:55:57 [INFO]: Epoch 138 done. Loss: 4.118, Time per epoch: 0.634[s]
+2026-03-16 11:55:57 [INFO]: GateMode: concat
+2026-03-16 11:55:57 [INFO]: Gate[FTI]: metric:0.376, trace:0.323, log:0.301
+2026-03-16 11:55:57 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:57 [DEBUG]: con_loss: 2.630, RCA_loss: 0.007, TC_loss: 0.040
+2026-03-16 11:55:58 [DEBUG]: con_loss: 2.616, RCA_loss: 0.006, TC_loss: 0.037
+2026-03-16 11:55:58 [INFO]: Epoch 139 done. Loss: 4.106, Time per epoch: 0.645[s]
+2026-03-16 11:55:58 [INFO]: GateMode: concat
+2026-03-16 11:55:58 [INFO]: Gate[FTI]: metric:0.376, trace:0.323, log:0.301
+2026-03-16 11:55:58 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:58 [DEBUG]: con_loss: 2.637, RCA_loss: 0.010, TC_loss: 0.043
+2026-03-16 11:55:58 [DEBUG]: con_loss: 2.606, RCA_loss: 0.003, TC_loss: 0.042
+2026-03-16 11:55:59 [INFO]: Epoch 140 done. Loss: 4.108, Time per epoch: 0.645[s]
+2026-03-16 11:55:59 [INFO]: GateMode: concat
+2026-03-16 11:55:59 [INFO]: Gate[FTI]: metric:0.376, trace:0.323, log:0.301
+2026-03-16 11:55:59 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:59 [DEBUG]: con_loss: 2.651, RCA_loss: 0.013, TC_loss: 0.042
+2026-03-16 11:55:59 [DEBUG]: con_loss: 2.607, RCA_loss: 0.011, TC_loss: 0.046
+2026-03-16 11:55:59 [INFO]: Epoch 141 done. Loss: 4.115, Time per epoch: 0.632[s]
+2026-03-16 11:55:59 [INFO]: GateMode: concat
+2026-03-16 11:55:59 [INFO]: Gate[FTI]: metric:0.376, trace:0.323, log:0.301
+2026-03-16 11:55:59 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:55:59 [DEBUG]: con_loss: 2.637, RCA_loss: 0.003, TC_loss: 0.042
+2026-03-16 11:56:00 [DEBUG]: con_loss: 2.613, RCA_loss: 0.007, TC_loss: 0.027
+2026-03-16 11:56:00 [INFO]: Epoch 142 done. Loss: 4.105, Time per epoch: 0.649[s]
+2026-03-16 11:56:00 [INFO]: GateMode: concat
+2026-03-16 11:56:00 [INFO]: Gate[FTI]: metric:0.376, trace:0.323, log:0.301
+2026-03-16 11:56:00 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:00 [DEBUG]: con_loss: 2.648, RCA_loss: 0.005, TC_loss: 0.034
+2026-03-16 11:56:00 [DEBUG]: con_loss: 2.609, RCA_loss: 0.009, TC_loss: 0.037
+2026-03-16 11:56:01 [INFO]: Epoch 143 done. Loss: 4.108, Time per epoch: 0.641[s]
+2026-03-16 11:56:01 [INFO]: GateMode: concat
+2026-03-16 11:56:01 [INFO]: Gate[FTI]: metric:0.376, trace:0.323, log:0.301
+2026-03-16 11:56:01 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:01 [DEBUG]: con_loss: 2.638, RCA_loss: 0.014, TC_loss: 0.027
+2026-03-16 11:56:01 [DEBUG]: con_loss: 2.611, RCA_loss: 0.006, TC_loss: 0.043
+2026-03-16 11:56:01 [INFO]: Epoch 144 done. Loss: 4.107, Time per epoch: 0.593[s]
+2026-03-16 11:56:01 [INFO]: GateMode: concat
+2026-03-16 11:56:01 [INFO]: Gate[FTI]: metric:0.376, trace:0.323, log:0.301
+2026-03-16 11:56:01 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:01 [DEBUG]: con_loss: 2.633, RCA_loss: 0.004, TC_loss: 0.031
+2026-03-16 11:56:02 [DEBUG]: con_loss: 2.602, RCA_loss: 0.006, TC_loss: 0.030
+2026-03-16 11:56:02 [INFO]: Epoch 145 done. Loss: 4.099, Time per epoch: 0.635[s]
+2026-03-16 11:56:02 [INFO]: GateMode: concat
+2026-03-16 11:56:02 [INFO]: Gate[FTI]: metric:0.376, trace:0.323, log:0.300
+2026-03-16 11:56:02 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:02 [DEBUG]: con_loss: 2.641, RCA_loss: 0.008, TC_loss: 0.034
+2026-03-16 11:56:02 [DEBUG]: con_loss: 2.596, RCA_loss: 0.006, TC_loss: 0.034
+2026-03-16 11:56:02 [INFO]: Epoch 146 done. Loss: 4.102, Time per epoch: 0.635[s]
+2026-03-16 11:56:02 [INFO]: GateMode: concat
+2026-03-16 11:56:02 [INFO]: Gate[FTI]: metric:0.377, trace:0.323, log:0.300
+2026-03-16 11:56:02 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:03 [DEBUG]: con_loss: 2.629, RCA_loss: 0.013, TC_loss: 0.029
+2026-03-16 11:56:03 [DEBUG]: con_loss: 2.608, RCA_loss: 0.007, TC_loss: 0.048
+2026-03-16 11:56:03 [INFO]: Epoch 147 done. Loss: 4.107, Time per epoch: 0.757[s]
+2026-03-16 11:56:03 [INFO]: GateMode: concat
+2026-03-16 11:56:03 [INFO]: Gate[FTI]: metric:0.377, trace:0.323, log:0.300
+2026-03-16 11:56:03 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:03 [DEBUG]: con_loss: 2.641, RCA_loss: 0.007, TC_loss: 0.050
+2026-03-16 11:56:04 [DEBUG]: con_loss: 2.611, RCA_loss: 0.007, TC_loss: 0.042
+2026-03-16 11:56:04 [INFO]: Epoch 148 done. Loss: 4.112, Time per epoch: 0.636[s]
+2026-03-16 11:56:04 [INFO]: GateMode: concat
+2026-03-16 11:56:04 [INFO]: Gate[FTI]: metric:0.377, trace:0.323, log:0.300
+2026-03-16 11:56:04 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:04 [DEBUG]: con_loss: 2.626, RCA_loss: 0.006, TC_loss: 0.056
+2026-03-16 11:56:04 [DEBUG]: con_loss: 2.588, RCA_loss: 0.003, TC_loss: 0.031
+2026-03-16 11:56:04 [INFO]: Epoch 149 done. Loss: 4.100, Time per epoch: 0.635[s]
+2026-03-16 11:56:04 [INFO]: GateMode: concat
+2026-03-16 11:56:04 [INFO]: Gate[FTI]: metric:0.377, trace:0.323, log:0.300
+2026-03-16 11:56:04 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:05 [DEBUG]: con_loss: 2.628, RCA_loss: 0.007, TC_loss: 0.033
+2026-03-16 11:56:05 [DEBUG]: con_loss: 2.595, RCA_loss: 0.006, TC_loss: 0.037
+2026-03-16 11:56:05 [INFO]: Epoch 150 done. Loss: 4.099, Time per epoch: 0.658[s]
+2026-03-16 11:56:05 [INFO]: GateMode: concat
+2026-03-16 11:56:05 [INFO]: Gate[FTI]: metric:0.377, trace:0.323, log:0.300
+2026-03-16 11:56:05 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:05 [DEBUG]: con_loss: 2.628, RCA_loss: 0.005, TC_loss: 0.055
+2026-03-16 11:56:06 [DEBUG]: con_loss: 2.593, RCA_loss: 0.011, TC_loss: 0.037
+2026-03-16 11:56:06 [INFO]: Epoch 151 done. Loss: 4.105, Time per epoch: 0.634[s]
+2026-03-16 11:56:06 [INFO]: GateMode: concat
+2026-03-16 11:56:06 [INFO]: Gate[FTI]: metric:0.377, trace:0.323, log:0.300
+2026-03-16 11:56:06 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:06 [DEBUG]: con_loss: 2.629, RCA_loss: 0.007, TC_loss: 0.046
+2026-03-16 11:56:06 [DEBUG]: con_loss: 2.597, RCA_loss: 0.005, TC_loss: 0.030
+2026-03-16 11:56:06 [INFO]: Epoch 152 done. Loss: 4.101, Time per epoch: 0.634[s]
+2026-03-16 11:56:06 [INFO]: GateMode: concat
+2026-03-16 11:56:06 [INFO]: Gate[FTI]: metric:0.377, trace:0.323, log:0.300
+2026-03-16 11:56:06 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:07 [DEBUG]: con_loss: 2.630, RCA_loss: 0.012, TC_loss: 0.030
+2026-03-16 11:56:07 [DEBUG]: con_loss: 2.610, RCA_loss: 0.017, TC_loss: 0.029
+2026-03-16 11:56:07 [INFO]: Epoch 153 done. Loss: 4.105, Time per epoch: 0.639[s]
+2026-03-16 11:56:07 [INFO]: GateMode: concat
+2026-03-16 11:56:07 [INFO]: Gate[FTI]: metric:0.378, trace:0.323, log:0.300
+2026-03-16 11:56:07 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:07 [DEBUG]: con_loss: 2.628, RCA_loss: 0.008, TC_loss: 0.034
+2026-03-16 11:56:07 [DEBUG]: con_loss: 2.591, RCA_loss: 0.005, TC_loss: 0.030
+2026-03-16 11:56:08 [INFO]: Epoch 154 done. Loss: 4.096, Time per epoch: 0.635[s]
+2026-03-16 11:56:08 [INFO]: GateMode: concat
+2026-03-16 11:56:08 [INFO]: Gate[FTI]: metric:0.378, trace:0.323, log:0.299
+2026-03-16 11:56:08 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:08 [DEBUG]: con_loss: 2.615, RCA_loss: 0.014, TC_loss: 0.028
+2026-03-16 11:56:08 [DEBUG]: con_loss: 2.594, RCA_loss: 0.009, TC_loss: 0.026
+2026-03-16 11:56:08 [INFO]: Epoch 155 done. Loss: 4.094, Time per epoch: 0.633[s]
+2026-03-16 11:56:08 [INFO]: GateMode: concat
+2026-03-16 11:56:08 [INFO]: Gate[FTI]: metric:0.378, trace:0.323, log:0.299
+2026-03-16 11:56:08 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:08 [DEBUG]: con_loss: 2.620, RCA_loss: 0.004, TC_loss: 0.025
+2026-03-16 11:56:09 [DEBUG]: con_loss: 2.588, RCA_loss: 0.011, TC_loss: 0.031
+2026-03-16 11:56:09 [INFO]: Epoch 156 done. Loss: 4.092, Time per epoch: 0.634[s]
+2026-03-16 11:56:09 [INFO]: GateMode: concat
+2026-03-16 11:56:09 [INFO]: Gate[FTI]: metric:0.378, trace:0.323, log:0.299
+2026-03-16 11:56:09 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:09 [DEBUG]: con_loss: 2.620, RCA_loss: 0.007, TC_loss: 0.029
+2026-03-16 11:56:09 [DEBUG]: con_loss: 2.607, RCA_loss: 0.011, TC_loss: 0.041
+2026-03-16 11:56:10 [INFO]: Epoch 157 done. Loss: 4.101, Time per epoch: 0.759[s]
+2026-03-16 11:56:10 [INFO]: GateMode: concat
+2026-03-16 11:56:10 [INFO]: Gate[FTI]: metric:0.378, trace:0.323, log:0.299
+2026-03-16 11:56:10 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:10 [DEBUG]: con_loss: 2.619, RCA_loss: 0.011, TC_loss: 0.033
+2026-03-16 11:56:10 [DEBUG]: con_loss: 2.577, RCA_loss: 0.005, TC_loss: 0.062
+2026-03-16 11:56:10 [INFO]: Epoch 158 done. Loss: 4.099, Time per epoch: 0.633[s]
+2026-03-16 11:56:10 [INFO]: GateMode: concat
+2026-03-16 11:56:10 [INFO]: Gate[FTI]: metric:0.378, trace:0.322, log:0.299
+2026-03-16 11:56:10 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:10 [DEBUG]: con_loss: 2.624, RCA_loss: 0.006, TC_loss: 0.044
+2026-03-16 11:56:11 [DEBUG]: con_loss: 2.591, RCA_loss: 0.005, TC_loss: 0.038
+2026-03-16 11:56:11 [INFO]: Epoch 159 done. Loss: 4.100, Time per epoch: 0.627[s]
+2026-03-16 11:56:11 [INFO]: GateMode: concat
+2026-03-16 11:56:11 [INFO]: Gate[FTI]: metric:0.379, trace:0.322, log:0.299
+2026-03-16 11:56:11 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:11 [DEBUG]: con_loss: 2.619, RCA_loss: 0.004, TC_loss: 0.052
+2026-03-16 11:56:11 [DEBUG]: con_loss: 2.579, RCA_loss: 0.005, TC_loss: 0.051
+2026-03-16 11:56:12 [INFO]: Epoch 160 done. Loss: 4.100, Time per epoch: 0.624[s]
+2026-03-16 11:56:12 [INFO]: GateMode: concat
+2026-03-16 11:56:12 [INFO]: Gate[FTI]: metric:0.379, trace:0.322, log:0.299
+2026-03-16 11:56:12 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:12 [DEBUG]: con_loss: 2.625, RCA_loss: 0.008, TC_loss: 0.029
+2026-03-16 11:56:12 [DEBUG]: con_loss: 2.587, RCA_loss: 0.006, TC_loss: 0.035
+2026-03-16 11:56:12 [INFO]: Epoch 161 done. Loss: 4.095, Time per epoch: 0.651[s]
+2026-03-16 11:56:12 [INFO]: GateMode: concat
+2026-03-16 11:56:12 [INFO]: Gate[FTI]: metric:0.379, trace:0.322, log:0.299
+2026-03-16 11:56:12 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:12 [DEBUG]: con_loss: 2.610, RCA_loss: 0.002, TC_loss: 0.028
+2026-03-16 11:56:13 [DEBUG]: con_loss: 2.594, RCA_loss: 0.006, TC_loss: 0.024
+2026-03-16 11:56:13 [INFO]: Epoch 162 done. Loss: 4.088, Time per epoch: 0.618[s]
+2026-03-16 11:56:13 [INFO]: GateMode: concat
+2026-03-16 11:56:13 [INFO]: Gate[FTI]: metric:0.379, trace:0.322, log:0.299
+2026-03-16 11:56:13 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:13 [DEBUG]: con_loss: 2.628, RCA_loss: 0.006, TC_loss: 0.033
+2026-03-16 11:56:13 [DEBUG]: con_loss: 2.575, RCA_loss: 0.002, TC_loss: 0.029
+2026-03-16 11:56:13 [INFO]: Epoch 163 done. Loss: 4.091, Time per epoch: 0.624[s]
+2026-03-16 11:56:13 [INFO]: GateMode: concat
+2026-03-16 11:56:13 [INFO]: Gate[FTI]: metric:0.379, trace:0.322, log:0.299
+2026-03-16 11:56:13 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:14 [DEBUG]: con_loss: 2.623, RCA_loss: 0.006, TC_loss: 0.032
+2026-03-16 11:56:14 [DEBUG]: con_loss: 2.583, RCA_loss: 0.002, TC_loss: 0.031
+2026-03-16 11:56:14 [INFO]: Epoch 164 done. Loss: 4.092, Time per epoch: 0.618[s]
+2026-03-16 11:56:14 [INFO]: GateMode: concat
+2026-03-16 11:56:14 [INFO]: Gate[FTI]: metric:0.379, trace:0.322, log:0.299
+2026-03-16 11:56:14 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:14 [DEBUG]: con_loss: 2.609, RCA_loss: 0.004, TC_loss: 0.029
+2026-03-16 11:56:15 [DEBUG]: con_loss: 2.575, RCA_loss: 0.004, TC_loss: 0.047
+2026-03-16 11:56:15 [INFO]: Epoch 165 done. Loss: 4.090, Time per epoch: 0.624[s]
+2026-03-16 11:56:15 [INFO]: GateMode: concat
+2026-03-16 11:56:15 [INFO]: Gate[FTI]: metric:0.379, trace:0.322, log:0.298
+2026-03-16 11:56:15 [INFO]: Gate[RCL]: metric:0.347, trace:0.329, log:0.324
+2026-03-16 11:56:15 [DEBUG]: con_loss: 2.624, RCA_loss: 0.015, TC_loss: 0.030
+2026-03-16 11:56:15 [DEBUG]: con_loss: 2.578, RCA_loss: 0.008, TC_loss: 0.025
+2026-03-16 11:56:15 [INFO]: Epoch 166 done. Loss: 4.093, Time per epoch: 0.602[s]
+2026-03-16 11:56:15 [INFO]: GateMode: concat
+2026-03-16 11:56:15 [INFO]: Gate[FTI]: metric:0.379, trace:0.322, log:0.298
+2026-03-16 11:56:15 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.324
+2026-03-16 11:56:16 [DEBUG]: con_loss: 2.612, RCA_loss: 0.004, TC_loss: 0.030
+2026-03-16 11:56:16 [DEBUG]: con_loss: 2.570, RCA_loss: 0.005, TC_loss: 0.023
+2026-03-16 11:56:16 [INFO]: Epoch 167 done. Loss: 4.084, Time per epoch: 0.756[s]
+2026-03-16 11:56:16 [INFO]: GateMode: concat
+2026-03-16 11:56:16 [INFO]: Gate[FTI]: metric:0.379, trace:0.322, log:0.298
+2026-03-16 11:56:16 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.324
+2026-03-16 11:56:16 [DEBUG]: con_loss: 2.620, RCA_loss: 0.014, TC_loss: 0.034
+2026-03-16 11:56:17 [DEBUG]: con_loss: 2.585, RCA_loss: 0.004, TC_loss: 0.026
+2026-03-16 11:56:17 [INFO]: Epoch 168 done. Loss: 4.093, Time per epoch: 0.622[s]
+2026-03-16 11:56:17 [INFO]: GateMode: concat
+2026-03-16 11:56:17 [INFO]: Gate[FTI]: metric:0.380, trace:0.322, log:0.298
+2026-03-16 11:56:17 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.324
+2026-03-16 11:56:17 [DEBUG]: con_loss: 2.613, RCA_loss: 0.002, TC_loss: 0.027
+2026-03-16 11:56:17 [DEBUG]: con_loss: 2.591, RCA_loss: 0.012, TC_loss: 0.026
+2026-03-16 11:56:17 [INFO]: Epoch 169 done. Loss: 4.090, Time per epoch: 0.620[s]
+2026-03-16 11:56:17 [INFO]: GateMode: concat
+2026-03-16 11:56:17 [INFO]: Gate[FTI]: metric:0.380, trace:0.322, log:0.298
+2026-03-16 11:56:17 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.324
+2026-03-16 11:56:17 [DEBUG]: con_loss: 2.615, RCA_loss: 0.008, TC_loss: 0.041
+2026-03-16 11:56:18 [DEBUG]: con_loss: 2.562, RCA_loss: 0.003, TC_loss: 0.037
+2026-03-16 11:56:18 [INFO]: Epoch 170 done. Loss: 4.090, Time per epoch: 0.620[s]
+2026-03-16 11:56:18 [INFO]: GateMode: concat
+2026-03-16 11:56:18 [INFO]: Gate[FTI]: metric:0.380, trace:0.322, log:0.298
+2026-03-16 11:56:18 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.324
+2026-03-16 11:56:18 [DEBUG]: con_loss: 2.616, RCA_loss: 0.009, TC_loss: 0.023
+2026-03-16 11:56:18 [DEBUG]: con_loss: 2.578, RCA_loss: 0.003, TC_loss: 0.037
+2026-03-16 11:56:19 [INFO]: Epoch 171 done. Loss: 4.089, Time per epoch: 0.618[s]
+2026-03-16 11:56:19 [INFO]: GateMode: concat
+2026-03-16 11:56:19 [INFO]: Gate[FTI]: metric:0.380, trace:0.322, log:0.298
+2026-03-16 11:56:19 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.324
+2026-03-16 11:56:19 [DEBUG]: con_loss: 2.624, RCA_loss: 0.016, TC_loss: 0.046
+2026-03-16 11:56:19 [DEBUG]: con_loss: 2.573, RCA_loss: 0.004, TC_loss: 0.038
+2026-03-16 11:56:19 [INFO]: Epoch 172 done. Loss: 4.098, Time per epoch: 0.620[s]
+2026-03-16 11:56:19 [INFO]: GateMode: concat
+2026-03-16 11:56:19 [INFO]: Gate[FTI]: metric:0.380, trace:0.322, log:0.298
+2026-03-16 11:56:19 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.324
+2026-03-16 11:56:19 [DEBUG]: con_loss: 2.608, RCA_loss: 0.005, TC_loss: 0.027
+2026-03-16 11:56:20 [DEBUG]: con_loss: 2.577, RCA_loss: 0.003, TC_loss: 0.033
+2026-03-16 11:56:20 [INFO]: Epoch 173 done. Loss: 4.086, Time per epoch: 0.620[s]
+2026-03-16 11:56:20 [INFO]: GateMode: concat
+2026-03-16 11:56:20 [INFO]: Gate[FTI]: metric:0.380, trace:0.322, log:0.298
+2026-03-16 11:56:20 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.324
+2026-03-16 11:56:20 [DEBUG]: con_loss: 2.596, RCA_loss: 0.003, TC_loss: 0.028
+2026-03-16 11:56:20 [DEBUG]: con_loss: 2.579, RCA_loss: 0.003, TC_loss: 0.029
+2026-03-16 11:56:20 [INFO]: Epoch 174 done. Loss: 4.082, Time per epoch: 0.623[s]
+2026-03-16 11:56:20 [INFO]: GateMode: concat
+2026-03-16 11:56:20 [INFO]: Gate[FTI]: metric:0.380, trace:0.322, log:0.298
+2026-03-16 11:56:20 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:21 [DEBUG]: con_loss: 2.602, RCA_loss: 0.006, TC_loss: 0.029
+2026-03-16 11:56:21 [DEBUG]: con_loss: 2.577, RCA_loss: 0.009, TC_loss: 0.033
+2026-03-16 11:56:21 [INFO]: Epoch 175 done. Loss: 4.087, Time per epoch: 0.624[s]
+2026-03-16 11:56:21 [INFO]: GateMode: concat
+2026-03-16 11:56:21 [INFO]: Gate[FTI]: metric:0.380, trace:0.322, log:0.298
+2026-03-16 11:56:21 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:21 [DEBUG]: con_loss: 2.607, RCA_loss: 0.004, TC_loss: 0.023
+2026-03-16 11:56:21 [DEBUG]: con_loss: 2.572, RCA_loss: 0.003, TC_loss: 0.032
+2026-03-16 11:56:22 [INFO]: Epoch 176 done. Loss: 4.083, Time per epoch: 0.622[s]
+2026-03-16 11:56:22 [INFO]: GateMode: concat
+2026-03-16 11:56:22 [INFO]: Gate[FTI]: metric:0.381, trace:0.322, log:0.298
+2026-03-16 11:56:22 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:22 [DEBUG]: con_loss: 2.602, RCA_loss: 0.004, TC_loss: 0.027
+2026-03-16 11:56:22 [DEBUG]: con_loss: 2.567, RCA_loss: 0.003, TC_loss: 0.027
+2026-03-16 11:56:22 [INFO]: Epoch 177 done. Loss: 4.080, Time per epoch: 0.765[s]
+2026-03-16 11:56:22 [INFO]: GateMode: concat
+2026-03-16 11:56:22 [INFO]: Gate[FTI]: metric:0.381, trace:0.322, log:0.298
+2026-03-16 11:56:22 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:23 [DEBUG]: con_loss: 2.611, RCA_loss: 0.005, TC_loss: 0.025
+2026-03-16 11:56:23 [DEBUG]: con_loss: 2.567, RCA_loss: 0.004, TC_loss: 0.029
+2026-03-16 11:56:23 [INFO]: Epoch 178 done. Loss: 4.082, Time per epoch: 0.624[s]
+2026-03-16 11:56:23 [INFO]: GateMode: concat
+2026-03-16 11:56:23 [INFO]: Gate[FTI]: metric:0.381, trace:0.321, log:0.298
+2026-03-16 11:56:23 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:23 [DEBUG]: con_loss: 2.599, RCA_loss: 0.009, TC_loss: 0.026
+2026-03-16 11:56:24 [DEBUG]: con_loss: 2.565, RCA_loss: 0.006, TC_loss: 0.023
+2026-03-16 11:56:24 [INFO]: Epoch 179 done. Loss: 4.080, Time per epoch: 0.622[s]
+2026-03-16 11:56:24 [INFO]: GateMode: concat
+2026-03-16 11:56:24 [INFO]: Gate[FTI]: metric:0.381, trace:0.321, log:0.297
+2026-03-16 11:56:24 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:24 [DEBUG]: con_loss: 2.606, RCA_loss: 0.006, TC_loss: 0.023
+2026-03-16 11:56:24 [DEBUG]: con_loss: 2.558, RCA_loss: 0.002, TC_loss: 0.026
+2026-03-16 11:56:24 [INFO]: Epoch 180 done. Loss: 4.077, Time per epoch: 0.625[s]
+2026-03-16 11:56:24 [INFO]: GateMode: concat
+2026-03-16 11:56:24 [INFO]: Gate[FTI]: metric:0.381, trace:0.321, log:0.297
+2026-03-16 11:56:24 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:24 [DEBUG]: con_loss: 2.605, RCA_loss: 0.002, TC_loss: 0.038
+2026-03-16 11:56:25 [DEBUG]: con_loss: 2.561, RCA_loss: 0.005, TC_loss: 0.035
+2026-03-16 11:56:25 [INFO]: Epoch 181 done. Loss: 4.084, Time per epoch: 0.622[s]
+2026-03-16 11:56:25 [INFO]: GateMode: concat
+2026-03-16 11:56:25 [INFO]: Gate[FTI]: metric:0.381, trace:0.321, log:0.297
+2026-03-16 11:56:25 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:25 [DEBUG]: con_loss: 2.605, RCA_loss: 0.006, TC_loss: 0.025
+2026-03-16 11:56:25 [DEBUG]: con_loss: 2.561, RCA_loss: 0.004, TC_loss: 0.025
+2026-03-16 11:56:26 [INFO]: Epoch 182 done. Loss: 4.080, Time per epoch: 0.623[s]
+2026-03-16 11:56:26 [INFO]: GateMode: concat
+2026-03-16 11:56:26 [INFO]: Gate[FTI]: metric:0.382, trace:0.321, log:0.297
+2026-03-16 11:56:26 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:26 [DEBUG]: con_loss: 2.598, RCA_loss: 0.003, TC_loss: 0.028
+2026-03-16 11:56:26 [DEBUG]: con_loss: 2.569, RCA_loss: 0.004, TC_loss: 0.027
+2026-03-16 11:56:26 [INFO]: Epoch 183 done. Loss: 4.080, Time per epoch: 0.628[s]
+2026-03-16 11:56:26 [INFO]: GateMode: concat
+2026-03-16 11:56:26 [INFO]: Gate[FTI]: metric:0.382, trace:0.321, log:0.297
+2026-03-16 11:56:26 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:26 [DEBUG]: con_loss: 2.594, RCA_loss: 0.005, TC_loss: 0.030
+2026-03-16 11:56:27 [DEBUG]: con_loss: 2.549, RCA_loss: 0.004, TC_loss: 0.022
+2026-03-16 11:56:27 [INFO]: Epoch 184 done. Loss: 4.074, Time per epoch: 0.633[s]
+2026-03-16 11:56:27 [INFO]: GateMode: concat
+2026-03-16 11:56:27 [INFO]: Gate[FTI]: metric:0.382, trace:0.321, log:0.297
+2026-03-16 11:56:27 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:27 [DEBUG]: con_loss: 2.598, RCA_loss: 0.003, TC_loss: 0.026
+2026-03-16 11:56:27 [DEBUG]: con_loss: 2.550, RCA_loss: 0.006, TC_loss: 0.022
+2026-03-16 11:56:27 [INFO]: Epoch 185 done. Loss: 4.074, Time per epoch: 0.628[s]
+2026-03-16 11:56:27 [INFO]: GateMode: concat
+2026-03-16 11:56:27 [INFO]: Gate[FTI]: metric:0.382, trace:0.321, log:0.297
+2026-03-16 11:56:27 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:28 [DEBUG]: con_loss: 2.581, RCA_loss: 0.001, TC_loss: 0.025
+2026-03-16 11:56:28 [DEBUG]: con_loss: 2.558, RCA_loss: 0.004, TC_loss: 0.028
+2026-03-16 11:56:28 [INFO]: Epoch 186 done. Loss: 4.072, Time per epoch: 0.621[s]
+2026-03-16 11:56:28 [INFO]: GateMode: concat
+2026-03-16 11:56:28 [INFO]: Gate[FTI]: metric:0.382, trace:0.321, log:0.297
+2026-03-16 11:56:28 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:28 [DEBUG]: con_loss: 2.590, RCA_loss: 0.003, TC_loss: 0.019
+2026-03-16 11:56:29 [DEBUG]: con_loss: 2.563, RCA_loss: 0.003, TC_loss: 0.023
+2026-03-16 11:56:29 [INFO]: Epoch 187 done. Loss: 4.073, Time per epoch: 0.736[s]
+2026-03-16 11:56:29 [INFO]: GateMode: concat
+2026-03-16 11:56:29 [INFO]: Gate[FTI]: metric:0.382, trace:0.321, log:0.297
+2026-03-16 11:56:29 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:29 [DEBUG]: con_loss: 2.606, RCA_loss: 0.010, TC_loss: 0.026
+2026-03-16 11:56:29 [DEBUG]: con_loss: 2.555, RCA_loss: 0.001, TC_loss: 0.020
+2026-03-16 11:56:29 [INFO]: Epoch 188 done. Loss: 4.077, Time per epoch: 0.618[s]
+2026-03-16 11:56:29 [INFO]: GateMode: concat
+2026-03-16 11:56:29 [INFO]: Gate[FTI]: metric:0.383, trace:0.321, log:0.297
+2026-03-16 11:56:29 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:30 [DEBUG]: con_loss: 2.581, RCA_loss: 0.004, TC_loss: 0.023
+2026-03-16 11:56:30 [DEBUG]: con_loss: 2.555, RCA_loss: 0.003, TC_loss: 0.024
+2026-03-16 11:56:30 [INFO]: Epoch 189 done. Loss: 4.070, Time per epoch: 0.620[s]
+2026-03-16 11:56:30 [INFO]: GateMode: concat
+2026-03-16 11:56:30 [INFO]: Gate[FTI]: metric:0.383, trace:0.321, log:0.297
+2026-03-16 11:56:30 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:30 [DEBUG]: con_loss: 2.600, RCA_loss: 0.009, TC_loss: 0.024
+2026-03-16 11:56:30 [DEBUG]: con_loss: 2.557, RCA_loss: 0.002, TC_loss: 0.041
+2026-03-16 11:56:31 [INFO]: Epoch 190 done. Loss: 4.081, Time per epoch: 0.620[s]
+2026-03-16 11:56:31 [INFO]: GateMode: concat
+2026-03-16 11:56:31 [INFO]: Gate[FTI]: metric:0.383, trace:0.321, log:0.297
+2026-03-16 11:56:31 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:31 [DEBUG]: con_loss: 2.594, RCA_loss: 0.002, TC_loss: 0.028
+2026-03-16 11:56:31 [DEBUG]: con_loss: 2.553, RCA_loss: 0.008, TC_loss: 0.018
+2026-03-16 11:56:31 [INFO]: Epoch 191 done. Loss: 4.074, Time per epoch: 0.615[s]
+2026-03-16 11:56:31 [INFO]: GateMode: concat
+2026-03-16 11:56:31 [INFO]: Gate[FTI]: metric:0.383, trace:0.321, log:0.296
+2026-03-16 11:56:31 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:31 [DEBUG]: con_loss: 2.587, RCA_loss: 0.002, TC_loss: 0.022
+2026-03-16 11:56:32 [DEBUG]: con_loss: 2.532, RCA_loss: 0.003, TC_loss: 0.016
+2026-03-16 11:56:32 [INFO]: Epoch 192 done. Loss: 4.063, Time per epoch: 0.619[s]
+2026-03-16 11:56:32 [INFO]: GateMode: concat
+2026-03-16 11:56:32 [INFO]: Gate[FTI]: metric:0.383, trace:0.321, log:0.296
+2026-03-16 11:56:32 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:32 [DEBUG]: con_loss: 2.599, RCA_loss: 0.008, TC_loss: 0.031
+2026-03-16 11:56:32 [DEBUG]: con_loss: 2.548, RCA_loss: 0.002, TC_loss: 0.022
+2026-03-16 11:56:32 [INFO]: Epoch 193 done. Loss: 4.075, Time per epoch: 0.591[s]
+2026-03-16 11:56:32 [INFO]: GateMode: concat
+2026-03-16 11:56:32 [INFO]: Gate[FTI]: metric:0.383, trace:0.321, log:0.296
+2026-03-16 11:56:32 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:33 [DEBUG]: con_loss: 2.582, RCA_loss: 0.001, TC_loss: 0.025
+2026-03-16 11:56:33 [DEBUG]: con_loss: 2.559, RCA_loss: 0.005, TC_loss: 0.018
+2026-03-16 11:56:33 [INFO]: Epoch 194 done. Loss: 4.070, Time per epoch: 0.622[s]
+2026-03-16 11:56:33 [INFO]: GateMode: concat
+2026-03-16 11:56:33 [INFO]: Gate[FTI]: metric:0.383, trace:0.321, log:0.296
+2026-03-16 11:56:33 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:33 [DEBUG]: con_loss: 2.583, RCA_loss: 0.003, TC_loss: 0.025
+2026-03-16 11:56:34 [DEBUG]: con_loss: 2.542, RCA_loss: 0.010, TC_loss: 0.020
+2026-03-16 11:56:34 [INFO]: Epoch 195 done. Loss: 4.068, Time per epoch: 0.629[s]
+2026-03-16 11:56:34 [INFO]: GateMode: concat
+2026-03-16 11:56:34 [INFO]: Gate[FTI]: metric:0.383, trace:0.321, log:0.296
+2026-03-16 11:56:34 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:34 [DEBUG]: con_loss: 2.592, RCA_loss: 0.011, TC_loss: 0.026
+2026-03-16 11:56:34 [DEBUG]: con_loss: 2.541, RCA_loss: 0.006, TC_loss: 0.029
+2026-03-16 11:56:34 [INFO]: Epoch 196 done. Loss: 4.074, Time per epoch: 0.618[s]
+2026-03-16 11:56:34 [INFO]: GateMode: concat
+2026-03-16 11:56:34 [INFO]: Gate[FTI]: metric:0.383, trace:0.321, log:0.296
+2026-03-16 11:56:34 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:35 [DEBUG]: con_loss: 2.580, RCA_loss: 0.007, TC_loss: 0.034
+2026-03-16 11:56:35 [DEBUG]: con_loss: 2.529, RCA_loss: 0.002, TC_loss: 0.022
+2026-03-16 11:56:35 [INFO]: Epoch 197 done. Loss: 4.066, Time per epoch: 0.742[s]
+2026-03-16 11:56:35 [INFO]: GateMode: concat
+2026-03-16 11:56:35 [INFO]: Gate[FTI]: metric:0.383, trace:0.320, log:0.296
+2026-03-16 11:56:35 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:35 [DEBUG]: con_loss: 2.584, RCA_loss: 0.002, TC_loss: 0.025
+2026-03-16 11:56:36 [DEBUG]: con_loss: 2.550, RCA_loss: 0.004, TC_loss: 0.025
+2026-03-16 11:56:36 [INFO]: Epoch 198 done. Loss: 4.070, Time per epoch: 0.620[s]
+2026-03-16 11:56:36 [INFO]: GateMode: concat
+2026-03-16 11:56:36 [INFO]: Gate[FTI]: metric:0.383, trace:0.320, log:0.296
+2026-03-16 11:56:36 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:36 [DEBUG]: con_loss: 2.583, RCA_loss: 0.003, TC_loss: 0.020
+2026-03-16 11:56:36 [DEBUG]: con_loss: 2.547, RCA_loss: 0.004, TC_loss: 0.024
+2026-03-16 11:56:36 [INFO]: Epoch 199 done. Loss: 4.068, Time per epoch: 0.618[s]
+2026-03-16 11:56:36 [INFO]: GateMode: concat
+2026-03-16 11:56:36 [INFO]: Gate[FTI]: metric:0.384, trace:0.320, log:0.296
+2026-03-16 11:56:36 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:36 [DEBUG]: con_loss: 2.572, RCA_loss: 0.006, TC_loss: 0.023
+2026-03-16 11:56:37 [DEBUG]: con_loss: 2.543, RCA_loss: 0.002, TC_loss: 0.021
+2026-03-16 11:56:37 [INFO]: Epoch 200 done. Loss: 4.064, Time per epoch: 0.622[s]
+2026-03-16 11:56:37 [INFO]: GateMode: concat
+2026-03-16 11:56:37 [INFO]: Gate[FTI]: metric:0.384, trace:0.320, log:0.296
+2026-03-16 11:56:37 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:37 [DEBUG]: con_loss: 2.569, RCA_loss: 0.006, TC_loss: 0.020
+2026-03-16 11:56:37 [DEBUG]: con_loss: 2.546, RCA_loss: 0.007, TC_loss: 0.028
+2026-03-16 11:56:38 [INFO]: Epoch 201 done. Loss: 4.066, Time per epoch: 0.624[s]
+2026-03-16 11:56:38 [INFO]: GateMode: concat
+2026-03-16 11:56:38 [INFO]: Gate[FTI]: metric:0.384, trace:0.320, log:0.296
+2026-03-16 11:56:38 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:38 [DEBUG]: con_loss: 2.585, RCA_loss: 0.005, TC_loss: 0.038
+2026-03-16 11:56:38 [DEBUG]: con_loss: 2.541, RCA_loss: 0.003, TC_loss: 0.021
+2026-03-16 11:56:38 [INFO]: Epoch 202 done. Loss: 4.071, Time per epoch: 0.624[s]
+2026-03-16 11:56:38 [INFO]: GateMode: concat
+2026-03-16 11:56:38 [INFO]: Gate[FTI]: metric:0.384, trace:0.320, log:0.296
+2026-03-16 11:56:38 [INFO]: Gate[RCL]: metric:0.347, trace:0.330, log:0.323
+2026-03-16 11:56:38 [INFO]: Early stop at epoch 202 due to lack of improvement.
+2026-03-16 11:56:38 [INFO]: Training has finished.
+2026-03-16 11:56:38 [DEBUG]: The training time is 131.4070463180542[s]
+2026-03-16 11:56:38 [DEBUG]: The training time per epoch is 0.647325351320464[s]
+2026-03-16 11:56:38 [DEBUG]: The affinity of RCL -> FTI is 0.0015147927482520585
+2026-03-16 11:56:38 [DEBUG]: The affinity of FTI -> RCL is 0.03690249825584424
+2026-03-16 11:56:38 [INFO]: Model checkpoint and metadata has been saved at ./logs/sockshop.
+2026-03-16 11:56:40 [INFO]: [Root localization] HR@1: 86.307%, HR@2: 91.701%, HR@3: 94.191%, HR@4: 95.851%, HR@5: 95.851%, avg@3: 0.907, MRR@3: 0.898
+2026-03-16 11:56:40 [INFO]: [Failure type classification] precision: 66.208%, recall: 63.485%, f1-score: 64.818%
+2026-03-16 11:56:40 [INFO]: The average test time is 0.00493537143058302[s]
+2026-03-16 11:56:40 [INFO]: The total test time is 1.1894245147705078[s]
